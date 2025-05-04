@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --no-warnings=ExperimentalWarning --experimental-specifier-resolution=node ./node_modules/vite/bin/vite.js",
-    "build": "vite build",
+    "build": "node --no-warnings=ExperimentalWarning --experimental-specifier-resolution=node ./node_modules/vite/bin/vite.js build",
     "typecheck": "tsc -b",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
