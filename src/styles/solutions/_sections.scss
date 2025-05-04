@@ -1,0 +1,112 @@
+// Estilos para las secciones
+.script-section {
+  .script-card {
+    background: rgba($brm-white, 0.1);
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    
+    h3 {
+      color: $brm-secondary;
+      margin-bottom: $spacing-md;
+    }
+    
+    .script-text {
+      .solution-line {
+        margin-bottom: $spacing-md;
+        padding: $spacing-md;
+        background: rgba($brm-white, 0.1);
+        border-radius: $border-radius-md;
+        color: $brm-white;
+      }
+    }
+  }
+}
+
+.benefits-section {
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+    
+    .benefit-card {
+      background: rgba($brm-white, 0.1);
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      text-align: left;
+      
+      .benefit-icon {
+        font-size: 1.8rem;
+        margin-bottom: $spacing-sm;
+        display: block;
+      }
+      
+      h4 {
+        color: $brm-secondary;
+        margin-bottom: $spacing-sm;
+        font-size: 1.1rem;
+        text-align: left;
+      }
+      
+      ul {
+        color: $brm-white;
+        list-style-type: none;
+        padding-left: 0;
+        text-align: left;
+        
+        li {
+          margin-bottom: $spacing-xs;
+          padding-left: $spacing-md;
+          position: relative;
+          text-align: left;
+          
+          &:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: $brm-secondary;
+          }
+        }
+      }
+    }
+  }
+}
+
+.rates-section {
+  h3 {
+    color: $brm-secondary;
+    margin-bottom: $spacing-lg;
+  }
+  
+  .rates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-lg;
+  }
+}
+
+.faq-section {
+  .faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-md;
+    
+    .faq-item {
+      background: rgba($brm-white, 0.1);
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      
+      h4 {
+        color: $brm-secondary;
+        margin-bottom: $spacing-sm;
+        font-size: 1.1rem;
+      }
+      
+      p {
+        color: $brm-white;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+// ... otros estilos de secciones ... 

@@ -1,0 +1,308 @@
+.conditions-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+
+  .conditions-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .conditions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      
+      li {
+        color: #fff;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        padding-left: 2rem;
+        position: relative;
+        text-align: left;
+        
+        &:before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #2ecc71;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.validation-options {
+  width: 100%;
+  padding: 2rem 0;
+
+  .validation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .option-button {
+      background: rgba($brm-primary, 0.1);
+      border: none;
+      border-radius: $border-radius-lg;
+      padding: $spacing-md $spacing-lg;
+      color: $brm-white;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      transition: $transition-normal;
+      min-width: 280px;
+      max-width: 380px;
+      height: 72px;
+
+      .button-icon {
+        font-size: 1.5rem;
+      }
+
+      .button-text {
+        font-size: 1.1rem;
+      }
+
+      .arrow-icon {
+        margin-left: auto;
+      }
+
+      &:hover {
+        background: rgba($brm-primary, 0.2);
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.validation-content {
+  .back-button {
+    background: transparent;
+    border: 1px solid $brm-primary;
+    border-radius: $border-radius-md;
+    padding: $spacing-sm $spacing-md;
+    color: $brm-white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: $transition-fast;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+
+    .button-icon {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background: rgba($brm-primary, 0.1);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.step-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
+
+  .step-button {
+    background: $brm-primary;
+    border: none;
+    border-radius: $border-radius-md;
+    padding: 1rem 3rem;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      background: darken($brm-primary, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:not(:disabled):active {
+      transform: translateY(0);
+    }
+  }
+}
+
+.validation-steps {
+  width: 100%;
+  padding: 1rem;
+
+  .back-to-validations-button {
+    background: transparent;
+    border: 1px solid $brm-primary;
+    border-radius: $border-radius-md;
+    padding: $spacing-sm $spacing-md;
+    color: $brm-white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    transition: $transition-fast;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+
+    .button-icon {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background: rgba($brm-primary, 0.1);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .step-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    h3 {
+      color: $brm-secondary;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: white;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .multi-step-description {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+
+      .step-description {
+        color: white;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        
+        strong {
+          color: $brm-secondary;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .step-description {
+      color: white;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-image {
+      width: 100%;
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      
+      .step-image-content {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        
+        &.td-first-image {
+          width: 40%;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+    }
+
+    .step-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+      .nav-button {
+        background: $brm-primary;
+        border: none;
+        border-radius: $border-radius-md;
+        padding: 0.75rem 1.5rem;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        &:not(:disabled):hover {
+          background: darken($brm-primary, 10%);
+          transform: translateY(-2px);
+        }
+      }
+
+      .step-indicator {
+        color: white;
+        font-size: 0.9rem;
+      }
+    }
+
+    .intro-text {
+      color: white;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .step-content {
+      // ... estilos anteriores ...
+    }
+  }
+} 

@@ -1,0 +1,274 @@
+// Nuevo archivo para estilos compartidos entre soluciones
+.solution-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: $spacing-lg;
+  background: $dark-gray;
+  border-radius: $border-radius-lg;
+  min-height: 600px; // Altura mínima fija para el contenedor
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  
+  @media (max-width: 768px) {
+    padding: $spacing-md;
+  }
+}
+
+.solution-title {
+  color: $brm-white;
+  font-size: 1.6rem;
+  margin-bottom: $spacing-lg;
+  text-align: center;
+  height: 40px; // Altura fija para el título
+}
+
+.sections-navigation {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    gap: $spacing-sm;
+  }
+  
+  .section-tab {
+    flex: 1;
+    min-height: 48px; // Altura mínima para asegurar espacio suficiente
+    padding: $spacing-md $spacing-lg;
+    background: rgba($brm-white, 0.1);
+    border-radius: $border-radius-md;
+    color: $brm-white;
+    cursor: pointer;
+    transition: $transition-normal;
+    font-size: 0.95rem; // Ajustado para mejor ajuste de texto
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    
+    // Permitir que el texto se ajuste en dos líneas si es necesario
+    @media (min-width: 769px) {
+      white-space: normal;
+      min-width: 140px; // Ancho mínimo para evitar compresión excesiva
+      max-width: 200px; // Ancho máximo para mantener consistencia
+    }
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: flex-start; // Alinear a la izquierda en móvil
+      white-space: normal; // Permitir múltiples líneas en móvil
+      padding: $spacing-md;
+    }
+    
+    &.active {
+      background: $brm-primary;
+    }
+    
+    &:hover:not(.active) {
+      background: rgba($brm-white, 0.2);
+    }
+    
+    // Ajustar el icono y el texto
+    .button-icon {
+      margin-right: $spacing-sm;
+    }
+    
+    .button-text {
+      flex: 1;
+    }
+  }
+}
+
+.section-content {
+  flex: 1;
+  min-height: 400px; // Altura mínima fija para el contenido
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  
+  > div {
+    height: 100%;
+  }
+}
+
+.benefits-grid,
+.rates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: $spacing-lg;
+  height: 100%;
+  min-height: 300px; // Altura mínima para las grids
+}
+
+.benefit-card,
+.rate-card {
+  background: rgba($brm-white, 0.1);
+  padding: $spacing-lg;
+  border-radius: $border-radius-md;
+  height: 100%;
+  min-height: 200px; // Altura mínima para las tarjetas
+  display: flex;
+  flex-direction: column;
+  
+  h4 {
+    color: $brm-secondary;
+    margin-bottom: $spacing-sm;
+    font-size: 1.1rem;
+    height: 40px; // Altura fija para títulos de tarjetas
+    display: flex;
+    align-items: center;
+  }
+  
+  ul {
+    color: $brm-white;
+    flex: 1;
+    margin: 0;
+    padding-left: 20px;
+    
+    li {
+      margin-bottom: $spacing-xs;
+    }
+  }
+}
+
+.script-section {
+  height: 100%;
+  
+  .script-card {
+    background: rgba($brm-white, 0.1);
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    height: 100%;
+    min-height: 300px; // Altura mínima para el guión
+    
+    h3 {
+      color: $brm-secondary;
+      margin-bottom: $spacing-md;
+      font-size: 1.3rem;
+      height: 40px; // Altura fija para el título
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.faq-section {
+  height: 100%;
+  
+  .faq-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-md;
+    height: 100%;
+    min-height: 300px; // Altura mínima para FAQs
+    
+    .faq-item {
+      background: rgba($brm-white, 0.1);
+      padding: $spacing-lg;
+      border-radius: $border-radius-md;
+      height: 100%;
+      min-height: 150px; // Altura mínima para cada FAQ
+      
+      h4 {
+        color: $brm-secondary;
+        margin-bottom: $spacing-sm;
+        font-size: 1.1rem;
+        height: 40px; // Altura fija para títulos de FAQ
+        display: flex;
+        align-items: center;
+      }
+      
+      p {
+        color: $brm-white;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+.solution-buttons {
+  display: flex;
+  gap: $spacing-md;
+  margin-top: auto;
+  padding-top: $spacing-lg;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+  
+  .solution-button {
+    flex: 1;
+    min-height: 48px; // Altura mínima consistente
+    padding: $spacing-md $spacing-lg;
+    font-size: 1rem;
+    border-radius: $border-radius-md;
+    transition: $transition-normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: $spacing-sm;
+    white-space: normal; // Permitir múltiples líneas si es necesario
+    line-height: 1.2;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: $spacing-md;
+    }
+    
+    &.accept {
+      background: #2ecc71;
+      color: $brm-white;
+      
+      &:hover {
+        background: darken(#2ecc71, 10%);
+      }
+    }
+    
+    &.reject {
+      background: #e74c3c;
+      color: $brm-white;
+      
+      &:hover {
+        background: darken(#e74c3c, 10%);
+      }
+    }
+    
+    .button-icon {
+      flex-shrink: 0; // Evitar que el icono se encoja
+    }
+    
+    .button-text {
+      flex: 1;
+    }
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 768px) {
+  .sections-navigation {
+    flex-direction: column;
+    height: auto;
+    
+    .section-tab {
+      max-width: 100%;
+    }
+  }
+  
+  .solution-buttons {
+    flex-direction: column;
+    height: auto;
+    
+    .solution-button {
+      max-width: 100%;
+    }
+  }
+} 

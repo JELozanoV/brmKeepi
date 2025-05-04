@@ -1,0 +1,147 @@
+@import '../../styles/App.scss';
+
+.solution-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background: #17191b;
+  border-radius: 12px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .solution-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    .solution-title {
+      color: #FFFFFF;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      .title-icon {
+        font-size: 1.8rem;
+      }
+    }
+
+    .solution-subtitle {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+      line-height: 1.5;
+      margin-top: 1rem;
+      padding: 0 1.5rem;
+    }
+  }
+
+  .sections-navigation {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    
+    .section-tab {
+      padding: 1rem;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      &.active {
+        background: #1A4DFF;
+      }
+      
+      &:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .tab-icon {
+        font-size: 1.2rem;
+      }
+
+      .tab-text {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .section-content {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .solution-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    .action-button {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &.accept {
+        background: #1A4DFF;
+        color: #FFFFFF;
+
+        &:hover {
+          background: #1543E0;
+        }
+      }
+
+      &.reject {
+        background: rgba(255, 255, 255, 0.1);
+        color: #FFFFFF;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+  }
+}
+
+// Estilos móviles para pantallas 360px–500px (solución y secciones)
+@media (min-width: 360px) and (max-width: 500px) {
+  .solution-container {
+    padding: 1rem;
+  }
+  .solution-container .section-content {
+    flex: 1;
+    background: #ffffff0d;
+    border-radius: 8px;
+    padding: 0.3rem;
+  }
+  .conditions-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 0rem;
+  }
+  .conditions-section .conditions-card {
+    background: #ffffff1a;
+    border-radius: 12px;
+    padding: 0.5rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, .1);
+  }
+}

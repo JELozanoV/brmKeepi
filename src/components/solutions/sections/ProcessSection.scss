@@ -1,0 +1,82 @@
+.process-section {
+  .process-container {
+    margin-bottom: 2rem;
+
+    .process-title {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .steps-container {
+      display: grid;
+      gap: 1rem;
+
+      .step-card {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+        .step-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1rem;
+
+          .step-number {
+            background: #007bff;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 0.9rem;
+          }
+
+          .step-description {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin: 0;
+          }
+        }
+
+        .step-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+
+          .step-image {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+          }
+
+          .step-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+              margin-bottom: 0.5rem;
+              padding-left: 1.5rem;
+              position: relative;
+
+              &:before {
+                content: "•";
+                color: #007bff;
+                position: absolute;
+                left: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} 

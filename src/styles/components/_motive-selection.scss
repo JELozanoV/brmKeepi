@@ -1,0 +1,94 @@
+.motive-selection {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px;
+
+  .accent-text {
+    color: $brm-white;
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 100px;
+    padding: $spacing-xl;
+    background: rgba($brm-primary, 0.1);
+    border-radius: $border-radius-lg;
+  }
+
+  .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+    .option-button {
+      background: rgba($brm-primary, 0.1);
+      border: none;
+      border-radius: $border-radius-lg;
+      padding: 25px 40px;
+      color: $brm-white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      
+      .button-icon {
+        font-size: 1.5rem;
+        margin-right: 20px;
+        min-width: 40px;
+        text-align: center;
+      }
+
+      .button-text {
+        flex-grow: 1;
+        text-align: left;
+      }
+
+      .arrow-icon {
+        font-size: 1.2rem;
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.3s ease;
+      }
+
+      &:hover {
+        background: rgba($brm-primary, 0.2);
+        transform: translateX(10px);
+        box-shadow: 0 5px 15px rgba($brm-primary, 0.2);
+
+        .arrow-icon {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// Animación de entrada para los botones
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Aplicar animación a cada botón con delay incremental
+.option-button {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+
+  @for $i from 1 through 7 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1}s;
+    }
+  }
+} 

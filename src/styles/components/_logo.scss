@@ -1,0 +1,36 @@
+.fidex-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  .fidex-logo-image {
+    max-height: 78px; /* 60% de 130px */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.15));
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .fidex-logo {
+    .fidex-logo-image {
+      max-height: 60px; /* 60% de 100px */
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .fidex-logo {
+    .fidex-logo-image {
+      max-height: 48px; /* 60% de 80px */
+    }
+  }
+}
