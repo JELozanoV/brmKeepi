@@ -28,6 +28,7 @@ import HogarViajeVacacionesSolution from './components/solutions/HogarViajeVacac
 import HogarViajeMudanzaSolution from './components/solutions/HogarViajeMudanzaSolution'
 import CompetitorSolution from './components/solutions/CompetitorSolution'
 import ReincidentClientSolution from './components/solutions/ReincidentClientSolution'
+import Chatbot from './components/Chatbot/Chatbot'
 
 function App() {
   const [serviceType, setServiceType] = useState<ServiceType>(null)
@@ -376,6 +377,9 @@ function App() {
       </div>
 
       {renderCurrentStep()}
+      
+      {/* Componente Chatbot que estará presente en todas las vistas */}
+      <Chatbot />
     </div>
   )
 }
