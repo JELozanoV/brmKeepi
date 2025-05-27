@@ -26,11 +26,40 @@ $negro-suave: #222222;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden; /* Asegura que nada se salga del borde redondeado */
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
   
-  &:hover {
+  /* Estilo para el estado normal */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background-color: $azul-principal;
+    transition: background-color 0.3s ease;
+    z-index: 0;
+  }
+  
+  /* Estilo para el estado hover */
+  &:hover::after {
     background-color: darken($azul-principal, 10%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilo para el estado focus */
+  &:focus::after {
+    background-color: darken($azul-principal, 10%);
+    box-shadow: 0 0 0 3px rgba($azul-principal, 0.3);
+  }
+  
+  /* Contenedor del ícono que se posiciona sobre el fondo */
+  svg {
+    position: relative;
+    z-index: 1;
   }
   
   .close-icon {
