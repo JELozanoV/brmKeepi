@@ -1,0 +1,112 @@
+@import '../styles/variables';
+
+.mood-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .description {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: $brm-text;
+    font-size: 1.1rem;
+  }
+
+  .mood-options-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+  }
+
+  .mood-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    background-color: $brm-white;
+    border: 2px solid $light-gray;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      border-color: $brm-primary;
+    }
+
+    &.selected {
+      border-color: $brm-primary;
+      background-color: rgba($brm-primary, 0.1);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .mood-emoji {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .mood-label {
+      font-size: 1rem;
+      font-weight: 500;
+      color: $brm-text;
+    }
+  }
+
+  .mood-selected-message {
+    background-color: rgba($brm-primary, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+
+    p {
+      margin: 0;
+      margin-bottom: 0.5rem;
+      color: $brm-text;
+    }
+
+    .mood-tip {
+      font-style: italic;
+      color: $brm-secondary;
+    }
+  }
+
+  .continue-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background-color: $brm-primary;
+    color: $brm-white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: darken($brm-primary, 10%);
+    }
+
+    .arrow-icon {
+      margin-left: 0.5rem;
+      font-size: 1.2rem;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  max-width: 450px;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: $brm-white;
+  margin-bottom: 1rem;
+  
+  &.toast-info {
+    border-left: 4px solid $brm-primary;
+  }
+  
+  &.toast-success {
+    border-left: 4px solid #4CAF50;
+  }
+  
+  &.toast-warning {
+    border-left: 4px solid #FF9800;
+  }
+  
+  &.toast-error {
+    border-left: 4px solid $claro-primary;
+  }
+}
+
+.toast-content {
+  flex: 1;
+  
+  p {
+    margin: 0;
+    color: $brm-text;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: $medium-gray;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  margin-left: 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+  
+  &:hover {
+    color: $dark-gray;
+  }
+}

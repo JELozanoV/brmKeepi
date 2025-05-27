@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './styles/App.scss'
-import { ServiceType, PlanType, CancellationReason, CostReason, FailureType, TravelType, CustomerServiceType, CompetitorType, HomeFailureType, ActivationDelayType, ReincidentClientType } from './types'
+import { ServiceType, PlanType, CancellationReason, CostReason, FailureType, TravelType, CustomerServiceType, CompetitorType, HomeFailureType, ActivationDelayType, ReincidentClientType, ClientMoodType } from './types'
 import ServiceSelector from './components/ServiceSelector'
 import PlanTypeSelector from './components/PlanTypeSelector'
 import CancellationReasonSelector from './components/CancellationReasonSelector'
@@ -29,6 +29,9 @@ import HogarViajeMudanzaSolution from './components/solutions/HogarViajeMudanzaS
 import CompetitorSolution from './components/solutions/CompetitorSolution'
 import ReincidentClientSolution from './components/solutions/ReincidentClientSolution'
 import Chatbot from './components/Chatbot/Chatbot'
+import MoodSelector from './components/MoodSelector'
+import Toast from './components/Toast/Toast'
+import { getMoodRecommendation } from './services/moodRecommendations'
 
 function App() {
   const [serviceType, setServiceType] = useState<ServiceType>(null)
@@ -43,6 +46,10 @@ function App() {
   const [homeFailureType, setHomeFailureType] = useState<HomeFailureType>(null)
   const [activationDelayType, setActivationDelayType] = useState<ActivationDelayType>(null)
   const [reincidentClientType, setReincidentClientType] = useState<ReincidentClientType>(null)
+  const [clientMood, setClientMood] = useState<ClientMoodType>(null)
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState<'info' | 'success' | 'warning' | 'error'>('info')
 
   const handleReset = () => {
     setServiceType(null)
@@ -57,15 +64,15 @@ function App() {
     setHomeFailureType(null)
     setActivationDelayType(null)
     setReincidentClientType(null)
+    setClientMood(null)
+    setShowToast(false)
   }
 
   const handleBack = () => {
-    if (reincidentClientType) {
-      setReincidentClientType(null)
-      return
-    }
     if (solutionApplied) {
       setSolutionApplied(false)
+    } else if (reincidentClientType) {
+      setReincidentClientType(null)
     } else if (activationDelayType) {
       setActivationDelayType(null)
     } else if (homeFailureType) {
@@ -82,6 +89,8 @@ function App() {
       setCostReason(null)
     } else if (cancellationReason) {
       setCancellationReason(null)
+    } else if (clientMood) {
+      setClientMood(null)
     } else if (planType) {
       setPlanType(null)
     } else if (serviceType) {
@@ -93,45 +102,55 @@ function App() {
     handleReset();
   }
 
+  const handleMoodSelect = (mood: ClientMoodType) => {
+    setClientMood(mood);
+    if (mood) {
+      const recommendation = getMoodRecommendation(mood);
+      setToastMessage(recommendation.message);
+      setToastType(recommendation.type);
+      setShowToast(true);
+    }
+  }
+
   const renderCurrentStep = () => {
     if (!serviceType) {
       return <ServiceSelector onSelect={setServiceType} />
     }
 
-    if (serviceType === 'movil' && !planType) {
+    if (serviceType && !clientMood) {
+      return <MoodSelector onSelect={handleMoodSelect} initialMood={null} />
+    }
+
+    if (serviceType === 'movil' && clientMood && !planType) {
       return <PlanTypeSelector onSelect={setPlanType} />
     }
 
-    if (serviceType === 'movil' && planType === 'pospago' && !cancellationReason) {
-      return (
-        <CancellationReasonSelector 
-          serviceType={serviceType}
-          planType={planType}
-          onSelect={setCancellationReason}
-        />
-      )
+    if (planType && !cancellationReason) {
+      return <CancellationReasonSelector 
+        serviceType={serviceType}
+        planType={planType}
+        onSelect={setCancellationReason}
+      />
     }
 
-    if (serviceType === 'movil' && cancellationReason === 'fallas' && !failureType) {
-      return <FailureTypeSelector onSelect={setFailureType} />
-    }
-
-    if (serviceType === 'hogar' && !cancellationReason) {
-      return (
-        <CancellationReasonSelector 
-          serviceType={serviceType}
-          planType={null}
-          onSelect={setCancellationReason}
-        />
-      )
-    }
-
-    if (serviceType === 'hogar' && cancellationReason === 'fallas' && !homeFailureType) {
-      return <HomeFailureSelector onSelect={setHomeFailureType} />
+    if (serviceType === 'hogar' && clientMood && !cancellationReason) {
+      return <CancellationReasonSelector 
+        serviceType={serviceType}
+        planType={null}
+        onSelect={setCancellationReason}
+      />
     }
 
     if (cancellationReason === 'costo' && !costReason) {
       return <CostReasonSelector onSelect={setCostReason} />
+    }
+
+    if (cancellationReason === 'fallas' && serviceType === 'movil' && !failureType) {
+      return <FailureTypeSelector onSelect={setFailureType} />
+    }
+
+    if (cancellationReason === 'fallas' && serviceType === 'hogar' && !homeFailureType) {
+      return <HomeFailureSelector onSelect={setHomeFailureType} />
     }
 
     if (cancellationReason === 'viaje' && !travelType) {
@@ -142,216 +161,76 @@ function App() {
       return <CustomerServiceTypeSelector onSelect={setCustomerServiceType} />
     }
 
-    if (cancellationReason === 'competencia') {
-      return (
-        <CompetitorSolution
-          competitor={competitorType}
-          onSolutionApplied={() => {
-            if (!competitorType) {
-              setCompetitorType('movistar'); // Valor por defecto, se cambiará cuando el usuario seleccione
-            } else {
-              setSolutionApplied(true);
-            }
-          }}
-        />
-      );
+    if (cancellationReason === 'competencia' && !competitorType) {
+      return <CompetitorSolution onSelect={setCompetitorType} />
     }
 
-    if (cancellationReason === 'demora-activacion' && !activationDelayType) {
+    if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'activacion-demora' && !activationDelayType) {
       return <ActivationDelaySelector onSelect={setActivationDelayType} />
     }
 
-    if (cancellationReason === 'cliente-reincidente' && !reincidentClientType) {
+    if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'cliente-reincidente' && !reincidentClientType) {
       return <ReincidentClientSelector onSelect={setReincidentClientType} />
     }
 
-    if (cancellationReason === 'cliente-reincidente' && reincidentClientType) {
-      return <ReincidentClientSolution onSolutionApplied={() => setSolutionApplied(true)} />;
+    // Render solutions based on selections
+    if (serviceType === 'movil' && cancellationReason === 'costo' && costReason === 'claro-pay') {
+      return <ClaroPaySolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    console.log('Debug estado:', {
-      serviceType,
-      cancellationReason,
-      homeFailureType,
-      solutionApplied
-    });
-
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'costo' && 
-        costReason === 'plan-alto') {
-      return (
-        <HogarCostosSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'costo') {
+      return <HogarCostosSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        cancellationReason === 'costo' && 
-        costReason === 'falta-trabajo') {
-      return (
-        <ClaroPaySolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'competencia') {
+      return <HogarMejorOfertaSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'costo' && 
-        costReason === 'mejor-oferta') {
-      return (
-        <HogarMejorOfertaSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'internet-lento') {
+      return <HogarInternetLentoSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'fallas' && 
-        homeFailureType === 'internet-lento') {
-      return (
-        <HogarInternetLentoSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'fallas-intermitentes') {
+      return <HogarFallasIntermitentesSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'fallas' && 
-        homeFailureType === 'fallas-intermitentes') {
-      return (
-        <HogarFallasIntermitentesSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'cortes-frecuentes') {
+      return <HogarCortesFrecuentesSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'fallas' && 
-        homeFailureType === 'cortes-frecuentes') {
-      return (
-        <HogarCortesFrecuentesSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'fallas-navegador') {
+      return <HogarFallasNavegadorSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'fallas' && 
-        homeFailureType === 'fallas-navegador') {
-      return (
-        <HogarFallasNavegadorSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'wifi-inestable') {
+      return <HogarWifiInestableSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'fallas' && 
-        homeFailureType === 'wifi-inestable') {
-      return (
-        <HogarWifiInestableSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'viaje' && travelType === 'trabajo') {
+      return <HogarViajeTrabajoSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && cancellationReason === 'competencia' && competitorType) {
-      return (
-        <CompetitorSolution
-          competitor={competitorType}
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'viaje' && travelType === 'vacaciones') {
+      return <HogarViajeVacacionesSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'viaje' && 
-        travelType === 'trabajo') {
-      return (
-        <HogarViajeTrabajoSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'viaje' && travelType === 'mudanza') {
+      return <HogarViajeMudanzaSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'viaje' && 
-        travelType === 'vacaciones') {
-      return (
-        <HogarViajeVacacionesSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
+    if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'asesor-inapropiado') {
+      return <HogarServicioClienteAsesorInapropiadoSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
-    if (!solutionApplied && 
-        serviceType === 'hogar' &&
-        cancellationReason === 'viaje' && 
-        travelType === 'mudanza') {
-      return (
-        <HogarViajeMudanzaSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      );
-    }
-
-    if (!solutionApplied && cancellationReason === 'servicio-cliente' && customerServiceType === 'asesor-inapropiado') {
-      return (
-        <HogarServicioClienteAsesorInapropiadoSolution
-          onSolutionApplied={() => setSolutionApplied(true)}
-        />
-      )
-    }
-
-    if (!solutionApplied) {
-      const shouldShowSolution = 
-        (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType) ||
-        (serviceType === 'movil' && cancellationReason === 'fallas' && failureType) ||
-        (cancellationReason === 'demora-activacion' && activationDelayType) ||
-        (!['fallas', 'demora-activacion'].includes(cancellationReason))
-
-      if (shouldShowSolution) {
-        return (
-          <SolutionCard
-            serviceType={serviceType}
-            planType={planType}
-            reason={cancellationReason}
-            costReason={costReason}
-            failureType={failureType}
-            travelType={travelType}
-            customerServiceType={customerServiceType}
-            competitorType={competitorType}
-            homeFailureType={homeFailureType}
-            activationDelayType={activationDelayType}
-            onSolutionApplied={() => setSolutionApplied(true)}
-          />
-        )
-      }
+    if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'cliente-reincidente') {
+      return <ReincidentClientSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
     if (solutionApplied) {
-      return (
-        <SummaryScreen
-          serviceType={serviceType}
-          planType={planType}
-          reason={cancellationReason}
-          costReason={costReason}
-          failureType={failureType}
-          travelType={travelType}
-          onReset={handleReset}
-        />
-      )
+      return <SummaryScreen onReset={handleReset} />
     }
+
+    return <SolutionCard onApplySolution={() => setSolutionApplied(true)} />
   }
 
   return (
@@ -363,10 +242,10 @@ function App() {
         {(serviceType || planType || cancellationReason || costReason || 
           failureType || travelType || customerServiceType || competitorType) && (
           <>
-        <button className="back-button" onClick={handleBack}>
-          <span className="button-icon">←</span>
-          <span className="button-text">Volver</span>
-        </button>
+            <button className="back-button" onClick={handleBack}>
+              <span className="button-icon">←</span>
+              <span className="button-text">Volver</span>
+            </button>
 
             <button className="home-button" onClick={handleHome}>
               <span className="button-icon">🏠</span>
@@ -376,10 +255,19 @@ function App() {
         )}
       </div>
 
-      {renderCurrentStep()}
-      
-      {/* Componente Chatbot que estará presente en todas las vistas */}
+      <div className="app-content">
+        {renderCurrentStep()}
+      </div>
+
       <Chatbot />
+
+      <Toast 
+        message={toastMessage} 
+        type={toastType} 
+        isVisible={showToast} 
+        duration={8000}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   )
 }

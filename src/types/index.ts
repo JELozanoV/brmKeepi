@@ -76,3 +76,12 @@ export type ReincidentClientType =
   | 'falta-transparencia'
   | 'llamada-colgada'
   | null; 
+
+// Nuevo tipo para el estado de ánimo del cliente
+export type ClientMoodType = 
+  | 'feliz'
+  | 'neutral'
+  | 'molesto'
+  | 'triste'
+  | 'satisfecho'
+  | null;
