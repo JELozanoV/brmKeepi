@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { askIA } from '../../services/iaService';
 import './Chatbot.scss';
 
 interface Message {
@@ -13,13 +14,15 @@ const Chatbot: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: 'Hola, soy tu asistente virtual. ¿En qué puedo ayudarte hoy?',
+      text: 'Hola, soy CordiBot. ¿En qué puedo ayudarte hoy?',
       sender: 'bot',
       timestamp: new Date(),
     },
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom whenever messages change
@@ -39,34 +42,49 @@ const Chatbot: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!inputValue.trim()) return;
-    
-    // Add user message
-    const userMessage: Message = {
-      id: messages.length + 1,
-      text: inputValue,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-    
-    setMessages([...messages, userMessage]);
+    await handleAskIA();
+  };
+
+  // Nueva función para manejar la lógica IA
+  const handleAskIA = async () => {
+    setError(null);
+    const prompt = inputValue;
     setInputValue('');
+    setLoading(true);
     setIsTyping(true);
-    
-    // Simulate API call to AI service
-    // This will be replaced with actual API integration
-    setTimeout(() => {
-      const botMessage: Message = {
-        id: messages.length + 2,
-        text: `Esta es una respuesta simulada. En el futuro, aquí se integrará la respuesta real de la API de IA.`,
-        sender: 'bot',
+    setMessages(prev => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        text: prompt,
+        sender: 'user',
         timestamp: new Date(),
-      };
-      
-      setMessages(prev => [...prev, botMessage]);
+      }
+    ]);
+    try {
+      const iaRes = await askIA(prompt);
+      console.log('Respuesta IA:', iaRes);
+      if (!iaRes || !iaRes.response || iaRes.response.trim() === "") {
+        setError('La IA no devolvió respuesta.');
+        return;
+      }
+      setMessages(prev => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          text: iaRes.response,
+          sender: 'bot',
+          timestamp: new Date(),
+        }
+      ]);
+    } catch (err: any) {
+      setError('Hubo un error al conectar con la IA. Intenta de nuevo.');
+      console.error('Error IA:', err);
+    } finally {
+      setLoading(false);
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const formatTime = (date: Date) => {
@@ -94,7 +112,7 @@ const Chatbot: React.FC = () => {
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <h3>Asistente Virtual</h3>
+            <h3>CordiBot</h3>
             <button 
               className="minimize-button" 
               onClick={toggleChatbot}
@@ -108,7 +126,7 @@ const Chatbot: React.FC = () => {
             {messages.map((message) => (
               <div 
                 key={message.id} 
-                className={`message ${message.sender === 'user' ? 'user-message' : 'bot-message'}`}
+                className={`chatbot-message ${message.sender}`}
               >
                 <div className="message-content">
                   <p>{message.text}</p>
@@ -116,7 +134,23 @@ const Chatbot: React.FC = () => {
                 </div>
               </div>
             ))}
-            
+
+            {loading && (
+              <div className="chatbot-message bot">
+                <div className="message-content">
+                  <p>CordiBot está pensando...</p>
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <div className="chatbot-message error">
+                <div className="message-content">
+                  <p>{error}</p>
+                </div>
+              </div>
+            )}
+
             {isTyping && (
               <div className="message bot-message">
                 <div className="message-content typing">

@@ -1,6 +1,8 @@
 import React from 'react';
 import BaseSolution from './BaseSolution';
-import { ScriptSection, BenefitsSection, RatesSection, FAQSection } from './sections';
+import { BenefitsSection, FAQSection } from './sections';
+import FilteredRatesSection from './FilteredRatesSection';
+import DynamicScriptSection from './DynamicScriptSection';
 
 interface Props {
   onSolutionApplied: () => void;
@@ -12,25 +14,7 @@ const HogarCostosSolution: React.FC<Props> = ({ onSolutionApplied }) => {
       id: 1,
       icon: '📝',
       title: 'Guión Recomendado',
-      content: (
-        <ScriptSection
-          title="Guión de Retención"
-          lines={[
-            {
-              text: "Entiendo tu preocupación por el costo del plan actual. Permíteme mostrarte algunas alternativas que tenemos disponibles en nuestra plataforma 'Conectados' que podrían ajustarse mejor a tu presupuesto.",
-              type: "empathy"
-            },
-            {
-              text: "Además, es importante que conozcas todos los beneficios adicionales que ya tienes incluidos en tu plan, como Claro Video con Paramount+, Claro Drive con 100GB y Claro Música, que por separado tendrían un costo significativo.",
-              type: "solution"
-            },
-            {
-              text: "¿Te parece si revisamos juntos las opciones que tenemos disponibles para encontrar el plan perfecto para ti?",
-              type: "closing"
-            }
-          ]}
-        />
-      )
+      content: <DynamicScriptSection />
     },
     {
       id: 2,
@@ -78,38 +62,7 @@ const HogarCostosSolution: React.FC<Props> = ({ onSolutionApplied }) => {
       icon: '💰',
       title: 'Tarifas Conectados',
       content: (
-        <RatesSection
-          title="Planes Recomendados en 'Conectados'"
-          rates={[
-            {
-              title: 'Triple Claro TV+ Intermedio Plus 500 MB',
-              price: '$111.900/mes',
-
-              features: [
-                '✓ Internet 500 Mbps',
-                '✓ Netflix con plan Básico',
-                '✓ Win + Futbol',
-                '✓ 3 Prime',
-                '✓ 1 Deco HD',
-                '✓ Ultra Wifi',
-                
-              ]
-            },
-            {
-              title: 'Triple Box TV Digital Avanzada 500 MB',
-              price: '$121.900/mes',
-              features: [
-                '✓ Internet 500 Mbps',
-                '✓ Deco Digital',
-                '✓ Multiasistencia',
-                '✓ 1 Deco HD',
-                '✓ Deco Box TV',
-                '✓ Ultra Wifi'
-              ],
-              isHighlighted: true
-            }
-          ]}
-        />
+        <FilteredRatesSection />
       )
     },
     {

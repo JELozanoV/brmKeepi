@@ -1,4 +1,5 @@
 import React from 'react';
+import './RatesSection.scss';
 
 interface Rate {
   title: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ScriptLine {
+export interface ScriptLine {
   text: string;
   type?: 'empathy' | 'solution' | 'benefit' | 'closing';
 }

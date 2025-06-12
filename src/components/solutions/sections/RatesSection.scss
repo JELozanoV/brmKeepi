@@ -1,0 +1,77 @@
+.rates-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(26,77,255,0.06);
+  margin-top: 20px;
+
+  h3 {
+    color: #1A4DFF;
+    margin-bottom: 18px;
+    font-size: 1.35rem;
+    font-weight: 700;
+  }
+
+  .rates-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .rate-card {
+    background: #F2F2F2;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.03);
+    padding: 18px 16px 14px 16px;
+    width: 100%;
+    max-width: 400px;
+    transition: border 0.2s, box-shadow 0.2s;
+    color: #222222;
+    position: relative;
+  }
+
+  .rate-card.highlighted {
+    border: 2px solid #1A4DFF;
+    box-shadow: 0 4px 18px rgba(26,77,255,0.13);
+    background: #eaf1ff;
+  }
+
+  .rate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    h4 {
+      color: #007BFF;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    .price {
+      background: #1A4DFF;
+      color: #fff;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      background: #fff;
+      border-radius: 5px;
+      padding: 6px 10px;
+      margin-bottom: 6px;
+      font-size: 0.97rem;
+      color: #222222;
+      box-shadow: 0 1px 2px #e0e0e0;
+    }
+  }
+}
