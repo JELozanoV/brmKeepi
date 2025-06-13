@@ -1,0 +1,32 @@
+.filtered-rates-section {
+  // ...otros estilos existentes...
+  max-width: 650px;
+  margin: 0 auto;
+
+  @media (min-width: 1024px) {
+    max-width: none;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .rates-section {
+    .rates-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+
+  // RESPONSIVE: 2 tarjetas por fila en pantallas >= 1024px (13 pulgadas)
+  @media (min-width: 1024px) {
+    .rates-section {
+      .rates-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 28px;
+        align-items: stretch;
+      }
+    }
+  }
+}

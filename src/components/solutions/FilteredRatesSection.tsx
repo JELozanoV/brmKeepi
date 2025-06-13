@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTarifas } from '../../services/api';
 import RatesSection from './sections/RatesSection';
+import './FilteredRatesSection.scss';
 
 // Función para formatear precios con separador de miles
 const formatPrice = (price: number): string => {
@@ -86,16 +87,16 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
       setHighlightedId(null);
       return;
     }
-    const numRate = parseFloat(clientRate.replace(/[^\d.]/g, ''));
-    if (isNaN(numRate)) {
+    const numRate = parseFloat(cleanPrice(clientRate));
+    if (isNaN(numRate) || numRate === 0) {
       setFilteredRates([]);
       setHighlightedId(null);
       return;
     }
-    // Filtrar por tecnología, tipo de servicio (si aplica) y precio
+    // Filtrar por tecnología, tipo de servicio (si aplica) y precio estrictamente mayor
     let validRates = rates.filter(r =>
       r.tipoTech === technology &&
-      r.price > numRate &&
+      Number(r.price) > numRate &&
       (serviceType ? r.tipoServicio === serviceType : true)
     );
     // Ordenar de menor a mayor precio
@@ -219,19 +220,20 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
       </div>
       <button
         style={{
-          background: '#007BFF',
+          background: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '#007BFF' : '#ccc',
           color: '#fff',
           border: 'none',
           borderRadius: 8,
           padding: '10px 38px',
           fontWeight: 700,
           fontSize: 18,
-          cursor: 'pointer',
+          cursor: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? 'pointer' : 'not-allowed',
           marginBottom: 24,
           boxShadow: '0 2px 8px #007BFF22',
           letterSpacing: 0.5
         }}
         onClick={handleBuscar}
+        disabled={!validatePrice(clientRate) || parseFloat(cleanPrice(clientRate)) === 0}
       >
         Buscar
       </button>

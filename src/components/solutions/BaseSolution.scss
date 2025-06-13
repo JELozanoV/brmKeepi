@@ -116,6 +116,14 @@
   }
 }
 
+// Aprovechar ancho en pantallas grandes
+@media (min-width: 1024px) {
+  .solution-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
 // Estilos móviles para pantallas 360px–500px (solución y secciones)
 @media (min-width: 360px) and (max-width: 500px) {
   .solution-container {

@@ -1,0 +1,12 @@
+@use '../styles/variables' as v;
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: v.$brm-white;
+  border-bottom: 1px solid v.$brm-light-gray;
+  width: 100%;
+  box-sizing: border-box;
+}

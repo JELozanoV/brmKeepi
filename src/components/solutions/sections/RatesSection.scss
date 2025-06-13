@@ -18,6 +18,15 @@
     gap: 20px;
   }
 
+  @media (min-width: 1024px) {
+    .rates-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 28px;
+      align-items: stretch;
+    }
+  }
+
   .rate-card {
     background: #F2F2F2;
     border-radius: 8px;
@@ -39,6 +48,7 @@
 
   .rate-header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;

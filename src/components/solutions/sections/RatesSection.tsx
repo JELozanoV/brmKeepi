@@ -24,9 +24,11 @@ const RatesSection: React.FC<RatesSectionProps> = ({ title, rates }) => (
             <span className="price">{rate.price}</span>
           </div>
           <ul>
-            {rate.features.map((feature, idx) => (
-              <li key={idx}>{feature}</li>
-            ))}
+            {rate.features
+              .filter(feature => !feature.toLowerCase().includes('precio'))
+              .map((feature, idx) => (
+                <li key={idx}>{feature}</li>
+              ))}
           </ul>
         </div>
       ))}
