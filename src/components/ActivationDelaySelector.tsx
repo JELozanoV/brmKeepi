@@ -7,7 +7,7 @@ interface Props {
 const ActivationDelaySelector = ({ onSelect }: Props) => {
   const delayTypes = [
     { 
-      id: 'expectativas-no-cumplidas.', 
+      id: 'expectativas-no-cumplidas', 
       text: 'Expectativas no cumplidas', 
       icon: '❌' 
     },
