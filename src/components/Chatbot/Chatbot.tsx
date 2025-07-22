@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { askIA } from '../../services/iaService';
+import Markdown from './Markdown';
 import './Chatbot.scss';
 
 interface Message {
@@ -124,16 +125,26 @@ const Chatbot: React.FC = () => {
           
           <div className="chatbot-messages">
             {messages.map((message) => (
-              <div 
-                key={message.id} 
-                className={`chatbot-message ${message.sender}`}
-              >
-                <div className="message-content">
-                  <p>{message.text}</p>
-                  <span className="message-time">{formatTime(message.timestamp)}</span>
-                </div>
-              </div>
-            ))}
+  <div 
+    key={message.id} 
+    className={`message ${message.sender === 'user' ? 'user-message' : 'bot-message'}`}
+  >
+    <div className="message-content">
+      {message.sender === 'bot' ? (
+        <Markdown
+          children={message.text}
+          components={{
+            h1: ({node, ...props}) => <h3 {...props} />,
+            h2: ({node, ...props}) => <h4 {...props} />,
+          }}
+        />
+      ) : (
+        <span>{message.text}</span>
+      )}
+      <span className="message-time">{formatTime(message.timestamp)}</span>
+    </div>
+  </div>
+))}
 
             {loading && (
               <div className="chatbot-message bot">
