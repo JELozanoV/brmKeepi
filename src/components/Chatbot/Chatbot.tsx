@@ -47,6 +47,16 @@ const Chatbot: React.FC = () => {
     await handleAskIA();
   };
 
+  // Obtener o crear sessionId persistente
+  const getSessionId = () => {
+    let sessionId = localStorage.getItem("sess");
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("sess", sessionId);
+    }
+    return sessionId;
+  };
+
   // Nueva función para manejar la lógica IA
   const handleAskIA = async () => {
     setError(null);
@@ -64,7 +74,8 @@ const Chatbot: React.FC = () => {
       }
     ]);
     try {
-      const iaRes = await askIA(prompt);
+      const sessionId = getSessionId();
+      const iaRes = await askIA(prompt, sessionId);
       console.log('Respuesta IA:', iaRes);
       if (!iaRes || !iaRes.response || iaRes.response.trim() === "") {
         setError('La IA no devolvió respuesta.');
