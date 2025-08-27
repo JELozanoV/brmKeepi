@@ -60,12 +60,14 @@ export type HomeFailureType =
   | 'cortes-frecuentes'
   | 'wifi-inestable'
   | 'fallas-navegador'
+  | 'activacion-demora'
   | null;
 
 export type ActivationDelayType = 
   | 'expectativas-no-cumplidas'
   | 'necesidad-urgente'
   | 'compromisos-personales'
+  | 'demora-activacion'
   | null;
 
 export type ReincidentClientType = 

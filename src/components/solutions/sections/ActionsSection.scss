@@ -1,0 +1,134 @@
+.actions-section {
+  margin: 1.5rem 0;
+  width: 100%;
+  
+  .actions-title {
+    color: #222222;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .actions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .action-item {
+    background: #FFFFFF;
+    border-radius: 6px;
+    border: 1px solid #E0E0E0;
+    padding: 0.75rem 1rem;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      border-color: #007BFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .action-checkbox {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    margin: 0;
+    position: relative;
+    
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      
+      &:focus + .checkmark {
+        outline: 2px solid #1A4DFF;
+        outline-offset: 2px;
+      }
+      
+      &:checked + .checkmark {
+        background-color: #1A4DFF;
+        border-color: #1A4DFF;
+        
+        &::after {
+          display: block;
+        }
+      }
+    }
+    
+    .checkmark {
+      position: relative;
+      height: 20px;
+      width: 20px;
+      min-width: 20px;
+      background-color: #FFFFFF;
+      border: 2px solid #BDBDBD;
+      border-radius: 4px;
+      margin-right: 12px;
+      margin-top: 2px;
+      transition: all 0.2s ease;
+      
+      &::after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+  
+  .action-content {
+    flex: 1;
+  }
+  
+  .action-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+  
+  .action-title {
+    font-weight: 600;
+    color: #222222;
+    margin-right: 0.5rem;
+  }
+  
+  .required-pill {
+    background-color: #FFEBEE;
+    color: #D32F2F;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+  }
+  
+  .action-detail {
+    color: #616161;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .actions-section {
+    .action-item {
+      padding: 0.75rem;
+    }
+    
+    .action-title {
+      font-size: 0.95rem;
+    }
+    
+    .action-detail {
+      font-size: 0.85rem;
+    }
+  }
+}

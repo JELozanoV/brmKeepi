@@ -30,6 +30,11 @@ const HomeFailureSelector = ({ onSelect }: Props) => {
       id: 'fallas-navegador', 
       text: 'Fallas con el navegador', 
       icon: '🌐' 
+    },
+    { 
+      id: 'activacion-demora', 
+      text: 'Demora en la activación', 
+      icon: '⏳' 
     }
   ];
 

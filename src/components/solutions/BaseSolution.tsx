@@ -16,7 +16,7 @@ interface Props {
   onSolutionApplied: () => void;
   acceptButtonText: string;
   rejectButtonText: string;
-  onBack?: () => void;
+
 }
 
 const BaseSolution: React.FC<Props> = ({
@@ -27,21 +27,12 @@ const BaseSolution: React.FC<Props> = ({
   onSolutionApplied,
   acceptButtonText,
   rejectButtonText,
-  onBack
 }) => {
   const [activeSection, setActiveSection] = useState<number>(1);
 
   return (
     <div className="solution-container">
-      {onBack && (
-        <button 
-          className="back-button"
-          onClick={onBack}
-        >
-          <span className="button-icon">←</span>
-          <span className="button-text">Volver</span>
-        </button>
-      )}
+      
       <div className="solution-header">
         <h2 className="solution-title">
           <span className="title-icon">{icon}</span>

@@ -1,0 +1,94 @@
+@use 'variables' as *;
+
+.profile-page {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $spacing-md;
+  color: $brm-white;
+
+  .profile-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+
+    .profile-title {
+      color: $brm-white;
+      margin: 0;
+    }
+
+    .range-selector {
+      display: inline-flex;
+      gap: $spacing-sm;
+
+      .range-btn {
+        background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+        color: $brm-white;
+        border: none;
+        border-radius: $border-radius-md;
+        padding: $spacing-sm $spacing-md;
+        cursor: pointer;
+        transition: $transition-normal;
+
+        &.active {
+          outline: 2px solid $brm-white;
+        }
+      }
+    }
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-md;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .kpi-card {
+    background: $brm-light; // Fondo de card
+    color: $brm-text; // Texto
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    box-shadow: $box-shadow;
+    border: 2px solid transparent;
+
+    &.kpi-good { border-color: $brm-primary; }
+    &.kpi-warn { border-color: $brm-secondary; }
+    &.kpi-bad  { border-color: $error-color; }
+
+    .kpi-card__label {
+      font-weight: 600;
+      color: $brm-secondary; // Títulos / acentos
+      margin-bottom: $spacing-sm;
+    }
+
+    .kpi-card__value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: $spacing-xs;
+      color: $brm-text;
+    }
+
+    .kpi-card__hint {
+      font-size: 0.85rem;
+      color: $text-secondary;
+    }
+  }
+
+  .kpi-loading,
+  .kpi-error {
+    background: $brm-light;
+    color: $brm-text;
+    border-radius: $border-radius-md;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+}

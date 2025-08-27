@@ -20,6 +20,11 @@ const ActivationDelaySelector = ({ onSelect }: Props) => {
       id: 'compromisos-personales', 
       text: 'Compromisos personales', 
       icon: '📅' 
+    },
+    { 
+      id: 'demora-activacion', 
+      text: 'Demora en la activación', 
+      icon: '⏳' 
     }
   ];
 

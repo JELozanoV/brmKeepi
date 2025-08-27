@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 interface Props {
-  onBack?: () => void;
+
 }
 
-export const PriceSolution = ({ onBack }: Props) => {
+export const PriceSolution = ({}: Props) => {
   const [activeSection, setActiveSection] = useState<number>(1);
 
   return (
@@ -108,12 +108,7 @@ export const PriceSolution = ({ onBack }: Props) => {
         )}
       </div>
 
-      {onBack && (
-        <button className="back-button" onClick={onBack}>
-          <span className="button-icon">←</span>
-          <span className="button-text">Volver</span>
-        </button>
-      )}
+      
     </div>
   );
 }; 

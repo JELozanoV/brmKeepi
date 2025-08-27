@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface Benefit {
-  icon: string;
-  title: string;
-  features: string[];
+  readonly icon: string;
+  readonly title: string;
+  readonly features: ReadonlyArray<string>;
 }
 
 interface BenefitsSectionProps {
-  benefits: Benefit[];
+  readonly benefits: ReadonlyArray<Benefit>;
 }
 
 const BenefitsSection: React.FC<BenefitsSectionProps> = ({ benefits }) => (
@@ -30,4 +30,4 @@ const BenefitsSection: React.FC<BenefitsSectionProps> = ({ benefits }) => (
   </div>
 );
 
-export default BenefitsSection; 
+export default BenefitsSection;

@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface ScriptLine {
   text: string;
-  type?: 'empathy' | 'solution' | 'benefit' | 'closing';
+  type?: 'empathy' | 'solution' | 'benefit' | 'closing' | 'diagnostic' | 'action';
 }
 
 /**
@@ -24,7 +24,7 @@ interface ScriptSectionProps {
   /** Título del guión */
   title: string;
   /** Array de líneas del guión */
-  lines: ScriptLine[];
+  lines: ReadonlyArray<ScriptLine>;
 }
 
 const ScriptSection: React.FC<ScriptSectionProps> = ({ title, lines }) => (
@@ -42,4 +42,4 @@ const ScriptSection: React.FC<ScriptSectionProps> = ({ title, lines }) => (
   </div>
 );
 
-export default ScriptSection; 
+export default ScriptSection;

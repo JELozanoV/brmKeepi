@@ -11,6 +11,10 @@ import SolutionCard from './components/SolutionCard'
 import SummaryScreen from './components/SummaryScreen'
 import CustomerServiceTypeSelector from './components/CustomerServiceTypeSelector'
 import HogarServicioClienteAsesorInapropiadoSolution from './components/solutions/HogarServicioClienteAsesorInapropiadoSolution'
+import HogarColgaronSolution from './components/solutions/HogarColgaronSolution'
+import HogarServicioClienteLargasEsperasSolution from './components/solutions/HogarServicioClienteLargasEsperasSolution'
+import HogarServicioClienteSinSolucionPreviaSolution from './components/solutions/HogarServicioClienteSinSolucionPreviaSolution'
+import HogarServicioClientePromesasIncumplidasSolution from './components/solutions/HogarServicioClientePromesasIncumplidasSolution'
 import HomeFailureSelector from './components/HomeFailureSelector'
 import ActivationDelaySelector from './components/ActivationDelaySelector'
 import Logo from './components/Logo'
@@ -28,10 +32,16 @@ import HogarViajeVacacionesSolution from './components/solutions/HogarViajeVacac
 import HogarViajeMudanzaSolution from './components/solutions/HogarViajeMudanzaSolution'
 import CompetitorSolution from './components/solutions/CompetitorSolution'
 import ReincidentClientSolution from './components/solutions/ReincidentClientSolution'
+import HogarActivacionDemoradaSolution from './components/solutions/HogarActivacionDemoradaSolution'
 import Chatbot from './components/Chatbot/Chatbot'
 import MoodSelector from './components/MoodSelector'
 import Toast from './components/Toast/Toast'
 import { getMoodRecommendation } from './services/moodRecommendations'
+
+import Header from './components/layout/Header';
+import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import RatesPage from './pages/RatesPage';
+import ProfilePage from './components/profile/ProfilePage';
 
 function App() {
   const [serviceType, setServiceType] = useState<ServiceType>(null)
@@ -50,6 +60,12 @@ function App() {
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState<'info' | 'success' | 'warning' | 'error'>('info')
+
+  // Add a ref for header height if needed, or use fixed value
+  const headerHeight = 56; // px, should match min-height in _header.scss
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isRatesRoute = location.pathname.includes('/tarifas');
 
   const handleReset = () => {
     setServiceType(null)
@@ -100,6 +116,11 @@ function App() {
 
   const handleHome = () => {
     handleReset();
+  }
+
+  const handleHeaderHome = () => {
+    handleReset();
+    navigate('/');
   }
 
   const handleMoodSelect = (mood: ClientMoodType) => {
@@ -165,8 +186,11 @@ function App() {
       return <CompetitorSolution onSelect={setCompetitorType} />
     }
 
-    if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'activacion-demora' && !activationDelayType) {
-      return <ActivationDelaySelector onSelect={setActivationDelayType} />
+    if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'activacion-demora') {
+      if (!activationDelayType) {
+        return <ActivationDelaySelector onSelect={setActivationDelayType} />
+      }
+      return <HogarActivacionDemoradaSolution onApplySolution={() => setSolutionApplied(true)} />
     }
 
     if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'cliente-reincidente' && !reincidentClientType) {
@@ -221,6 +245,22 @@ function App() {
     if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'asesor-inapropiado') {
       return <HogarServicioClienteAsesorInapropiadoSolution onApplySolution={() => setSolutionApplied(true)} />
     }
+    
+    if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'llamada-colgada') {
+      return <HogarColgaronSolution onApplySolution={() => setSolutionApplied(true)} />
+    }
+
+    if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'largas-esperas') {
+      return <HogarServicioClienteLargasEsperasSolution onApplySolution={() => setSolutionApplied(true)} />
+    }
+
+    if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'sin-solucion') {
+      return <HogarServicioClienteSinSolucionPreviaSolution onApplySolution={() => setSolutionApplied(true)} />
+    }
+
+    if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'promesas-incumplidas') {
+      return <HogarServicioClientePromesasIncumplidasSolution onApplySolution={() => setSolutionApplied(true)} />
+    }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'cliente-reincidente') {
       return <ReincidentClientSolution onApplySolution={() => setSolutionApplied(true)} />
@@ -234,41 +274,35 @@ function App() {
   }
 
   return (
-    <div className="app-container">
-      <div className="logo-container">
-        <Logo />
+    <>
+      <Header onHome={handleHeaderHome} onBack={!isRatesRoute ? handleBack : undefined} />
+      <div className="app-container" style={{ paddingTop: `${headerHeight + 8}px` }}>
+        <div className="logo-container">
+          <Logo />
+        </div>
+
+        <Routes>
+          <Route path="/" element={
+            <div className="app-content">
+              {renderCurrentStep()}
+            </div>
+          } />
+          <Route path="/perfil" element={<ProfilePage />} />
+          <Route path="/tarifas" element={<RatesPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+
+        <Chatbot />
+
+        <Toast 
+          message={toastMessage} 
+          type={toastType} 
+          isVisible={showToast} 
+          duration={8000}
+          onClose={() => setShowToast(false)}
+        />
       </div>
-      <div className="navigation-buttons">
-        {(serviceType || planType || cancellationReason || costReason || 
-          failureType || travelType || customerServiceType || competitorType) && (
-          <>
-            <button className="back-button" onClick={handleBack}>
-              <span className="button-icon">←</span>
-              <span className="button-text">Volver</span>
-            </button>
-
-            <button className="home-button" onClick={handleHome}>
-              <span className="button-icon">🏠</span>
-              <span className="button-text">Inicio</span>
-            </button>
-          </>
-        )}
-      </div>
-
-      <div className="app-content">
-        {renderCurrentStep()}
-      </div>
-
-      <Chatbot />
-
-      <Toast 
-        message={toastMessage} 
-        type={toastType} 
-        isVisible={showToast} 
-        duration={8000}
-        onClose={() => setShowToast(false)}
-      />
-    </div>
+    </>
   )
 }
 
