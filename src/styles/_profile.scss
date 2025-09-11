@@ -102,6 +102,19 @@
     }
   }
 
+  // Chip de estado en tarjetas KPI
+  .kpi-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    margin-bottom: $spacing-sm;
+    color: $brm-white;
+  }
+  .kpi-chip-good { background: #22c55e; }
+  .kpi-chip-warn { background: #f59e0b; }
+  .kpi-chip-bad  { background: #ef4444; }
+
   .kpi-loading,
   .kpi-error {
     background: $brm-light;

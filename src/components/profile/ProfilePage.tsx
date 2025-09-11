@@ -5,6 +5,7 @@ import { formatTmo, getStatusByThresholds } from '../../utils/metrics';
 import KpiCard from './KpiCard';
 import ProfileInfoCard from './ProfileInfoCard';
 import ProfileOperationalPanel from './ProfileOperationalPanel';
+import KpiCoach from './KpiCoach';
 import '../../styles/operational.scss';
 
 const ProfilePage: React.FC = () => {
@@ -83,11 +84,24 @@ const ProfilePage: React.FC = () => {
           {error && <div className="kpi-error">{error}</div>}
 
           {derived && (
-            <div className="kpi-grid">
-              <KpiCard label="TMO" value={derived.tmo} hint="Meta ≤ 07:00" comparator="≤" numericValue={derived.tmoSec} targetValue={420} />
-              <KpiCard label="% Transferencias" value={derived.transPct} hint="Meta ≤ 40%" comparator="≤" numericValue={derived.transPctNum} targetValue={40} warnAbsoluteDelta={5} />
-              <KpiCard label="NPS" value={`${derived.qaPct} / ${derived.csatStr}`} hint="Meta ≥ 60%" comparator="≥" numericValue={parseInt(derived.qaPct, 10)} targetValue={60} warnAbsoluteDelta={5} />
-            </div>
+            <>
+              <div className="kpi-grid">
+                <KpiCard label="TMO" value={derived.tmo} hint="Tu meta hoy: 07:00 o menos" comparator="≤" numericValue={derived.tmoSec} targetValue={420} />
+                <KpiCard label="Tu tasa" value={derived.transPct} hint="Tu meta hoy: 40% o menos" comparator="≤" numericValue={derived.transPctNum} targetValue={40} warnAbsoluteDelta={5} />
+                <KpiCard label="Tu NPS" value={`${derived.qaPct}%`} hint="Tu meta hoy: 60% o más" comparator="≥" numericValue={parseInt(derived.qaPct, 10)} targetValue={60} warnAbsoluteDelta={5} />
+              </div>
+              {/* Sección KpiCoach (debajo de KPI cards) */}
+              <section aria-label="KpiCoach" style={{ marginTop: '1.5rem' }}>
+                <h3 className="profile-title" style={{ marginBottom: '0.75rem' }}>KpiCoach</h3>
+                <KpiCoach
+                  range={range as any}
+                  callsHandled={data?.callsHandled || 0}
+                  totalHandleTimeSec={data?.totalHandleTimeSec || 0}
+                  transfers={data?.transfers || 0}
+                  npsPct={Math.round(data?.qa || 0)}
+                />
+              </section>
+            </>
           )}
 
           {/* Sección Información operativa */}
@@ -95,6 +109,8 @@ const ProfilePage: React.FC = () => {
             <h3 className="profile-title" style={{ marginBottom: '0.75rem' }}>Información operativa</h3>
             <ProfileOperationalPanel timeframe={range as any} />
           </section>
+
+          
         </main>
       </div>
     </div>

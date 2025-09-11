@@ -23,3 +23,17 @@ export const API_ENDPOINTS = {
  * 0.05 = 5%. Ajustable sin tocar componentes.
  */
 export const GOALS_WARN_THRESHOLD = 0.05;
+
+/** Metas para KPIs principales (Mi Perfil) */
+export const KPI_TARGETS = {
+  tmoSec: 420,          // ≤ 07:00
+  transfersPct: 40,     // ≤ 40%
+  npsPct: 60,           // ≥ 60%
+} as const;
+
+/** Volúmenes esperados por timeframe (para cálculos Nivel 2 en KpiCoach) */
+export const EXPECTED_CALLS: Record<'today'|'week'|'month', number> = {
+  today: 40,
+  week: 200,
+  month: 800,
+};

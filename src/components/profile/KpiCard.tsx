@@ -50,8 +50,10 @@ const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, status, comparato
     return 'bad';
   }, [comparator, numericValue, targetValue, warnThresholdPct, status]);
 
+  const verdict = computedStatus === 'good' ? 'En meta' : computedStatus === 'warn' ? 'Cerca de la meta' : computedStatus === 'bad' ? 'Necesita atención' : undefined;
   return (
     <div className={`kpi-card ${computedStatus ? `kpi-${computedStatus}` : ''}`} role="status" aria-label={`${label}: ${value}`}>
+      {verdict && <span className={`kpi-chip kpi-chip-${computedStatus}`}>{verdict}</span>}
       <div className="kpi-card__label">{label}</div>
       <div className="kpi-card__value">{value}</div>
       {hint && <div className="kpi-card__hint">{hint}</div>}
