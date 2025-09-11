@@ -47,7 +47,7 @@ const ProfileOperationalPanel: React.FC<ProfileOperationalPanelProps> = ({ timef
 
   return (
     <div className="operational-grid">
-      <GoalsTrafficLight goals={data.goals} />
+      {/* Semáforo global oculto; la lógica ahora vive en las tarjetas principales */}
       <div className="op-chart-cards">
         <TrendMiniChart series={tmoSeries} />
         <TrendMiniChart series={transfersSeries} />

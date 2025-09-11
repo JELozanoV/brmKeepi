@@ -53,16 +53,35 @@
   }
 
   .kpi-card {
-    background: $brm-light; // Fondo de card
+    background: $brm-light; // Fondo por defecto
     color: $brm-text; // Texto
     border-radius: $border-radius-lg;
     padding: $spacing-lg;
     box-shadow: $box-shadow;
     border: 2px solid transparent;
 
-    &.kpi-good { border-color: $brm-primary; }
-    &.kpi-warn { border-color: $brm-secondary; }
-    &.kpi-bad  { border-color: $error-color; }
+    // Colores de fondo según semáforo
+    &.kpi-good {
+      border-color: #22c55e;
+      background: rgba(#22c55e, 0.12);
+      color: $brm-white;
+      .kpi-card__label, .kpi-card__value { color: $brm-white; }
+      .kpi-card__hint { color: rgba($brm-white, 0.85); }
+    }
+    &.kpi-warn {
+      border-color: #f59e0b;
+      background: rgba(#f59e0b, 0.12);
+      color: $brm-white;
+      .kpi-card__label, .kpi-card__value { color: $brm-white; }
+      .kpi-card__hint { color: rgba($brm-white, 0.85); }
+    }
+    &.kpi-bad  {
+      border-color: #ef4444;
+      background: rgba(#ef4444, 0.12);
+      color: $brm-white;
+      .kpi-card__label, .kpi-card__value { color: $brm-white; }
+      .kpi-card__hint { color: rgba($brm-white, 0.85); }
+    }
 
     .kpi-card__label {
       font-weight: 600;

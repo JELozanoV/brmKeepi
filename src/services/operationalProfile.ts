@@ -10,7 +10,7 @@ export async function fetchOperationalProfile(timeframe: OperationalTimeframe = 
 
   // Valores base (mock)
   const tmoSec = 6 * 60 + 40; // 06:40 => 400s
-  const transfersPct = 41; // % Transferencias actual
+  const transfersPct = 40; // % Transferencias actual
   const npsPct = 70; // NPS % actual
 
   const target = {

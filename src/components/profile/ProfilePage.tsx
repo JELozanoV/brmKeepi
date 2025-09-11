@@ -84,9 +84,9 @@ const ProfilePage: React.FC = () => {
 
           {derived && (
             <div className="kpi-grid">
-              <KpiCard label="TMO" value={derived.tmo} hint="Meta ≤ 07:00" status={derived.status.tmo} />
-              <KpiCard label="% Transferencias" value={derived.transPct} hint="Meta ≤ 40%" status={derived.status.trans} />
-              <KpiCard label="NPS" value={`${derived.qaPct} / ${derived.csatStr}`} hint="Meta ≥ 60%" status={derived.status.qa === 'bad' || derived.status.csat === 'bad' ? 'bad' : (derived.status.qa === 'warn' || derived.status.csat === 'warn' ? 'warn' : 'good')} />
+              <KpiCard label="TMO" value={derived.tmo} hint="Meta ≤ 07:00" comparator="≤" numericValue={derived.tmoSec} targetValue={420} />
+              <KpiCard label="% Transferencias" value={derived.transPct} hint="Meta ≤ 40%" comparator="≤" numericValue={derived.transPctNum} targetValue={40} warnAbsoluteDelta={5} />
+              <KpiCard label="NPS" value={`${derived.qaPct} / ${derived.csatStr}`} hint="Meta ≥ 60%" comparator="≥" numericValue={parseInt(derived.qaPct, 10)} targetValue={60} warnAbsoluteDelta={5} />
             </div>
           )}
 
