@@ -17,7 +17,6 @@ import HogarServicioClienteSinSolucionPreviaSolution from './components/solution
 import HogarServicioClientePromesasIncumplidasSolution from './components/solutions/HogarServicioClientePromesasIncumplidasSolution'
 import HomeFailureSelector from './components/HomeFailureSelector'
 import ActivationDelaySelector from './components/ActivationDelaySelector'
-import Logo from './components/Logo'
 import ReincidentClientSelector from './components/ReincidentClientSelector'
 import ClaroPaySolution from './components/solutions/ClaroPaySolution'
 import HogarCostosSolution from './components/solutions/HogarCostosSolution'
@@ -277,9 +276,7 @@ function App() {
     <>
       <Header onHome={handleHeaderHome} onBack={!isRatesRoute ? handleBack : undefined} />
       <div className="app-container" style={{ paddingTop: `${headerHeight + 8}px` }}>
-        <div className="logo-container">
-          <Logo />
-        </div>
+        {/* Logo movido a la navbar */}
 
         <Routes>
           <Route path="/" element={

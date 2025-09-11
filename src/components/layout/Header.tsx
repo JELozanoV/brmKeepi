@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/_header.scss';
+import RetenLogo from '../../assets/images/RETEN.svg';
 
 // Removed modal-based rates view; navigation will take the user to a dedicated page
 
@@ -45,6 +46,9 @@ const Header: React.FC<HeaderProps> = ({ onHome, onBack }) => {
             <span className="button-icon" role="img" aria-label="Atrás">🔙</span>
             <span className="button-text">Atrás</span>
           </button>
+        </div>
+        <div className="brm-header__center" aria-label="Logo Reten+">
+          <img src={RetenLogo} alt="Reten+ Logo" className="brm-header__logo" />
         </div>
         <div className="brm-header__right">
           <button

@@ -3,12 +3,22 @@ import { Range } from '../../types/profile';
 import { getMyKpis } from '../../services/kpisService';
 import { formatTmo, getStatusByThresholds } from '../../utils/metrics';
 import KpiCard from './KpiCard';
+import ProfileInfoCard from './ProfileInfoCard';
+import ProfileOperationalPanel from './ProfileOperationalPanel';
+import '../../styles/operational.scss';
 
 const ProfilePage: React.FC = () => {
   const [range, setRange] = useState<Range>('week');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<{ callsHandled: number; totalHandleTimeSec: number; transfers: number; retentionAccepted: number; cancellationIntents?: number; qa: number; csat: number } | null>(null);
+
+  // Por ahora hardcodeado; preparado para integrar datos reales (servicio backend o contexto)
+  const profile = {
+    firstName: 'Juan',
+    lastName: 'Pérez',
+    coordinator: 'María Gómez',
+  };
 
   useEffect(() => {
     let cancelled = false;
@@ -31,25 +41,21 @@ const ProfilePage: React.FC = () => {
   const derived = useMemo(() => {
     if (!data) return null;
     const calls = data.callsHandled || 0;
-    const intents = typeof data.cancellationIntents === 'number' ? data.cancellationIntents : calls;
     const tmoSec = calls ? data.totalHandleTimeSec / calls : 0;
     const tmo = formatTmo(tmoSec);
     const transPctNum = calls ? Math.round((data.transfers / calls) * 100) : 0;
     const transPct = `${transPctNum}%`;
-    const retPctNum = intents ? Math.round((data.retentionAccepted / intents) * 100) : 0;
-    const retPct = `${retPctNum}%`;
     const qaPct = `${Math.round(data.qa)}%`;
     const csatStr = data.csat.toFixed(1);
 
     const status = getStatusByThresholds({
       tmoSec,
       transPct: transPctNum,
-      retPct: retPctNum,
       qa: data.qa,
       csat: data.csat,
     });
 
-    return { tmo, tmoSec, transPct, transPctNum, retPct, retPctNum, qaPct, csatStr, status };
+    return { tmo, tmoSec, transPct, transPctNum, qaPct, csatStr, status };
   }, [data]);
 
   return (
@@ -63,17 +69,34 @@ const ProfilePage: React.FC = () => {
         </div>
       </div>
 
-      {loading && <div className="kpi-loading">Cargando KPIs…</div>}
-      {error && <div className="kpi-error">{error}</div>}
+      <div className="profile-layout">
+        <aside className="profile-sidebar" aria-label="Información del asesor">
+          <ProfileInfoCard
+            firstName={profile.firstName}
+            lastName={profile.lastName}
+            coordinator={profile.coordinator}
+          />
+        </aside>
 
-      {derived && (
-        <div className="kpi-grid">
-          <KpiCard label="TMO" value={derived.tmo} hint="Meta ≤ 08:00" status={derived.status.tmo} />
-          <KpiCard label="% Transferencias" value={derived.transPct} hint="Meta ≤ 15%" status={derived.status.trans} />
-          <KpiCard label="% Retención" value={derived.retPct} hint="Meta ≥ 35%" status={derived.status.ret} />
-          <KpiCard label="NPS" value={`${derived.qaPct} / ${derived.csatStr}`} hint="Meta ≥ 90 / 4.5" status={derived.status.qa === 'bad' || derived.status.csat === 'bad' ? 'bad' : (derived.status.qa === 'warn' || derived.status.csat === 'warn' ? 'warn' : 'good')} />
-        </div>
-      )}
+        <main className="profile-main">
+          {loading && <div className="kpi-loading">Cargando KPIs…</div>}
+          {error && <div className="kpi-error">{error}</div>}
+
+          {derived && (
+            <div className="kpi-grid">
+              <KpiCard label="TMO" value={derived.tmo} hint="Meta ≤ 07:00" status={derived.status.tmo} />
+              <KpiCard label="% Transferencias" value={derived.transPct} hint="Meta ≤ 40%" status={derived.status.trans} />
+              <KpiCard label="NPS" value={`${derived.qaPct} / ${derived.csatStr}`} hint="Meta ≥ 60%" status={derived.status.qa === 'bad' || derived.status.csat === 'bad' ? 'bad' : (derived.status.qa === 'warn' || derived.status.csat === 'warn' ? 'warn' : 'good')} />
+            </div>
+          )}
+
+          {/* Sección Información operativa */}
+          <section aria-label="Información operativa" style={{ marginTop: '1.5rem' }}>
+            <h3 className="profile-title" style={{ marginBottom: '0.75rem' }}>Información operativa</h3>
+            <ProfileOperationalPanel timeframe={range as any} />
+          </section>
+        </main>
+      </div>
     </div>
   );
 };

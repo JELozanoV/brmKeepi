@@ -92,3 +92,99 @@
     margin-bottom: $spacing-md;
   }
 }
+
+// Layout de perfil (sidebar izquierda + contenido principal)
+.profile-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: $spacing-lg;
+  align-items: start;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.profile-sidebar {
+  width: 100%;
+}
+
+.profile-main {
+  width: 100%;
+}
+
+// Tarjeta de perfil (estilo alineado con kpi-card)
+.profile-card {
+  background: $brm-light;
+  color: $brm-text;
+  border-radius: $border-radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $box-shadow;
+  border: 2px solid transparent;
+
+  .profile-card__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+  }
+
+  .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+    color: $brm-white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.5rem;
+    box-shadow: $box-shadow;
+    flex-shrink: 0;
+  }
+
+  .profile-identity {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    .profile-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $brm-text;
+    }
+
+    .profile-role {
+      font-size: 0.9rem;
+      color: $text-secondary;
+    }
+  }
+
+  .profile-fields {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+
+    .profile-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba($brm-white, 0.05);
+      border-radius: $border-radius-md;
+      padding: $spacing-sm $spacing-md;
+
+      .label {
+        color: $brm-text;
+        font-weight: 600;
+        padding-right: $spacing-md;
+        min-width: 120px;
+      }
+
+      .value {
+        color: $brm-text;
+        text-transform: none;
+      }
+    }
+  }
+}

@@ -17,3 +17,9 @@ export const API_ENDPOINTS = {
   RATES: '/api/rates',
   // ... más endpoints
 } as const; 
+
+/**
+ * Umbral de advertencia para semáforo de metas.
+ * 0.05 = 5%. Ajustable sin tocar componentes.
+ */
+export const GOALS_WARN_THRESHOLD = 0.05;
