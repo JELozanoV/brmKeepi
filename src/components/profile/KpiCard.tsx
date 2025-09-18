@@ -1,11 +1,15 @@
 import React, { useMemo } from 'react';
 import { GOALS_WARN_THRESHOLD } from '../../config/constants';
+import { computeKpiStatus } from '../../utils/kpiStatus';
+import { KpiViewModel } from '../../utils/kpiSelector';
 
 export interface KpiCardProps {
   label: string;           // "TMO", "% Transferencias", "% Retención", "QA / CSAT"
   value: string;           // "06:45", "22%", "38%", "91% / 4.6"
   hint?: string;           // "Meta ≤ 08:00", etc.
   status?: 'good' | 'warn' | 'bad';
+  /** View-model unificado (preferido). Si se provee, no se recalcula estado en el componente. */
+  vm?: KpiViewModel;
   /** Comparador de la meta: ≤ o ≥. Si se define junto a targetValue y numericValue, se ignora 'status' y se calcula internamente. */
   comparator?: '≤' | '≥';
   /** Valor numérico del KPI para la evaluación (segundos para TMO, porcentaje entero para %). */
@@ -18,45 +22,29 @@ export interface KpiCardProps {
   warnAbsoluteDelta?: number;
 }
 
-const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, status, comparator, numericValue, targetValue, warnThresholdPct, warnAbsoluteDelta }) => {
-  const computedStatus: 'good' | 'warn' | 'bad' | undefined = useMemo(() => {
-    if (!comparator || typeof numericValue !== 'number' || typeof targetValue !== 'number') return status;
-    const thr = typeof warnThresholdPct === 'number' ? warnThresholdPct : GOALS_WARN_THRESHOLD;
-    if (targetValue === 0) {
-      if (comparator === '≤') return numericValue <= 0 ? 'good' : 'bad';
-      return numericValue >= 0 ? 'good' : 'bad';
-    }
-    if (comparator === '≤') {
-      if (typeof warnAbsoluteDelta === 'number') {
-        const greenMaxAbs = targetValue - warnAbsoluteDelta;
-        if (numericValue <= greenMaxAbs) return 'good';
-        if (numericValue <= targetValue) return 'warn';
-        return 'bad';
-      }
-      const greenMax = targetValue * (1 - thr);
-      if (numericValue <= greenMax) return 'good';
-      if (numericValue <= targetValue) return 'warn';
-      return 'bad';
-    }
-    if (typeof warnAbsoluteDelta === 'number') {
-      const greenMinAbs = targetValue + warnAbsoluteDelta;
-      if (numericValue >= greenMinAbs) return 'good';
-      if (numericValue >= targetValue) return 'warn';
-      return 'bad';
-    }
-    const greenMin = targetValue * (1 + thr);
-    if (numericValue >= greenMin) return 'good';
-    if (numericValue >= targetValue) return 'warn';
-    return 'bad';
-  }, [comparator, numericValue, targetValue, warnThresholdPct, status]);
+const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, status, vm, comparator, numericValue, targetValue, warnThresholdPct, warnAbsoluteDelta }) => {
+  const statusData = vm ? undefined : useMemo(() => {
+    if (!comparator || typeof numericValue !== 'number' || typeof targetValue !== 'number') return undefined;
+    const key = label.toLowerCase().includes('tmo') ? 'tmo' : label.toLowerCase().includes('nps') ? 'nps' : 'transfers';
+    const current = key === 'tmo' ? numericValue : Number(numericValue);
+    const target = Number(targetValue);
+    return computeKpiStatus(key as any, current, target);
+  }, [comparator, numericValue, targetValue, label]);
 
-  const verdict = computedStatus === 'good' ? 'En meta' : computedStatus === 'warn' ? 'Cerca de la meta' : computedStatus === 'bad' ? 'Necesita atención' : undefined;
+  const unifiedStatus = vm?.status || (statusData?.status === 'good' ? 'ok' : statusData?.status) || (status === 'good' ? 'ok' : (status as any));
+  const statusClass = unifiedStatus === 'ok' ? 'good' : unifiedStatus;
+  const chipText = vm?.chipText || (statusData ? statusData.chipText : (status === 'bad' ? 'Necesita atención' : status === 'warn' ? 'En meta, pero muy cerca del límite' : 'En meta'));
+  const aria = vm?.ariaLabel;
+
   return (
-    <div className={`kpi-card ${computedStatus ? `kpi-${computedStatus}` : ''}`} role="status" aria-label={`${label}: ${value}`}>
-      {verdict && <span className={`kpi-chip kpi-chip-${computedStatus}`}>{verdict}</span>}
+    <div className={`kpi-card ${statusClass ? `kpi-${statusClass}` : ''}`} role="status" aria-label={aria || `${label}: ${value}`}>
+      {(vm || statusData) && <span className={`kpi-chip kpi-chip-${statusClass}`}>{chipText}</span>}
       <div className="kpi-card__label">{label}</div>
       <div className="kpi-card__value">{value}</div>
       {hint && <div className="kpi-card__hint">{hint}</div>}
+      {vm && (
+        <div style={{ display: 'none' }} data-debug={`${vm.status}|${vm.difference}|${vm.direction}`}></div>
+      )}
     </div>
   );
 };

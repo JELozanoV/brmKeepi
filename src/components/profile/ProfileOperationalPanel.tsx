@@ -4,7 +4,6 @@ import { fetchOperationalProfile } from '../../services/operationalProfile';
 import GoalsTrafficLight from './GoalsTrafficLight';
 import TrendMiniChart from './TrendMiniChart';
 import BenchmarkCard from './BenchmarkCard';
-import AlertsList from './AlertsList';
 
 export interface ProfileOperationalPanelProps {
   /** today | week | month */
@@ -57,7 +56,6 @@ const ProfileOperationalPanel: React.FC<ProfileOperationalPanelProps> = ({ timef
         <TrendMiniChart series={transfersSeries} />
         <TrendMiniChart series={npsSeries} />
       </div>
-      <AlertsList alerts={data.alerts} />
     </div>
   );
 };

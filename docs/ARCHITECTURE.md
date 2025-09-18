@@ -1,3 +1,113 @@
+## Arquitectura técnica
+
+Este documento describe la arquitectura del frontend actual (fuente de verdad: el código del repositorio). Cuando falte información de backend se marca como TODO.
+
+### Mapa de carpetas (alto nivel)
+
+```mermaid
+flowchart TB
+  src((src))
+  subgraph components[components]
+    profile[profile/*]
+    layout[layout/Header.tsx]
+    solutions[solutions/*]
+    common[common/*]
+    brand[BrandLogo.tsx]
+  end
+  pages[pages/*]
+  services[services/*]
+  utils[utils/*]
+  hooks[hooks/*]
+  styles[styles/*]
+  config[config/constants.ts]
+  types[types/*]
+
+  src --> components
+  src --> pages
+  src --> services
+  src --> utils
+  src --> hooks
+  src --> styles
+  src --> config
+  src --> types
+```
+
+Referencias clave:
+- `src/App.tsx`: rutas, Guard de autenticación y montaje de `Header`.
+- `src/context/AuthContext.tsx`: proveedor de autenticación mock.
+- `src/components/profile/ProfilePage.tsx`: orquesta KPIs, KpiCoach, Ranking.
+- `src/utils/kpiSelector.ts`: única fuente de estado para KPI/KpiCoach.
+- `src/utils/rankingUtils.ts`: view-model y reglas del ranking.
+- `src/pages/ProporcionalesPage.tsx` + `src/utils/prorrateo.ts`: calculadora de proporcionales.
+- `src/components/solutions/FilteredRatesSection.tsx`: “Tarifas Conectados”.
+
+### Flujo de datos y navegación
+
+```mermaid
+sequenceDiagram
+  autonumber
+  actor U as Usuario
+  participant R as Router (App.tsx)
+  participant G as Guard
+  participant H as Header
+  participant P as ProfilePage
+  participant K as KPI/KpiCoach
+  participant Rk as RankingCard
+  participant Pr as ProporcionalesPage
+
+  U->>R: Visita /login o /
+  R->>G: Evalúa isAuthenticated (AuthContext)
+  alt no autenticado
+    G-->>R: Redirect a /login
+  else autenticado
+    G-->>R: Renderiza DashboardApp
+    R->>H: Header con menú (Perfil/Salir)
+    U->>R: Navega a /perfil
+    R->>P: Render Perfil
+    P->>K: Calcula VM con computeKpiViewModels()
+    P->>Rk: buildRankingVM() (equipo / operación)
+    U->>R: Navega a /proporcionales
+    R->>Pr: Render Calculadora (utils/prorrateo)
+  end
+```
+
+### Estado global y proveedores
+- `AuthProvider` (`src/context/AuthContext.tsx`): expone `user`, `isAuthenticated`, `login`, `logout`, `lockSeconds`, `error`, `loading`, `isLoggingOut`.
+- Persistencia: `localStorage` con expiración de 8 horas.
+- TODO backend: sustituir mock por cookies httpOnly + CSRF y endpoints reales.
+
+### Única fuente de verdad KPI ↔ KpiCoach
+`ProfilePage` calcula una vez el view-model de KPIs con `computeKpiViewModels()` y lo pasa tal cual a las tarjetas superiores y a KpiCoach. No se recalcula en hijos.
+
+```12:36:src/utils/kpiSelector.ts
+export interface KpiSelectorOutput {
+  tmo: KpiViewModel;
+  transfers: KpiViewModel;
+  nps: KpiViewModel;
+}
+```
+
+### Rutas y protección
+- Definidas en `src/App.tsx` con `react-router-dom`.
+- Guard simple que bloquea `/` y rutas privadas si no hay sesión; redirige a `/login`.
+
+```297:306:src/App.tsx
+<Routes>
+  <Route path="/" element={<div className="app-content">{renderCurrentStep()}</div>} />
+  <Route path="/perfil" element={<ProfilePage />} />
+  <Route path="/tarifas" element={<RatesPage />} />
+  <Route path="/proporcionales" element={<ProporcionalesPage />} />
+  <Route path="*" element={<Navigate to="/" replace />} />
+</Routes>
+```
+
+### Estilos y patrones
+- Sass; UI oscura con borde azul `#1A4DFF` en cards y controles.
+- Chips/segmentos reutilizan el mismo patrón de botones con borde azul y fondo activo.
+
+### TODOs
+- Integración real de auth y prorrateo (contratos en `docs/API_CONTRACTS/`).
+- Pruebas automáticas (unitarias para utils y de integración para flujos). 
 # Arquitectura de la Aplicación
 
 ## 🎯 Objetivos de Diseño

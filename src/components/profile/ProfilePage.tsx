@@ -1,11 +1,17 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Range } from '../../types/profile';
 import { getMyKpis } from '../../services/kpisService';
-import { formatTmo, getStatusByThresholds } from '../../utils/metrics';
+import { formatTmo } from '../../utils/metrics';
+import { computeKpiViewModels } from '../../utils/kpiSelector';
 import KpiCard from './KpiCard';
 import ProfileInfoCard from './ProfileInfoCard';
-import ProfileOperationalPanel from './ProfileOperationalPanel';
+import { useCurrentUser } from '../../hooks/useCurrentUser';
+// import ProfileOperationalPanel from './ProfileOperationalPanel';
 import KpiCoach from './KpiCoach';
+import RankingCard from './RankingCard';
+import { fetchRankingMock } from '../../services/rankingService';
+import { buildRankingVM } from '../../utils/rankingUtils';
+import { MetricKey } from '../../types/ranking';
 import '../../styles/operational.scss';
 
 const ProfilePage: React.FC = () => {
@@ -13,12 +19,16 @@ const ProfilePage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<{ callsHandled: number; totalHandleTimeSec: number; transfers: number; retentionAccepted: number; cancellationIntents?: number; qa: number; csat: number } | null>(null);
+  const [rankingMetricTeam, setRankingMetricTeam] = useState<MetricKey>('tmo');
+  const [rankingMetricOp, setRankingMetricOp] = useState<MetricKey>('tmo');
+  const [rankingData, setRankingData] = useState<any | null>(null);
 
   // Por ahora hardcodeado; preparado para integrar datos reales (servicio backend o contexto)
+  const { user, loading: userLoading } = useCurrentUser();
   const profile = {
-    firstName: 'Juan',
-    lastName: 'Pérez',
-    coordinator: 'María Gómez',
+    firstName: user?.firstName || 'Asesor',
+    lastName: user?.lastName || '',
+    coordinator: user?.coordinatorName || 'María Gómez',
   };
 
   useEffect(() => {
@@ -39,6 +49,16 @@ const ProfilePage: React.FC = () => {
     return () => { cancelled = true; };
   }, [range]);
 
+  useEffect(() => {
+    let cancelled = false;
+    const run = async () => {
+      const ds = await fetchRankingMock(range as any);
+      if (!cancelled) setRankingData(ds);
+    };
+    run();
+    return () => { cancelled = true; };
+  }, [range]);
+
   const derived = useMemo(() => {
     if (!data) return null;
     const calls = data.callsHandled || 0;
@@ -48,15 +68,17 @@ const ProfilePage: React.FC = () => {
     const transPct = `${transPctNum}%`;
     const qaPct = `${Math.round(data.qa)}%`;
     const csatStr = data.csat.toFixed(1);
-
-    const status = getStatusByThresholds({
+    const vm = computeKpiViewModels(range as any, {
       tmoSec,
-      transPct: transPctNum,
-      qa: data.qa,
-      csat: data.csat,
+      transfersPct: transPctNum,
+      npsPct: Math.round(data.qa)
+    }, undefined, {
+      n: calls,
+      N: undefined as any,
+      totalTalkSec: data.totalHandleTimeSec,
+      transfers: data.transfers
     });
-
-    return { tmo, tmoSec, transPct, transPctNum, qaPct, csatStr, status };
+    return { tmo, tmoSec, transPct, transPctNum, qaPct, csatStr, vm };
   }, [data]);
 
   return (
@@ -72,11 +94,15 @@ const ProfilePage: React.FC = () => {
 
       <div className="profile-layout">
         <aside className="profile-sidebar" aria-label="Información del asesor">
-          <ProfileInfoCard
-            firstName={profile.firstName}
-            lastName={profile.lastName}
-            coordinator={profile.coordinator}
-          />
+          {userLoading ? (
+            <div className="kpi-loading">Cargando perfil…</div>
+          ) : (
+            <ProfileInfoCard
+              firstName={profile.firstName}
+              lastName={profile.lastName}
+              coordinator={profile.coordinator}
+            />
+          )}
         </aside>
 
         <main className="profile-main">
@@ -86,9 +112,9 @@ const ProfilePage: React.FC = () => {
           {derived && (
             <>
               <div className="kpi-grid">
-                <KpiCard label="TMO" value={derived.tmo} hint="Tu meta hoy: 07:00 o menos" comparator="≤" numericValue={derived.tmoSec} targetValue={420} />
-                <KpiCard label="Tu tasa" value={derived.transPct} hint="Tu meta hoy: 40% o menos" comparator="≤" numericValue={derived.transPctNum} targetValue={40} warnAbsoluteDelta={5} />
-                <KpiCard label="Tu NPS" value={`${derived.qaPct}%`} hint="Tu meta hoy: 60% o más" comparator="≥" numericValue={parseInt(derived.qaPct, 10)} targetValue={60} warnAbsoluteDelta={5} />
+                <KpiCard label="TMO" value={derived.tmo} hint="Tu meta hoy: 07:00 o menos" vm={derived.vm.tmo} />
+                <KpiCard label="Tu tasa" value={derived.transPct} hint="Tu meta hoy: 40% o menos" vm={derived.vm.transfers} />
+                <KpiCard label="Tu NPS" value={`${derived.qaPct}%`} hint="Tu meta hoy: 60% o más" vm={derived.vm.nps} />
               </div>
               {/* Sección KpiCoach (debajo de KPI cards) */}
               <section aria-label="KpiCoach" style={{ marginTop: '1.5rem' }}>
@@ -99,16 +125,31 @@ const ProfilePage: React.FC = () => {
                   totalHandleTimeSec={data?.totalHandleTimeSec || 0}
                   transfers={data?.transfers || 0}
                   npsPct={Math.round(data?.qa || 0)}
+                  vm={derived.vm as any}
                 />
               </section>
+
+              {/* Ranking de mi equipo y de la operación */}
+              {rankingData && (
+                <>
+                  <RankingCard
+                    title="Ranking de mi equipo"
+                    metric={rankingMetricTeam}
+                    onMetricChange={setRankingMetricTeam}
+                    vm={buildRankingVM(rankingMetricTeam, rankingData, 'team', 'c-1')}
+                  />
+                  <RankingCard
+                    title="Ranking de toda la operación"
+                    metric={rankingMetricOp}
+                    onMetricChange={setRankingMetricOp}
+                    vm={buildRankingVM(rankingMetricOp, rankingData, 'operation')}
+                  />
+                </>
+              )}
             </>
           )}
 
-          {/* Sección Información operativa */}
-          <section aria-label="Información operativa" style={{ marginTop: '1.5rem' }}>
-            <h3 className="profile-title" style={{ marginBottom: '0.75rem' }}>Información operativa</h3>
-            <ProfileOperationalPanel timeframe={range as any} />
-          </section>
+          {/* Sección Información operativa removida a solicitud */}
 
           
         </main>

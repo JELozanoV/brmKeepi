@@ -11,7 +11,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docs:open": "open ./docs/ARCHITECTURE.md"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",

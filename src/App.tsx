@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './styles/App.scss'
 import { ServiceType, PlanType, CancellationReason, CostReason, FailureType, TravelType, CustomerServiceType, CompetitorType, HomeFailureType, ActivationDelayType, ReincidentClientType, ClientMoodType } from './types'
 import ServiceSelector from './components/ServiceSelector'
@@ -39,10 +39,13 @@ import { getMoodRecommendation } from './services/moodRecommendations'
 
 import Header from './components/layout/Header';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
 import RatesPage from './pages/RatesPage';
+import ProporcionalesPage from './pages/ProporcionalesPage';
 import ProfilePage from './components/profile/ProfilePage';
 
-function App() {
+function DashboardApp() {
   const [serviceType, setServiceType] = useState<ServiceType>(null)
   const [planType, setPlanType] = useState<PlanType>(null)
   const [cancellationReason, setCancellationReason] = useState<CancellationReason>(null)
@@ -64,7 +67,7 @@ function App() {
   const headerHeight = 56; // px, should match min-height in _header.scss
   const location = useLocation();
   const navigate = useNavigate();
-  const isRatesRoute = location.pathname.includes('/tarifas');
+  const isRatesRoute = location.pathname.includes('/tarifas') || location.pathname.includes('/proporcionales');
 
   const handleReset = () => {
     setServiceType(null)
@@ -131,6 +134,20 @@ function App() {
       setShowToast(true);
     }
   }
+
+  // Escuchar toasts globales (e.g., logout)
+  useEffect(() => {
+    const handler = (e: any) => {
+      const detail = e?.detail || {};
+      if (detail?.message) {
+        setToastMessage(detail.message);
+        setToastType(detail.type || 'info');
+        setShowToast(true);
+      }
+    };
+    window.addEventListener('brm-toast', handler as any);
+    return () => window.removeEventListener('brm-toast', handler as any);
+  }, []);
 
   const renderCurrentStep = () => {
     if (!serviceType) {
@@ -286,6 +303,7 @@ function App() {
           } />
           <Route path="/perfil" element={<ProfilePage />} />
           <Route path="/tarifas" element={<RatesPage />} />
+          <Route path="/proporcionales" element={<ProporcionalesPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
@@ -301,6 +319,27 @@ function App() {
       </div>
     </>
   )
+}
+
+function App() {
+  const Guard: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const { isAuthenticated, loading } = useAuth();
+    const location = useLocation();
+    const isLogin = location.pathname.endsWith('/login');
+    if (loading) return null; // evita parpadeo/bucle mientras se restaura sesión
+    if (!isAuthenticated && !isLogin) return <Navigate to="/login" replace />;
+    if (isAuthenticated && isLogin) return <Navigate to="/" replace />;
+    return <>{children}</>;
+  };
+
+  return (
+    <AuthProvider>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/*" element={<Guard><DashboardApp /></Guard>} />
+      </Routes>
+    </AuthProvider>
+  );
 }
 
 export default App

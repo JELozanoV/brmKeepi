@@ -1,125 +1,76 @@
-# App_BRM - Aplicación de Asistencia para Call Center
+# App BRM — Aplicación para asesores (React + Vite + TypeScript)
 
-## 📋 Descripción
-Aplicación web para asesores de call center de Claro que proporciona scripts, tarifas y soluciones para la atención al cliente.
+Aplicación web para asesoría y retención con:
+- Indicadores (KPIs) sincronizados con coaching (KpiCoach)
+- Ranking (Mi equipo / Operación) con TMO, Transferencia, NPS y métrica “Combinado”
+- Tarifas Conectados (filtro por tecnología y precio)
+- Calculadora de Proporcionales (Cambio de ciclo / Cambio de plan inmediato)
+- Autenticación mock con guard y sesión persistente
 
-## 🏗️ Arquitectura
-La aplicación está construida siguiendo una arquitectura de componentes con separación clara entre la capa de presentación y datos:
+## Requisitos
+- Node 18+
 
-```tree
+## Instalación y ejecución
+```bash
+npm install
+npm run dev
+# build de producción
+npm run build
+# previsualización
+npm run preview
+```
+
+### Cómo probar rápidamente
+- Ir a `/login` y autenticar con usuario `001` y contraseña `contraseña`.
+- Tras login, verás el dashboard. Abre el menú Perfil en el header para “Ver perfil” o “Cerrar sesión”.
+- Calculadora de Proporcionales: botón “Proporcionales” en el header.
+  - Caso Cambio de ciclo: Valor mensual 90.000, día 1 → 17 → resultado `$48.000`.
+  - Caso Cambio inmediato: 38.900 / 54.900, corte 1, cambio 21 → `$44.233,33`.
+
+## Scripts útiles
+```bash
+npm run typecheck   # verificación de tipos
+npm run lint        # lint del repositorio
+npm run docs:open   # abre docs/ARCHITECTURE.md (macOS)
+```
+
+## Rutas principales
+- `/login`: acceso (mock) con bloqueo por intentos y sesión persistente
+- `/`: flujo principal de soluciones
+- `/perfil`: Mi Perfil (KPIs + KpiCoach + Ranking)
+- `/tarifas`: Tarifas Conectados
+- `/proporcionales`: Calculadora de Proporcionales
+
+## Estructura (alto nivel)
+```text
 src/
-├── components/      # Componentes de UI reutilizables
-├── services/       # Servicios para comunicación con el backend
-├── types/          # Definiciones de TypeScript
-├── hooks/          # Custom hooks
-└── utils/          # Utilidades y helpers
+  components/           # UI (perfil, ranking, layout/header, soluciones, etc.)
+  pages/                # Páginas: Login, RatesPage, ProporcionalesPage, ProfilePage
+  services/             # Servicios mock: api, ranking, prorrateo (stub)
+  utils/                # Lógica pura: kpiSelector, rankingUtils, prorrateo, transparentLogo
+  hooks/                # useTransparentLogo
+  styles/               # Sass (dark UI, borde azul #1A4DFF)
+  config/               # constants (metas y mock de usuario actual)
+  types/                # tipos compartidos
 ```
 
-## 🛠️ Stack Tecnológico
-- React + TypeScript
-- Sass para estilos
-- Vite como bundler
-- [Backend Stack] (por definir)
+## Funcionalidades clave (estado actual)
+- Login mock con hash SHA-256 + pepper, bloqueo por intentos, expiración de 8h (localStorage)
+- Guard de rutas y menú de perfil (logout) accesible en el header
+- KPIs con semáforo unificado (ok/warn/bad) y microcopy natural (sin símbolos)
+- KpiCoach alineado 1:1 con el estado de las tarjetas KPI
+- Ranking con Top 3 + tu fila + vecinos (6 filas), selector de métrica y score combinado (40/40/20)
+- Calculadora de Proporcionales (base 30 días) y stub de servicio para futura API; entradas de monto con separador de miles (ej. 90.000)
+- Logo PNG procesado en cliente para transparencias (cacheado)
 
-## 📦 Instalación y Configuración
-```bash
-npm install
-npm run dev
-```
+## Documentación
+Consulta la carpeta `docs/`:
+- `ARCHITECTURE.md`: arquitectura técnica (Mermaid)
+- `FRONTEND.md`: stack, patrones de UI (dark + borde azul), rutas y estados
+- `AUTH.md`: autenticación mock y migración a backend (TODO endpoints reales)
+- `KPI_LOGIC.md`, `RANKING.md`, `PROPORCIONALES.md`: lógicas de negocio
+- `STYLEGUIDE.md`, `ACCESSIBILITY.md`, `SECURITY.md`
+- `CHANGELOG.md`, `ROADMAP.md`
 
-## 🔄 Flujo de Datos
-![Diagrama de Flujo](./docs/data-flow.png)
-
-# Keepi
-
-Herramienta para guiar a los asesores cuando un cliente desea cancelar su servicio.
-
-## Características
-
-- Gestión de cancelaciones para servicios Móvil y Hogar
-- Flujo intuitivo de toma de decisiones
-- Soluciones personalizadas según el motivo de cancelación
-- Interfaz amigable y responsive
-
-## Tecnologías
-
-- React
-- TypeScript
-- Sass
-- Vite
-
-## Instalación
-
-```bash
-# Clonar el repositorio
-git clone https://github.com/USER/REPO.git
-
-# Instalar dependencias
-npm install
-
-# Iniciar servidor de desarrollo
-npm run dev
-```
-
-## Uso
-
-1. Selecciona el tipo de servicio (Móvil/Hogar)
-2. Si es móvil, selecciona el tipo de plan
-3. Elige el motivo de cancelación
-4. Sigue el flujo según el motivo seleccionado
-5. Aplica la solución sugerida
-
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Notas
+- TODO: integrar backend real para auth y prorrateo; contratos en `docs/API_CONTRACTS/`.

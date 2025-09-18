@@ -37,3 +37,10 @@ export const EXPECTED_CALLS: Record<'today'|'week'|'month', number> = {
   week: 200,
   month: 800,
 };
+
+// Usuario actual (mock)
+export const CURRENT_USER = {
+  id: 'me-1',
+  displayName: 'Pepito Pérez',
+  coordinatorId: 'c-1',
+};

@@ -116,22 +116,22 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
     setShowResults(false);
   }, [technology, clientRate]);
 
-  if (loading) return <div>Cargando tarifas...</div>;
-  if (error) return <div style={{color: 'red'}}>{error}</div>;
+  if (loading) return <div style={{ color: 'rgba(255,255,255,0.9)' }}>Cargando tarifas...</div>;
+  if (error) return <div style={{color: '#ef4444'}}>{error}</div>;
 
   return (
-    <div className="filtered-rates-section" style={{background: '#fff', padding: 28, borderRadius: 16, maxWidth: 650, margin: '0 auto', boxShadow: '0 2px 16px rgba(26,77,255,0.10)'}}>
-      <h2 style={{color: '#1A4DFF', fontWeight: 700, marginBottom: 10, fontSize: 24, letterSpacing: 0.5}}>Filtrar tarifas por tecnología y precio</h2>
-      <p style={{color: '#222', fontSize: 16, marginBottom: 26}}>
-        Selecciona la <span style={{color: '#007BFF', fontWeight: 600}}>tecnología</span> y coloca el <span style={{color: '#007BFF', fontWeight: 600}}>precio actual del cliente</span> para ver solo las tarifas que puedes ofrecer.
+    <div className="filtered-rates-section" style={{ background: '#222', color: 'rgba(255,255,255,0.96)', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid #1A4DFF', boxShadow: '0 1px 8px rgba(26,77,255,0.08)' }}>
+      <h2 style={{color: 'rgba(255,255,255,0.98)', fontWeight: 700, marginBottom: 8, fontSize: 22, letterSpacing: 0.3}}>Tarifas Conectados</h2>
+      <p style={{color: 'rgba(255,255,255,0.85)', fontSize: 15, marginBottom: 22}}>
+        Selecciona la <span style={{color: '#8db0ff', fontWeight: 600}}>tecnología</span> y coloca el <span style={{color: '#8db0ff', fontWeight: 600}}>precio actual del cliente</span> para ver solo las tarifas que puedes ofrecer.
       </p>
       <div style={{marginBottom: 22, display: 'flex', gap: 18, alignItems: 'center'}}>
-        <span style={{fontWeight: 600, color: '#222'}}>Tecnología:</span>
+        <span style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)'}}>Tecnología:</span>
         <button
           type="button"
           style={{
-            background: technology === 'HFC' ? '#1A4DFF' : '#F2F2F2',
-            color: technology === 'HFC' ? '#fff' : '#1A4DFF',
+            background: technology === 'HFC' ? '#1A4DFF' : 'rgba(255,255,255,0.08)',
+            color: technology === 'HFC' ? '#fff' : '#8db0ff',
             border: '2px solid #1A4DFF',
             borderRadius: 8,
             padding: '8px 28px',
@@ -149,8 +149,8 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
         <button
           type="button"
           style={{
-            background: technology === 'FTTH' ? '#1A4DFF' : '#F2F2F2',
-            color: technology === 'FTTH' ? '#fff' : '#1A4DFF',
+            background: technology === 'FTTH' ? '#1A4DFF' : 'rgba(255,255,255,0.08)',
+            color: technology === 'FTTH' ? '#fff' : '#8db0ff',
             border: '2px solid #1A4DFF',
             borderRadius: 8,
             padding: '8px 28px',
@@ -167,7 +167,7 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
         </button>
       </div>
       <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 16}}>
-        <label style={{fontWeight: 600, color: '#222', fontSize: 15, minWidth: 120}}>
+        <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15, minWidth: 120}}>
           Tipo de servicio:
           <select
             value={serviceType}
@@ -178,8 +178,8 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
               borderRadius: 8,
               border: '1.5px solid #1A4DFF',
               fontSize: 16,
-              color: '#222',
-              background: '#F2F2F2',
+              color: 'rgba(255,255,255,0.95)',
+              background: '#111',
               minWidth: 170,
               fontWeight: 600
             }}
@@ -192,7 +192,7 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
         </label>
       </div>
       <div style={{marginBottom: 18}}>
-        <label style={{fontWeight: 600, color: '#222', fontSize: 15}}>
+        <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
           {minPriceLabel}:
           <input
             type="text"
@@ -211,42 +211,43 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
               padding: 8,
               borderRadius: 8,
               border: '1.5px solid #1A4DFF',
-              width: 140,
+              width: 160,
               fontSize: 16,
-              color: '#222'
+              color: 'rgba(255,255,255,0.95)',
+              background: '#111'
             }}
           />
         </label>
       </div>
       <button
         style={{
-          background: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '#007BFF' : '#ccc',
+          background: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '#1A4DFF' : 'rgba(255,255,255,0.2)',
           color: '#fff',
-          border: 'none',
+          border: '1px solid #1A4DFF',
           borderRadius: 8,
-          padding: '10px 38px',
+          padding: '10px 28px',
           fontWeight: 700,
-          fontSize: 18,
+          fontSize: 16,
           cursor: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? 'pointer' : 'not-allowed',
-          marginBottom: 24,
-          boxShadow: '0 2px 8px #007BFF22',
-          letterSpacing: 0.5
+          marginBottom: 20,
+          boxShadow: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '0 2px 8px #1A4DFF33' : 'none',
+          letterSpacing: 0.3
         }}
         onClick={handleBuscar}
         disabled={!validatePrice(clientRate) || parseFloat(cleanPrice(clientRate)) === 0}
       >
         Buscar
       </button>
-      <div style={{marginBottom: 8, fontSize: 14, color: '#888'}}>
+      <div style={{marginBottom: 8, fontSize: 13, color: 'rgba(255,255,255,0.6)'}}>
         Tarifas recibidas: {rates.length} | Tecnología: {technology || 'No seleccionada'} | Valor ingresado: {clientRate} | numRate: {parseFloat(clientRate.replace(/[^\d.]/g, ''))} | Tarifas válidas: {filteredRates.length}
       </div>
       {showResults && (
         !technology || clientRate === '' ? (
-          <div style={{marginTop: 16, color: '#d9534f', fontWeight: 500}}>
+          <div style={{marginTop: 16, color: '#ef4444', fontWeight: 600}}>
             Por favor, selecciona una tecnología y coloca el precio del cliente antes de buscar.
           </div>
         ) : filteredRates.length === 0 ? (
-          <div style={{marginTop: 16, color: '#d9534f', fontWeight: 500}}>
+          <div style={{marginTop: 16, color: '#ef4444', fontWeight: 600}}>
             No hay tarifas recomendadas para la tecnología y precio ingresados.
           </div>
         ) : (

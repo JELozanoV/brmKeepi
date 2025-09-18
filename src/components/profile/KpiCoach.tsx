@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Range } from '../../types/profile';
 import { KPI_TARGETS, EXPECTED_CALLS, GOALS_WARN_THRESHOLD } from '../../config/constants';
+import { computeKpiStatus } from '../../utils/kpiStatus';
 
 function formatSec(sec: number): string {
   const s = Math.max(0, Math.round(sec));
@@ -106,32 +107,38 @@ export interface KpiCoachProps {
   totalHandleTimeSec: number;
   transfers: number;
   npsPct: number;
+  vm?: {
+    tmo: ReturnType<typeof computeKpiStatus>;
+    transfers: ReturnType<typeof computeKpiStatus>;
+    nps: ReturnType<typeof computeKpiStatus>;
+  };
 }
 
 const KpiCoach: React.FC<KpiCoachProps> = (props) => {
   const { result, status } = useMemo(() => computeCoach(props), [props]);
-  const verdictTmo = status.tmo === 'good' ? 'En meta' : status.tmo === 'warn' ? 'Cerca de la meta' : 'Necesita atención';
-  const verdictTrans = status.transfers === 'good' ? 'En meta' : status.transfers === 'warn' ? 'Cerca de la meta' : 'Necesita atención';
-  const verdictNps = status.nps === 'good' ? 'En meta' : status.nps === 'warn' ? 'Cerca de la meta' : 'Necesita atención';
+  const tmoStatus = props.vm ? props.vm.tmo : computeKpiStatus('tmo', result?.context?.tmoActualSec || 0, KPI_TARGETS.tmoSec);
+  const transStatus = props.vm ? props.vm.transfers : computeKpiStatus('transfers', result?.context?.transfersPct || 0, KPI_TARGETS.transfersPct);
+  const npsStatus = props.vm ? props.vm.nps : computeKpiStatus('nps', result?.context?.npsPct || 0, KPI_TARGETS.npsPct);
 
+  const toClass = (s: any) => (s === 'ok' ? 'good' : s);
   return (
     <section className="op-card" style={{ marginTop: '1rem' }} aria-label="KpiCoach">
       <div className="card-title">KpiCoach</div>
       <div className="kpi-coach-grid">
-        <div className={`kpi-coach-item kpi-${status.tmo}`}>
-          <span className={`kpi-chip kpi-chip-${status.tmo}`}>{verdictTmo}</span>
+        <div className={`kpi-coach-item kpi-${toClass(tmoStatus.status)}`}>
+          <span className={`kpi-chip kpi-chip-${toClass(tmoStatus.status)}`}>{tmoStatus.chipText}</span>
           <div className="kpi-subtle">TMO</div>
           <div>{result.tmo.gapText}</div>
           <div>{result.tmo.requiredText}</div>
         </div>
-        <div className={`kpi-coach-item kpi-${status.transfers}`}>
-          <span className={`kpi-chip kpi-chip-${status.transfers}`}>{verdictTrans}</span>
+        <div className={`kpi-coach-item kpi-${toClass(transStatus.status)}`}>
+          <span className={`kpi-chip kpi-chip-${toClass(transStatus.status)}`}>{transStatus.chipText}</span>
           <div className="kpi-subtle">% Transferencias</div>
           <div>{result.transfers.gapText}</div>
           <div>{result.transfers.requiredText}</div>
         </div>
-        <div className={`kpi-coach-item kpi-${status.nps}`}>
-          <span className={`kpi-chip kpi-chip-${status.nps}`}>{verdictNps}</span>
+        <div className={`kpi-coach-item kpi-${toClass(npsStatus.status)}`}>
+          <span className={`kpi-chip kpi-chip-${toClass(npsStatus.status)}`}>{npsStatus.chipText}</span>
           <div className="kpi-subtle">NPS</div>
           <div>{result.nps.gapText}</div>
           <div>{result.nps.requiredText}</div>

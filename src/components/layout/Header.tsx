@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/_header.scss';
-import RetenLogo from '../../assets/images/RETEN.svg';
+import BrandLogo from '../BrandLogo';
+import { useAuth } from '../../context/AuthContext';
 
 // Removed modal-based rates view; navigation will take the user to a dedicated page
 
@@ -12,6 +13,9 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onHome, onBack }) => {
   const navigate = useNavigate();
+  const { logout, isLoggingOut } = useAuth();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   // Rates moved to dedicated route: /tarifas
 
   // Handler for keyboard accessibility
@@ -21,6 +25,16 @@ const Header: React.FC<HeaderProps> = ({ onHome, onBack }) => {
       action();
     }
   };
+
+  useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (open && menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onDoc);
+    return () => document.removeEventListener('mousedown', onDoc);
+  }, [open]);
 
   return (
     <header className="brm-header" role="banner">
@@ -48,9 +62,19 @@ const Header: React.FC<HeaderProps> = ({ onHome, onBack }) => {
           </button>
         </div>
         <div className="brm-header__center" aria-label="Logo Reten+">
-          <img src={RetenLogo} alt="Reten+ Logo" className="brm-header__logo" />
+          <BrandLogo variant="header" />
         </div>
         <div className="brm-header__right">
+          <button
+            className="section-tab"
+            aria-label="Calculadora de proporcionales"
+            tabIndex={0}
+            onClick={() => navigate('/proporcionales')}
+            onKeyDown={handleKey(() => navigate('/proporcionales'))}
+          >
+            <span className="tab-icon" role="img" aria-label="Calculadora">🧮</span>
+            <span className="tab-text">Proporcionales</span>
+          </button>
           <button
             className="section-tab"
             aria-label="Tarifas de Conectados"
@@ -61,16 +85,31 @@ const Header: React.FC<HeaderProps> = ({ onHome, onBack }) => {
             <span className="tab-icon" role="img" aria-label="Tarifas">💰</span>
             <span className="tab-text">Tarifas Conectados</span>
           </button>
-          <button
-            className="profile-button"
-            aria-label="Perfil"
-            tabIndex={0}
-            onClick={() => navigate('/perfil')}
-            onKeyDown={handleKey(() => navigate('/perfil'))}
-          >
-            <span className="button-icon" role="img" aria-label="Perfil">👤</span>
-            <span className="button-text">Perfil</span>
-          </button>
+          <div ref={menuRef} style={{ position: 'relative' }}>
+            <button
+              className="profile-button"
+              aria-label="Abrir menú de perfil"
+              aria-haspopup="menu"
+              aria-expanded={open}
+              aria-controls="profile-menu"
+              tabIndex={0}
+              onClick={() => setOpen(o => !o)}
+              onKeyDown={handleKey(() => setOpen(o => !o))}
+            >
+              <span className="button-icon" role="img" aria-label="Perfil">👤</span>
+              <span className="button-text">Perfil</span>
+            </button>
+            {open && (
+              <div id="profile-menu" role="menu" className="profile-menu" style={{ position: 'absolute', right: 0, top: 'calc(100% + 6px)' }}>
+                <button role="menuitem" className="profile-menu__item" onClick={() => { setOpen(false); navigate('/perfil'); }}>
+                  Ver perfil
+                </button>
+                <button role="menuitem" aria-label="Cerrar sesión" className="profile-menu__item profile-menu__item--danger" disabled={isLoggingOut} onClick={() => { setOpen(false); logout(); navigate('/login', { replace: true }); window.dispatchEvent(new CustomEvent('brm-toast', { detail: { message: 'Sesión cerrada', type: 'success' } })); }}>
+                  {isLoggingOut ? 'Cerrando…' : 'Cerrar sesión'}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       {/* Rates modal removed; navigation handles this now */}
