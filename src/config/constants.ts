@@ -31,6 +31,16 @@ export const KPI_TARGETS = {
   npsPct: 60,           // ≥ 60%
 } as const;
 
+// Umbrales absolutos para advertencia (punto amarillo) en calendario
+export const CALENDAR_WARN_ABSOLUTE = {
+  tmoSeconds: 30,       // dentro de 30 segundos de la meta
+  transfersPoints: 2,   // a ≤ 2 puntos del máximo
+  npsPoints: 5,         // a ≤ 5 puntos del mínimo
+} as const;
+
+// Zona horaria fija para cálculos/agregaciones
+export const TIMEZONE = 'America/Bogota';
+
 /** Volúmenes esperados por timeframe (para cálculos Nivel 2 en KpiCoach) */
 export const EXPECTED_CALLS: Record<'today'|'week'|'month', number> = {
   today: 40,

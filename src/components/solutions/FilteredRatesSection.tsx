@@ -238,9 +238,7 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
       >
         Buscar
       </button>
-      <div style={{marginBottom: 8, fontSize: 13, color: 'rgba(255,255,255,0.6)'}}>
-        Tarifas recibidas: {rates.length} | Tecnología: {technology || 'No seleccionada'} | Valor ingresado: {clientRate} | numRate: {parseFloat(clientRate.replace(/[^\d.]/g, ''))} | Tarifas válidas: {filteredRates.length}
-      </div>
+      {/* Debug info oculto a petición del negocio */}
       {showResults && (
         !technology || clientRate === '' ? (
           <div style={{marginTop: 16, color: '#ef4444', fontWeight: 600}}>

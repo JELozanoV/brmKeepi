@@ -1,0 +1,19 @@
+{
+  "version": "movil-regiones-1",
+  "regions": {
+    "Oriente": {
+      "allowedCurrentDays": [2, 4, 8, 11, 14, 17, 18, 20, 22, 24, 26],
+      "allowedTargetDays": [2, 4, 8, 11, 14, 17, 18, 20, 22, 24, 26]
+    },
+    "Occidente": {
+      "allowedCurrentDays": [3, 5, 7, 10, 15, 19, 25, 28],
+      "allowedTargetDays": [3, 5, 7, 10, 15, 19, 25, 28]
+    },
+    "Costa": {
+      "allowedCurrentDays": [12, 16, 27],
+      "allowedTargetDays": [12, 16, 27]
+    }
+  }
+}
+
+

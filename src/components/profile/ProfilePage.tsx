@@ -13,6 +13,9 @@ import { fetchRankingMock } from '../../services/rankingService';
 import { buildRankingVM } from '../../utils/rankingUtils';
 import { MetricKey } from '../../types/ranking';
 import '../../styles/operational.scss';
+import { useKpiHistory } from '../../hooks/useKpiHistory';
+import KpiCalendar from './KpiCalendar';
+import KpiHistoryCard from './KpiHistoryCard';
 
 const ProfilePage: React.FC = () => {
   const [range, setRange] = useState<Range>('week');
@@ -30,6 +33,16 @@ const ProfilePage: React.FC = () => {
     lastName: user?.lastName || '',
     coordinator: user?.coordinatorName || 'María Gómez',
   };
+
+  // Calendario histórico
+  const today = new Date();
+  const [calendarMonth, setCalendarMonth] = useState<Date>(new Date(today.getFullYear(), today.getMonth(), 1));
+  const [selection, setSelection] = useState<{ from: Date; to?: Date }>({ from: today });
+  const { data: monthData, loading: histLoading, loadMonth } = useKpiHistory(user?.id || null);
+  useEffect(() => {
+    const monthIso = `${calendarMonth.getFullYear()}-${String(calendarMonth.getMonth() + 1).padStart(2, '0')}`;
+    loadMonth(monthIso);
+  }, [calendarMonth, loadMonth]);
 
   useEffect(() => {
     let cancelled = false;
@@ -103,6 +116,7 @@ const ProfilePage: React.FC = () => {
               coordinator={profile.coordinator}
             />
           )}
+          {/* Se mueve el histórico a su propia card en el main */}
         </aside>
 
         <main className="profile-main">
@@ -114,7 +128,7 @@ const ProfilePage: React.FC = () => {
               <div className="kpi-grid">
                 <KpiCard label="TMO" value={derived.tmo} hint="Tu meta hoy: 07:00 o menos" vm={derived.vm.tmo} />
                 <KpiCard label="Tu tasa" value={derived.transPct} hint="Tu meta hoy: 40% o menos" vm={derived.vm.transfers} />
-                <KpiCard label="Tu NPS" value={`${derived.qaPct}%`} hint="Tu meta hoy: 60% o más" vm={derived.vm.nps} />
+                <KpiCard label="Tu NPS" value={derived.qaPct} hint="Tu meta hoy: 60% o más" vm={derived.vm.nps} />
               </div>
               {/* Sección KpiCoach (debajo de KPI cards) */}
               <section aria-label="KpiCoach" style={{ marginTop: '1.5rem' }}>
@@ -128,6 +142,9 @@ const ProfilePage: React.FC = () => {
                   vm={derived.vm as any}
                 />
               </section>
+
+              {/* Historial KPI */}
+              <KpiHistoryCard userId={user?.id || null} />
 
               {/* Ranking de mi equipo y de la operación */}
               {rankingData && (
