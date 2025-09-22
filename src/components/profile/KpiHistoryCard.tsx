@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useKpiHistory } from '../../hooks/useKpiHistory';
-import { evaluateDayStatus } from '../../services/kpisHistoryService';
 import { KPI_TARGETS } from '../../config/constants';
 import { formatTmo } from '../../utils/metrics';
 import KpiCard from './KpiCard';
 import KpiCalendar from './KpiCalendar';
+import KpiCoach from './KpiCoach';
 
 type ViewMode = 'month' | 'day';
 
@@ -22,12 +22,30 @@ const KpiHistoryCard: React.FC<{ userId: string | null }>
   const [month, setMonth] = useState<Date>(clampToMonth(today));
   const [mode, setMode] = useState<ViewMode>('month');
   const [selectedDay, setSelectedDay] = useState<Date | null>(null);
+  const [dayPickerOpen, setDayPickerOpen] = useState<boolean>(false);
   const { data, loading, error, loadMonth } = useKpiHistory(userId);
 
-  // cargar datos del mes
-  useEffect(() => { loadMonth(monthKey(month)); }, [month, loadMonth]);
+  // Selects Año/Mes
+  const currentYear = today.getFullYear();
+  const [yearSel, setYearSel] = useState<number | null>(null);
+  const [monthSel, setMonthSel] = useState<number | null>(null);
+  const canLoad = yearSel != null && monthSel != null;
 
-  const days = data?.days || {};
+  // cargar datos del mes cuando hay año/mes
+  useEffect(() => {
+    if (canLoad) {
+      const d = new Date(yearSel as number, (monthSel as number) - 1, 1);
+      setMonth(clampToMonth(d));
+      loadMonth(yearSel as number, monthSel as number);
+    }
+  }, [yearSel, monthSel, canLoad, loadMonth]);
+
+  // mapear a daysMap para el calendario
+  const days = useMemo(() => {
+    const map: Record<string, { tmoSec?: number; transfersPct?: number; npsPct?: number }> = {};
+    (data?.days || []).forEach(d => { map[d.date] = { tmoSec: d.tmoSec, transfersPct: d.transfersPct, npsPct: d.npsPct }; });
+    return map;
+  }, [data]);
 
   const monthAverages = useMemo(() => {
     const values = Object.values(days);
@@ -48,11 +66,26 @@ const KpiHistoryCard: React.FC<{ userId: string | null }>
       <div className="card-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
         <span>Historial KPI</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button className="range-btn" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() - 1, 1))} aria-label="Mes anterior">‹</button>
           <div aria-live="polite" aria-atomic="true" style={{ minWidth: 140, textAlign: 'center' }}>
-            {new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(month)}
+            {/* Selects Año/Mes */}
+            <label style={{ marginRight: 8 }}>
+              <select aria-label="Seleccionar año" value={yearSel ?? ''} onChange={(e) => { const v = e.target.value ? Number(e.target.value) : null; setYearSel(v); setSelectedDay(null); setMode('month'); }} style={{ background: '#111', color: '#e5e7eb', border: '1px solid #1A4DFF', borderRadius: 8, padding: '4px 8px' }}>
+                <option value="" disabled>—</option>
+                {Array.from({ length: 7 }, (_, i) => currentYear - i).map(y => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              <select aria-label="Seleccionar mes" value={monthSel ?? ''} onChange={(e) => { const v = e.target.value ? Number(e.target.value) : null; setMonthSel(v); setSelectedDay(null); setMode('month'); }} style={{ background: '#111', color: '#e5e7eb', border: '1px solid #1A4DFF', borderRadius: 8, padding: '4px 8px' }}>
+                <option value="" disabled>—</option>
+                {['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'].map((mName, idx) => (
+                  <option key={mName} value={idx+1}>{mName}</option>
+                ))}
+              </select>
+            </label>
           </div>
-          <button className="range-btn" onClick={() => setMonth(new Date(month.getFullYear(), month.getMonth() + 1, 1))} aria-label="Mes siguiente" disabled={monthKey(month) === monthKey(clampToMonth(new Date()))}>›</button>
+          {/* Toggle Mes | Día */}
           <div role="tablist" aria-label="Cambiar vista" style={{ marginLeft: 12 }}>
             <button role="tab" aria-selected={mode==='month'} className={`range-btn ${mode==='month'?'active':''}`} onClick={() => setMode('month')}>Mes</button>
             <button role="tab" aria-selected={mode==='day'} className={`range-btn ${mode==='day'?'active':''}`} onClick={() => setMode('day')} style={{ marginLeft: 6 }}>Día</button>
@@ -63,51 +96,73 @@ const KpiHistoryCard: React.FC<{ userId: string | null }>
       <div className="card-body" style={{ paddingTop: 12 }}>
         {mode === 'month' && (
           <div>
-            <KpiCalendar
-              month={month}
-              mode="single" selected={selectedDay || undefined}
-              onMonthChange={setMonth}
-              onSelect={() => {}}
-              onDaySelected={(d) => { setSelectedDay(d); setMode('day'); }}
-              daysMap={days}
-            />
-            <div style={{ marginTop: 12, color: '#e5e7eb' }} aria-live="polite">
-              {loading ? (
-                <span>Cargando histórico del mes…</span>
-              ) : error ? (
-                <div className="kpi-error">{error}</div>
-              ) : (monthAverages.n > 0 ? (
-                <span>Promedios del mes seleccionado: TMO {monthAverages.tmo} · %Trans {monthAverages.trans} · NPS {monthAverages.nps} (sobre {monthAverages.n} días con datos).</span>
-              ) : (
-                <span>No hay registros para este mes.</span>
-              ))}
-            </div>
+            {!canLoad ? (
+              <div className="kpi-loading">Selecciona año y mes para ver tu historial</div>
+            ) : (
+              <div style={{ background: '#222', border: '1px solid #1A4DFF', borderRadius: 12, padding: 12 }}>
+                <div className="kpi-grid">
+                  <KpiCard showChip={false} label="TMO" value={monthAverages.tmo} hint={`Promedio de ${new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(month)}`} comparator="≤" numericValue={Number((() => { const arr = monthAverages.tmo.split(':'); return Number(arr[0]) * 60 + Number(arr[1]); })())} targetValue={KPI_TARGETS.tmoSec} />
+                  <KpiCard showChip={false} label="% Transferencias" value={monthAverages.trans} hint={`Promedio de ${new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(month)}`} comparator="≤" numericValue={Number(monthAverages.trans.replace('%',''))} targetValue={KPI_TARGETS.transfersPct} />
+                  <KpiCard showChip={false} label="Tu NPS" value={monthAverages.nps} hint={`Promedio de ${new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(month)}`} comparator=">=" numericValue={Number(monthAverages.nps.replace('%',''))} targetValue={KPI_TARGETS.npsPct} />
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         {mode === 'day' && (
-          <div className="kpi-grid" aria-live="polite">
-            <div style={{ marginBottom: 12 }}>
-              <KpiCalendar
-                month={month}
-                mode="single"
-                selected={selectedDay || undefined}
-                onMonthChange={setMonth}
-                onSelect={() => {}}
-                onDaySelected={(d) => setSelectedDay(d)}
-                daysMap={days}
-              />
-            </div>
-            <div className="kpi-grid" style={{ marginTop: 8 }}>
-              {selectedDay && selectedData ? (
-                <>
-                  <KpiCard label="TMO" value={formatTmo(selectedData.tmoSec || 0)} hint={`Meta ${formatTmo(KPI_TARGETS.tmoSec)} o menos`} />
-                  <KpiCard label="% Transferencias" value={`${(selectedData.transfersPct || 0).toFixed(1)}%`} hint={`Meta ${KPI_TARGETS.transfersPct}% o menos`} />
-                  <KpiCard label="Tu NPS" value={`${(selectedData.npsPct || 0).toFixed(1)}%`} hint={`Meta ${KPI_TARGETS.npsPct}% o más`} />
-                </>
-              ) : (
-                <div className="kpi-loading">{loading ? 'Cargando día…' : 'No hay registros para esta fecha.'}</div>
-              )}
+          <div aria-live="polite">
+            {/* Selector de día en popover */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, flexWrap: 'wrap' }}>
+              <div style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  aria-haspopup="dialog"
+                  aria-expanded={dayPickerOpen}
+                  onClick={() => setDayPickerOpen(v => !v)}
+                  style={{ cursor: 'pointer', background: '#111', color: '#e5e7eb', border: '1px solid #1A4DFF', borderRadius: 8, padding: '6px 10px' }}
+                >
+                  {selectedDay ? `${String(selectedDay.getDate()).padStart(2,'0')}/${String(selectedDay.getMonth()+1).padStart(2,'0')}/${selectedDay.getFullYear()}` : 'Selecciona día'}
+                </button>
+                {dayPickerOpen && (
+                  <div style={{ position: 'absolute', zIndex: 10, marginTop: 6 }}>
+                    <KpiCalendar
+                      bare
+                      disableNav
+                      month={month}
+                      mode="single"
+                      selected={selectedDay || undefined}
+                      onMonthChange={() => {}}
+                      onSelect={() => {}}
+                      onDaySelected={(d) => {
+                        setSelectedDay(d);
+                        setDayPickerOpen(false);
+                      }}
+                      daysMap={days}
+                      disabledIf={(date) => {
+                        const key = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+                        return !days[key];
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div style={{ flex: 1, minWidth: 260 }}>
+                <div style={{ background: '#222', border: '1px solid #1A4DFF', borderRadius: 12, padding: 12 }}>
+                  <div className="kpi-grid">
+                    {selectedDay && selectedData ? (
+                      <>
+                        <KpiCard showChip={false} label="TMO" value={formatTmo(selectedData.tmoSec || 0)} hint={`Valores del ${selectedDay ? `${String(selectedDay.getDate()).padStart(2,'0')}/${String(selectedDay.getMonth()+1).padStart(2,'0')}/${selectedDay.getFullYear()}` : ''}`} comparator="≤" numericValue={selectedData.tmoSec || 0} targetValue={KPI_TARGETS.tmoSec} />
+                        <KpiCard showChip={false} label="% Transferencias" value={`${(selectedData.transfersPct || 0).toFixed(1)}%`} hint={`Valores del ${selectedDay ? `${String(selectedDay.getDate()).padStart(2,'0')}/${String(selectedDay.getMonth()+1).padStart(2,'0')}/${selectedDay.getFullYear()}` : ''}`} comparator="≤" numericValue={selectedData.transfersPct || 0} targetValue={KPI_TARGETS.transfersPct} />
+                        <KpiCard showChip={false} label="Tu NPS" value={`${(selectedData.npsPct || 0).toFixed(1)}%`} hint={`Valores del ${selectedDay ? `${String(selectedDay.getDate()).padStart(2,'0')}/${String(selectedDay.getMonth()+1).padStart(2,'0')}/${selectedDay.getFullYear()}` : ''}`} comparator=">=" numericValue={selectedData.npsPct || 0} targetValue={KPI_TARGETS.npsPct} />
+                      </>
+                    ) : (
+                      <div className="kpi-loading">{loading ? 'Cargando día…' : 'No hay registros para esta fecha.'}</div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}

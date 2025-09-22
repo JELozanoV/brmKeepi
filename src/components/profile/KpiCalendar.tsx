@@ -12,6 +12,12 @@ interface KpiCalendarProps {
   daysMap: Record<string, { tmoSec?: number; transfersPct?: number; npsPct?: number } | undefined>;
   mode?: 'single' | 'range';
   onDaySelected?: (date: Date) => void;
+  /** Oculta navegación (flechas) del caption. El mes lo controla el padre. */
+  disableNav?: boolean;
+  /** Deshabilita días según función. Útil para permitir solo días con datos. */
+  disabledIf?: (date: Date) => boolean;
+  /** Si true, no envuelve en el contenedor azul (para usar en popover). */
+  bare?: boolean;
 }
 
 const statusColor: Record<string, string> = {
@@ -21,9 +27,12 @@ const statusColor: Record<string, string> = {
   gray: '#6b7280',
 };
 
-export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMonthChange, onSelect, daysMap, mode = 'range', onDaySelected }) => {
+export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMonthChange, onSelect, daysMap, mode = 'range', onDaySelected, disableNav, disabledIf, bare }) => {
+  const Container: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    bare ? <>{children}</> : <div style={{ background: '#222', border: '1px solid #1A4DFF', borderRadius: 12, padding: 12 }}>{children}</div>
+  );
   return (
-    <div style={{ background: '#222', border: '1px solid #1A4DFF', borderRadius: 12, padding: 12 }}>
+    <Container>
       <DayPicker
         mode={mode as any}
         month={month}
@@ -38,7 +47,11 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
             onSelect(val);
           }
         }}
-        disabled={{ after: new Date() }}
+        disabled={(date: Date) => {
+          const isFuture = date > new Date();
+          const disabledByFn = disabledIf ? disabledIf(date) : false;
+          return isFuture || disabledByFn;
+        }}
         styles={{
           caption: { color: '#fff' },
           head: { color: '#8db0ff' },
@@ -52,6 +65,12 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
         }
         modifiersStyles={{}}
         components={{
+          Caption: disableNav
+            ? (props: any) => {
+                const label = new Intl.DateTimeFormat('es-CO', { month: 'long', year: 'numeric' }).format(props.displayMonth || month);
+                return <div style={{ textAlign: 'center', color: '#e5e7eb', marginBottom: 8 }}>{label}</div>;
+              }
+            : undefined,
           Day: (props: any) => {
             const { date } = props || {};
             if (!date) return null as any;
@@ -85,7 +104,7 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
           }
         }}
       />
-    </div>
+    </Container>
   );
 };
 

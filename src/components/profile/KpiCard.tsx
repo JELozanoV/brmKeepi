@@ -8,6 +8,8 @@ export interface KpiCardProps {
   value: string;           // "06:45", "22%", "38%", "91% / 4.6"
   hint?: string;           // "Meta ≤ 08:00", etc.
   status?: 'good' | 'warn' | 'bad';
+  /** Ocultar etiqueta/chip de estado visual encima del card. Por defecto true (se muestra). */
+  showChip?: boolean;
   /** View-model unificado (preferido). Si se provee, no se recalcula estado en el componente. */
   vm?: KpiViewModel;
   /** Comparador de la meta: ≤ o ≥. Si se define junto a targetValue y numericValue, se ignora 'status' y se calcula internamente. */
@@ -22,7 +24,7 @@ export interface KpiCardProps {
   warnAbsoluteDelta?: number;
 }
 
-const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, status, vm, comparator, numericValue, targetValue, warnThresholdPct, warnAbsoluteDelta }) => {
+const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, status, vm, comparator, numericValue, targetValue, warnThresholdPct, warnAbsoluteDelta, showChip = true }) => {
   const statusData = vm ? undefined : useMemo(() => {
     if (!comparator || typeof numericValue !== 'number' || typeof targetValue !== 'number') return undefined;
     const key = label.toLowerCase().includes('tmo') ? 'tmo' : label.toLowerCase().includes('nps') ? 'nps' : 'transfers';
@@ -38,7 +40,7 @@ const KpiCard: React.FC<KpiCardProps> = ({ label, value, hint, status, vm, compa
 
   return (
     <div className={`kpi-card ${statusClass ? `kpi-${statusClass}` : ''}`} role="status" aria-label={aria || `${label}: ${value}`}>
-      {(vm || statusData) && <span className={`kpi-chip kpi-chip-${statusClass}`}>{chipText}</span>}
+      {showChip && (vm || statusData) && <span className={`kpi-chip kpi-chip-${statusClass}`}>{chipText}</span>}
       <div className="kpi-card__label">{label}</div>
       <div className="kpi-card__value">{value}</div>
       {hint && <div className="kpi-card__hint">{hint}</div>}
