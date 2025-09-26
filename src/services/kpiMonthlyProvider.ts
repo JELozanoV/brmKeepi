@@ -57,10 +57,11 @@ function generateDeterministicMock(args: FetchArgs): MonthlyKpiDTO {
   };
 
   // 30 días para mock (suficiente para el histórico visual)
+  const daysInThisMonth = new Date(year, month, 0).getDate();
   const days: MonthlyKpiDTO['days'] = [];
-  for (let d = 1; d <= 31; d++) {
-    // 1/7 días sin datos
-    const noData = Math.floor(rnd() * 7) === 0;
+  for (let d = 1; d <= daysInThisMonth; d++) {
+    // ~1/4 de días sin datos para probar estados
+    const noData = Math.floor(rnd() * 4) === 0;
     const date = normalizeDateISO(year, month, d);
     if (noData) {
       days.push({ date });

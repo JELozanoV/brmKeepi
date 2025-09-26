@@ -1,7 +1,9 @@
 import React from 'react';
 import { DayPicker } from 'react-day-picker';
+import { es } from 'date-fns/locale';
 import 'react-day-picker/style.css';
 import { evaluateDayStatus } from '../../services/kpisHistoryService';
+import { TIMEZONE } from '../../config/constants';
 import { formatTmo } from '../../utils/metrics';
 
 interface KpiCalendarProps {
@@ -28,6 +30,24 @@ const statusColor: Record<string, string> = {
 };
 
 export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMonthChange, onSelect, daysMap, mode = 'range', onDaySelected, disableNav, disabledIf, bare }) => {
+  // Fecha "hoy" según zona horaria de Colombia
+  function nowInTimezone(tz: string): Date {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+      hour12: false
+    }).formatToParts(new Date());
+    const y = Number(parts.find(p => p.type === 'year')?.value || new Date().getFullYear());
+    const m = Number(parts.find(p => p.type === 'month')?.value || (new Date().getMonth() + 1));
+    const d = Number(parts.find(p => p.type === 'day')?.value || new Date().getDate());
+    return new Date(y, m - 1, d);
+  }
+  const todayTz = nowInTimezone(TIMEZONE);
   const Container: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     bare ? <>{children}</> : <div style={{ background: '#222', border: '1px solid #1A4DFF', borderRadius: 12, padding: 12 }}>{children}</div>
   );
@@ -38,6 +58,10 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
         month={month}
         onMonthChange={onMonthChange}
         selected={selected as any}
+        locale={es}
+        showOutsideDays={false}
+        fromMonth={month}
+        toMonth={month}
         onSelect={(val: any) => {
           if (mode === 'single') {
             if (val && val instanceof Date) {
@@ -48,22 +72,24 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
           }
         }}
         disabled={(date: Date) => {
-          const isFuture = date > new Date();
+          const isFuture = date > todayTz;
           const disabledByFn = disabledIf ? disabledIf(date) : false;
           return isFuture || disabledByFn;
         }}
         styles={{
           caption: { color: '#fff' },
           head: { color: '#8db0ff' },
-          day: { color: '#e5e7eb' },
+          day: { color: '#e5e7eb', width: 36, height: 32 },
           day_selected: { backgroundColor: '#1A4DFF', color: '#fff' },
           day_today: { outline: '1px solid #1A4DFF' },
           chevron: { fill: '#8db0ff' },
         }}
+        modifiersStyles={{
+          disabled: { filter: 'grayscale(1)', opacity: 0.6 }
+        }}
         footer={
           <div style={{ height: 0 }} />
         }
-        modifiersStyles={{}}
         components={{
           Caption: disableNav
             ? (props: any) => {
@@ -71,6 +97,7 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
                 return <div style={{ textAlign: 'center', color: '#e5e7eb', marginBottom: 8 }}>{label}</div>;
               }
             : undefined,
+          Nav: disableNav ? (() => null) as any : undefined,
           Day: (props: any) => {
             const { date } = props || {};
             if (!date) return null as any;
@@ -80,25 +107,26 @@ export const KpiCalendar: React.FC<KpiCalendarProps> = ({ month, selected, onMon
             const kpi = daysMap[key];
             const status = evaluateDayStatus(kpi as any);
             const color = statusColor[status];
-            const summary = kpi ? `TMO ${formatTmo(kpi.tmoSec || 0)} · Trans ${((kpi.transfersPct ?? 0)).toFixed(1)}% · NPS ${((kpi.npsPct ?? 0)).toFixed(1)}% · Estado: ${status === 'green' ? 'En meta' : status === 'yellow' ? 'En meta, pero muy cerca del límite' : status === 'red' ? 'Necesita atención' : 'Sin datos'}` : 'Sin datos';
+            const summary = kpi ? `TMO ${formatTmo(kpi.tmoSec || 0)} · %Trans ${((kpi.transfersPct ?? 0)).toFixed(1)}% · NPS ${((kpi.npsPct ?? 0)).toFixed(1)}% · Estado: ${status === 'green' ? 'En meta' : status === 'yellow' ? 'En meta, pero muy cerca del límite' : status === 'red' ? 'Necesita atención' : 'Sin datos'}` : 'Sin datos';
             const readableDate = `${String(date.getDate()).padStart(2,'0')}/${String(date.getMonth()+1).padStart(2,'0')}/${date.getFullYear()}`;
             const aria = `${readableDate}. ${summary.replace(' · ', ', ').replace(' · ', ', ').replace(' · ', ', ')}`;
             const btnProps = props.buttonProps || {};
             btnProps.title = `${readableDate} · ${summary}`;
             btnProps['aria-label'] = aria;
             const btnClass = btnProps.className || '';
+            const isDisabled = props?.activeModifiers?.disabled || false;
             return (
-              <div style={{ position: 'relative' }}>
+              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%', filter: isDisabled ? 'grayscale(1)' : undefined, opacity: isOutside ? 0.35 : 1 }}>
                 {btnProps ? (
-                  <button {...btnProps} className={btnClass}>
-                    <div style={{ opacity: isOutside ? 0.35 : 1 }}>{date.getDate()}</div>
+                  <button {...btnProps} className={btnClass} disabled={isDisabled} style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                    <div>{date.getDate()}</div>
                   </button>
                 ) : (
-                  <div className={btnClass}>
-                    <div style={{ opacity: isOutside ? 0.35 : 1 }}>{date.getDate()}</div>
+                  <div className={btnClass} style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+                    <div>{date.getDate()}</div>
                   </div>
                 )}
-                <div aria-hidden style={{ position: 'absolute', left: '50%', bottom: 6, transform: 'translateX(-50%)', width: 6, height: 6, borderRadius: 999, background: color }} />
+                <div aria-hidden style={{ position: 'absolute', left: 6, top: 6, width: 6, height: 6, borderRadius: 999, background: color }} />
               </div>
             );
           }

@@ -33,8 +33,8 @@ const ProporcionalesPage: React.FC = () => {
   // Estado de resultado y errores
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [resCiclo, setResCiclo] = useState<{ diasProrrateo: number; cargo: number } | null>(null);
-  const [resInmediato, setResInmediato] = useState<{ diasConsumidos: number; diasRestantes: number; cargo: number } | null>(null);
+  const [resCiclo, setResCiclo] = useState<{ diasProrrateo: number; cargo: number; totalFactura: number; descripcion: string } | null>(null);
+  const [resInmediato, setResInmediato] = useState<{ diasConsumidos: number; diasRestantes: number; cargo: number; totalFactura: number; descripcion: string } | null>(null);
 
   const validarDia = (v: string) => {
     const n = Number(v);
@@ -79,7 +79,26 @@ const ProporcionalesPage: React.FC = () => {
           nuevoDia: Number(nuevoDia),
           base: BASE,
         });
-        setResCiclo({ diasProrrateo: out.diasProrrateo, cargo: out.cargoProporcional });
+        const nActual = Number(diaActual);
+        const nNuevo = Number(nuevoDia);
+        const proporcional = out.cargoProporcional;
+        let totalFactura = 0;
+        let descripcion = '';
+        if (nNuevo === nActual || proporcional === 0) {
+          descripcion = 'No habrá cobro de ajuste en tu próxima factura. Tu siguiente factura será solo por el cargo mensual correspondiente.';
+          totalFactura = proporcional;
+        } else {
+          const haciaAdelante = nNuevo > nActual;
+          if (haciaAdelante && validarValor(valorPlan)) {
+            const valorMensualActual = Number(cleanPrice(valorPlan));
+            totalFactura = valorMensualActual + proporcional;
+            descripcion = `Incluye tu cargo mensual (${formatCOP(valorMensualActual)}) + el ajuste único (${formatCOP(proporcional)}).`;
+          } else {
+            totalFactura = proporcional;
+            descripcion = 'Incluye únicamente el ajuste de ciclo. En esta próxima factura no se cobrará el cargo mensual completo.';
+          }
+        }
+        setResCiclo({ diasProrrateo: out.diasProrrateo, cargo: out.cargoProporcional, totalFactura, descripcion });
       } else {
         const out = calcularCambioPlanInmediato({
           planActual: Number(cleanPrice(planActual)),
@@ -88,7 +107,15 @@ const ProporcionalesPage: React.FC = () => {
           diaCambio: Number(diaCambio),
           base: BASE,
         });
-        setResInmediato({ diasConsumidos: out.diasConsumidos, diasRestantes: out.diasRestantes, cargo: out.cargoProporcional });
+        const proporcional = out.cargoProporcional;
+        let totalFactura = proporcional;
+        let descripcion = '';
+        if (proporcional === 0) {
+          descripcion = 'No habrá cobro de ajuste en tu próxima factura. Tu siguiente factura será solo por el valor mensual correspondiente.';
+        } else {
+          descripcion = 'Incluye únicamente el ajuste único por el cambio inmediato.';
+        }
+        setResInmediato({ diasConsumidos: out.diasConsumidos, diasRestantes: out.diasRestantes, cargo: out.cargoProporcional, totalFactura, descripcion });
       }
     } catch (e: any) {
       const msg = e?.message || 'No se pudo calcular. Verifica los datos.';
@@ -274,6 +301,21 @@ const ProporcionalesPage: React.FC = () => {
                       )}
                   </p>
                 )}
+                {/* Total estimado próxima factura (Cambio de ciclo) */}
+                <div style={{ marginTop: 10 }}>
+                  {resCiclo.totalFactura === 0 ? (
+                    <div className="kpi-subtle" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                      {resCiclo.descripcion}
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ fontSize: 17, fontWeight: 700 }}>Total estimado de la próxima factura: {formatCOP(resCiclo.totalFactura)}</div>
+                      <div style={{ marginTop: 4, color: 'rgba(255,255,255,0.75)', fontSize: 13 }}>
+                        {resCiclo.descripcion}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             )}
 
@@ -290,6 +332,21 @@ const ProporcionalesPage: React.FC = () => {
                       )}
                   </p>
                 )}
+                {/* Total estimado próxima factura (Cambio inmediato) */}
+                <div style={{ marginTop: 10 }}>
+                  {resInmediato.totalFactura === 0 ? (
+                    <div className="kpi-subtle" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                      {resInmediato.descripcion}
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ fontSize: 17, fontWeight: 700 }}>Total estimado de la próxima factura: {formatCOP(resInmediato.totalFactura)}</div>
+                      <div style={{ marginTop: 4, color: 'rgba(255,255,255,0.75)', fontSize: 13 }}>
+                        {resInmediato.descripcion}
+                      </div>
+                    </>
+                  )}
+                </div>
               </div>
             )}
           </div>
