@@ -43,7 +43,9 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
 import RatesPage from './pages/RatesPage';
 import ProporcionalesPage from './pages/ProporcionalesPage';
+import RankingPage from './pages/RankingPage';
 import ProfilePage from './components/profile/ProfilePage';
+import FacturacionRRPage from './pages/FacturacionRRPage';
 
 function DashboardApp() {
   const [serviceType, setServiceType] = useState<ServiceType>(null)
@@ -302,8 +304,10 @@ function DashboardApp() {
             </div>
           } />
           <Route path="/perfil" element={<ProfilePage />} />
+          <Route path="/ranking" element={<RankingPage />} />
           <Route path="/tarifas" element={<RatesPage />} />
           <Route path="/proporcionales" element={<ProporcionalesPage />} />
+          <Route path="/facturacion-rr" element={<FacturacionRRPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 

@@ -31,9 +31,14 @@ function buildRows(metric: MetricKey, list: Participant[], meId: string): Rankin
 }
 
 export function buildRankingVM(metric: MetricKey, dataset: { participants: Participant[]; currentUserId: string }, scope: 'team'|'operation', coordinatorId?: string): RankingViewModel {
+  console.log('🔨 [buildRankingVM] Iniciando construcción para métrica:', metric, 'alcance:', scope);
+  const startTime = performance.now();
+
   const people = scope === 'team' && coordinatorId ? dataset.participants.filter(p => p.coordinatorId === coordinatorId) : dataset.participants.slice();
   const me = dataset.participants.find(p => p.id === dataset.currentUserId);
   const list = people.slice();
+
+  console.log(`📊 [buildRankingVM] Procesando ${list.length} participantes`);
 
   // Ordenamiento por métrica
   if (metric === 'tmo') {
@@ -263,6 +268,9 @@ export function buildRankingVM(metric: MetricKey, dataset: { participants: Parti
   });
 
   const smallNote = list.length < 6 ? 'Grupo pequeño; los cambios pueden mover mucho tu posición.' : undefined;
+
+  const endTime = performance.now();
+  console.log(`✅ [buildRankingVM] Construcción completa en ${Math.round(endTime - startTime)}ms`);
 
   return {
     metric,

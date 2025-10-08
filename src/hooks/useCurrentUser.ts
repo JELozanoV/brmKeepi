@@ -12,14 +12,14 @@ export interface CurrentUser {
 }
 
 const MOCK_USER: CurrentUser = {
-  id: 'me',
-  firstName: 'Pepito',
-  lastName: 'Pérez',
-  displayName: 'Pepito Pérez',
-  coordinatorName: 'María Gómez',
-  role: 'Asesor',
-  avatarUrl: null,
-  initials: 'PP',
+   id: 'me',
+   firstName: 'Pepito',
+   lastName: 'Pérez',
+   displayName: 'Pepito Pérez',
+   coordinatorName: 'Andriu Orduz',
+   role: 'Asesor',
+   avatarUrl: null,
+   initials: 'PP',
 };
 
 /**

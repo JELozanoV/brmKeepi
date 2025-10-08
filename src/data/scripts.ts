@@ -5,7 +5,7 @@ export const scripts = {
     title: "Guión de Retención",
     lines: [
       {
-        text: "Entiendo su preocupación por el costo del servicio. Permítame revisar las opciones que tenemos disponibles para usted.",
+        text: "Entiendo su preocupación por el costo del servicio. Permítame mostrarle cómo podemos maximizar el valor de su plan actual.",
         type: "empathy"
       },
       {
@@ -13,7 +13,7 @@ export const scripts = {
         type: "diagnostic"
       },
       {
-        text: "Tenemos algunas alternativas que podrían ajustarse mejor a sus necesidades.",
+        text: "Podemos enriquecer su experiencia actual con beneficios adicionales incluidos en su plan.",
         type: "solution"
       }
     ]

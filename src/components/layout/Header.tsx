@@ -60,6 +60,16 @@ const Header: React.FC<HeaderProps> = ({ onHome, onBack }) => {
             <span className="button-icon" role="img" aria-label="Atrás">🔙</span>
             <span className="button-text">Atrás</span>
           </button>
+          <button
+            className="section-tab"
+            aria-label="Facturación RR"
+            tabIndex={0}
+            onClick={() => navigate('/facturacion-rr')}
+            onKeyDown={handleKey(() => navigate('/facturacion-rr'))}
+          >
+            <span className="tab-icon" role="img" aria-label="Facturación">📄</span>
+            <span className="tab-text">Facturación RR</span>
+          </button>
         </div>
         <div className="brm-header__center" aria-label="Logo Reten+">
           <BrandLogo variant="header" />

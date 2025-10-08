@@ -8,41 +8,24 @@ import ProfileInfoCard from './ProfileInfoCard';
 import { useCurrentUser } from '../../hooks/useCurrentUser';
 // import ProfileOperationalPanel from './ProfileOperationalPanel';
 import KpiCoach from './KpiCoach';
-import RankingCard from './RankingCard';
-import { fetchRankingMock } from '../../services/rankingService';
-import { buildRankingVM } from '../../utils/rankingUtils';
-import { MetricKey } from '../../types/ranking';
+import { EXPECTED_CALLS } from '../../config/constants';
 import '../../styles/operational.scss';
-import { useKpiHistory } from '../../hooks/useKpiHistory';
-import KpiCalendar from './KpiCalendar';
 import KpiHistoryCard from './KpiHistoryCard';
+import ProfileRankingCard from './ProfileRankingCard';
 
 const ProfilePage: React.FC = () => {
   const [range, setRange] = useState<Range>('week');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<{ callsHandled: number; totalHandleTimeSec: number; transfers: number; retentionAccepted: number; cancellationIntents?: number; qa: number; csat: number } | null>(null);
-  const [rankingMetricTeam, setRankingMetricTeam] = useState<MetricKey>('tmo');
-  const [rankingMetricOp, setRankingMetricOp] = useState<MetricKey>('tmo');
-  const [rankingData, setRankingData] = useState<any | null>(null);
 
   // Por ahora hardcodeado; preparado para integrar datos reales (servicio backend o contexto)
   const { user, loading: userLoading } = useCurrentUser();
   const profile = {
     firstName: user?.firstName || 'Asesor',
     lastName: user?.lastName || '',
-    coordinator: user?.coordinatorName || 'María Gómez',
+    coordinator: user?.coordinatorName || 'Andriu Orduz',
   };
-
-  // Calendario histórico
-  const today = new Date();
-  const [calendarMonth, setCalendarMonth] = useState<Date>(new Date(today.getFullYear(), today.getMonth(), 1));
-  const [selection, setSelection] = useState<{ from: Date; to?: Date }>({ from: today });
-  const { data: monthData, loading: histLoading, loadMonth } = useKpiHistory(user?.id || null);
-  useEffect(() => {
-    const monthIso = `${calendarMonth.getFullYear()}-${String(calendarMonth.getMonth() + 1).padStart(2, '0')}`;
-    loadMonth(monthIso);
-  }, [calendarMonth, loadMonth]);
 
   useEffect(() => {
     let cancelled = false;
@@ -52,21 +35,11 @@ const ProfilePage: React.FC = () => {
       try {
         const res = await getMyKpis(range);
         if (!cancelled) setData(res);
-      } catch (e) {
+      } catch {
         if (!cancelled) setError('No se pudieron cargar KPIs');
       } finally {
         if (!cancelled) setLoading(false);
       }
-    };
-    run();
-    return () => { cancelled = true; };
-  }, [range]);
-
-  useEffect(() => {
-    let cancelled = false;
-    const run = async () => {
-      const ds = await fetchRankingMock(range as any);
-      if (!cancelled) setRankingData(ds);
     };
     run();
     return () => { cancelled = true; };
@@ -81,18 +54,18 @@ const ProfilePage: React.FC = () => {
     const transPct = `${transPctNum}%`;
     const qaPct = `${Math.round(data.qa)}%`;
     const csatStr = data.csat.toFixed(1);
-    const vm = computeKpiViewModels(range as any, {
+    const vm = computeKpiViewModels(range, {
       tmoSec,
       transfersPct: transPctNum,
       npsPct: Math.round(data.qa)
     }, undefined, {
       n: calls,
-      N: undefined as any,
+      N: EXPECTED_CALLS[range],
       totalTalkSec: data.totalHandleTimeSec,
       transfers: data.transfers
     });
     return { tmo, tmoSec, transPct, transPctNum, qaPct, csatStr, vm };
-  }, [data]);
+  }, [data, range]);
 
   return (
     <div className="profile-page">
@@ -116,7 +89,31 @@ const ProfilePage: React.FC = () => {
               coordinator={profile.coordinator}
             />
           )}
-          {/* Se mueve el histórico a su propia card en el main */}
+
+          {/* Componente de ranking reducido en el sidebar */}
+          <ProfileRankingCard range={range} />
+
+          {/* Botón para ver Rankings completos */}
+          <div style={{ marginTop: 16, textAlign: 'center' }}>
+            <button
+              style={{
+                background: '#1A4DFF',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '10px 20px',
+                fontWeight: 700,
+                fontSize: 14,
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px #1A4DFF33',
+                letterSpacing: 0.3,
+                width: '100%'
+              }}
+              onClick={() => window.location.href = '/brmKeepi/ranking'}
+            >
+              Ver Rankings Completos
+            </button>
+          </div>
         </aside>
 
         <main className="profile-main">
@@ -127,42 +124,23 @@ const ProfilePage: React.FC = () => {
             <>
               <div className="kpi-grid">
                 <KpiCard label="TMO" value={derived.tmo} hint="Tu meta hoy: 07:00 o menos" vm={derived.vm.tmo} />
-                <KpiCard label="Tu tasa" value={derived.transPct} hint="Tu meta hoy: 40% o menos" vm={derived.vm.transfers} />
+                <KpiCard label="Transferencia" value={derived.transPct} hint="Tu meta hoy: 40% o menos" vm={derived.vm.transfers} />
                 <KpiCard label="Tu NPS" value={derived.qaPct} hint="Tu meta hoy: 60% o más" vm={derived.vm.nps} />
               </div>
               {/* Sección KpiCoach (debajo de KPI cards) */}
               <section aria-label="KpiCoach" style={{ marginTop: '1.5rem' }}>
                 <h3 className="profile-title" style={{ marginBottom: '0.75rem' }}>KpiCoach</h3>
                 <KpiCoach
-                  range={range as any}
+                  range={range}
                   callsHandled={data?.callsHandled || 0}
                   totalHandleTimeSec={data?.totalHandleTimeSec || 0}
                   transfers={data?.transfers || 0}
                   npsPct={Math.round(data?.qa || 0)}
-                  vm={derived.vm as any}
                 />
               </section>
 
               {/* Historial KPI */}
               <KpiHistoryCard userId={user?.id || null} />
-
-              {/* Ranking de mi equipo y de la operación */}
-              {rankingData && (
-                <>
-                  <RankingCard
-                    title="Ranking de mi equipo"
-                    metric={rankingMetricTeam}
-                    onMetricChange={setRankingMetricTeam}
-                    vm={buildRankingVM(rankingMetricTeam, rankingData, 'team', 'c-1')}
-                  />
-                  <RankingCard
-                    title="Ranking de toda la operación"
-                    metric={rankingMetricOp}
-                    onMetricChange={setRankingMetricOp}
-                    vm={buildRankingVM(rankingMetricOp, rankingData, 'operation')}
-                  />
-                </>
-              )}
             </>
           )}
 

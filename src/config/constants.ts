@@ -9,14 +9,21 @@ export const SOLUTION_TYPES = {
 } as const;
 
 /**
+ * @constant API_BASE_URL
+ * @description URL base de la API backend
+ */
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+
+/**
  * @constant API_ENDPOINTS
  * @description Endpoints de la API (para futura implementación)
  */
 export const API_ENDPOINTS = {
   SCRIPTS: '/api/scripts',
   RATES: '/api/rates',
+  INVOICE_ANALYSIS: '/api/analizar-factura',
   // ... más endpoints
-} as const; 
+} as const;
 
 /**
  * Umbral de advertencia para semáforo de metas.
@@ -43,9 +50,16 @@ export const TIMEZONE = 'America/Bogota';
 
 /** Volúmenes esperados por timeframe (para cálculos Nivel 2 en KpiCoach) */
 export const EXPECTED_CALLS: Record<'today'|'week'|'month', number> = {
-  today: 40,
-  week: 200,
-  month: 800,
+  today: 40,        // 40 llamadas por día laboral
+  week: 240,        // 40 llamadas * 6 días laborales por semana
+  month: 1032,      // 40 llamadas * 6 días * 4.3 semanas promedio por mes
+};
+
+/** Encuestas NPS esperadas por timeframe (10 encuestas por día laboral) */
+export const EXPECTED_SURVEYS: Record<'today'|'week'|'month', number> = {
+  today: 10,        // 10 encuestas por día laboral
+  week: 60,         // 10 encuestas * 6 días laborales por semana
+  month: 258,       // 10 encuestas * 6 días * 4.3 semanas promedio por mes
 };
 
 // Usuario actual (mock)

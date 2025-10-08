@@ -14,7 +14,7 @@ export const GUION_A: ScriptStep[] = [
   },
   {
     type: 'oferta',
-    text: 'Si tu motivo era revisar costos/beneficios, puedo validar las opciones disponibles que mantengan o mejoren tu servicio. Además, te explico cómo aprovechar beneficios como Claro Video, Música o Claro Club para que el valor percibido sea mayor.'
+    text: 'Si tu motivo era revisar costos/beneficios, puedo mostrarte cómo maximizar el valor de tu servicio actual. Además, te explico cómo aprovechar beneficios como Claro Video, Música o Claro Club para que el valor percibido sea mayor.'
   },
   {
     type: 'cierre',
@@ -33,7 +33,7 @@ export const GUION_B: ScriptStep[] = [
   },
   {
     type: 'oferta',
-    text: 'Veo alternativas que, con un pequeño ajuste, mejoran velocidad/canales y suman beneficios VAS para que el valor mensual tenga más retorno.'
+    text: 'Puedo mostrarte cómo enriquecer tu servicio actual con beneficios VAS incluidos para que el valor mensual tenga más retorno.'
   },
   {
     type: 'cierre',
@@ -52,7 +52,7 @@ export const GUION_C: ScriptStep[] = [
   },
   {
     type: 'oferta',
-    text: 'Puedo explicarte alternativas disponibles que no reduzcan tu plan por debajo del valor actual y optimicen tu experiencia.'
+    text: 'Puedo mostrarte cómo optimizar tu experiencia actual sin reducir tu plan, aprovechando al máximo los beneficios incluidos.'
   },
   {
     type: 'cierre',

@@ -8,7 +8,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -30,7 +30,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -52,7 +52,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -74,7 +74,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -96,7 +96,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -118,7 +118,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -140,7 +140,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -162,7 +162,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -184,7 +184,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -206,7 +206,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -228,7 +228,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -250,7 +250,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -272,7 +272,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -294,7 +294,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -316,7 +316,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -338,7 +338,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -360,7 +360,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -382,7 +382,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -404,7 +404,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -426,7 +426,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -448,7 +448,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -470,7 +470,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -492,7 +492,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -514,7 +514,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -536,7 +536,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -558,7 +558,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -580,7 +580,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -602,7 +602,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -624,7 +624,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -646,7 +646,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -668,7 +668,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -690,7 +690,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -712,7 +712,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -734,7 +734,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -756,7 +756,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -778,7 +778,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -800,7 +800,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -822,7 +822,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -844,7 +844,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {
@@ -866,7 +866,7 @@ export const cancelacionCostosScripts = [
         type: "empathy"
       },
       {
-        text: "Permíteme revisar en nuestro sistema las tarifas disponibles actualmente, para evaluar si hay alguna opción que pueda beneficiarte.",
+        text: "Permítame mostrarle cómo podemos maximizar el valor de su plan actual con beneficios adicionales incluidos.",
         type: "action"
       },
       {

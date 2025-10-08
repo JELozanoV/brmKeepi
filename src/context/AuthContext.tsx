@@ -108,9 +108,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     const session: AuthResponse = {
-      user: { id: 'me', firstName: 'Pepito', lastName: 'Pérez', displayName: 'Pepito Pérez', coordinatorName: 'María Gómez', avatarUrl: null },
-      token: { token: 'mock-token', expiresAt: Date.now() + 8 * 60 * 60 * 1000 },
-    };
+       user: { id: 'me', firstName: 'Pepito', lastName: 'Pérez', displayName: 'Pepito Pérez', coordinatorName: 'Andriu Orduz', avatarUrl: null },
+       token: { token: 'mock-token', expiresAt: Date.now() + 8 * 60 * 60 * 1000 },
+     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
     setUser(session.user);
     setAttempts(0);
