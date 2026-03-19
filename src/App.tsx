@@ -37,7 +37,7 @@ import MoodSelector from './components/MoodSelector'
 import Toast from './components/Toast/Toast'
 import { getMoodRecommendation } from './services/moodRecommendations'
 
-import Header from './components/layout/Header';
+import DashboardLayout from './components/layout/DashboardLayout';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LoginPage from './pages/LoginPage';
@@ -65,8 +65,6 @@ function DashboardApp() {
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState<'info' | 'success' | 'warning' | 'error'>('info')
 
-  // Add a ref for header height if needed, or use fixed value
-  const headerHeight = 56; // px, should match min-height in _header.scss
   const location = useLocation();
   const navigate = useNavigate();
   const isRatesRoute = location.pathname.includes('/tarifas') || location.pathname.includes('/proporcionales');
@@ -118,14 +116,10 @@ function DashboardApp() {
     }
   }
 
-  const handleHome = () => {
-    handleReset();
-  }
-
   const handleHeaderHome = () => {
     handleReset();
     navigate('/');
-  }
+  };
 
   const handleMoodSelect = (mood: ClientMoodType) => {
     setClientMood(mood);
@@ -293,10 +287,7 @@ function DashboardApp() {
 
   return (
     <>
-      <Header onHome={handleHeaderHome} onBack={!isRatesRoute ? handleBack : undefined} />
-      <div className="app-container" style={{ paddingTop: `${headerHeight + 8}px` }}>
-        {/* Logo movido a la navbar */}
-
+      <DashboardLayout onHome={handleHeaderHome} onBack={!isRatesRoute ? handleBack : undefined}>
         <Routes>
           <Route path="/" element={
             <div className="app-content">
@@ -320,7 +311,7 @@ function DashboardApp() {
           duration={8000}
           onClose={() => setShowToast(false)}
         />
-      </div>
+      </DashboardLayout>
     </>
   )
 }
@@ -346,4 +337,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

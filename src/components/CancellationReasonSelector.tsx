@@ -30,7 +30,7 @@ const CancellationReasonSelector = ({ serviceType, planType, onSelect }: Props) 
   ];
 
   // Filter out 'competencia' from the reasons list
-const reasons = (serviceType === 'movil' ? mobileReasons : homeReasons).filter(r => r.id !== 'competencia');
+  const reasons = (serviceType === 'movil' ? mobileReasons : homeReasons).filter(r => r.id !== 'competencia');
   const title = serviceType === 'movil' 
     ? 'Motivo de cancelación - Plan Pospago'
     : 'Motivo de cancelación - Hogar';
@@ -58,4 +58,4 @@ const reasons = (serviceType === 'movil' ? mobileReasons : homeReasons).filter(r
   );
 };
 
-export default CancellationReasonSelector; 
+export default CancellationReasonSelector;

@@ -34,9 +34,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #222222;
+  background-color: $brm-text; // Negro suave consistente con dashboard
   padding: 0.3rem 0.5rem 3rem;
-  color: $black;
+  color: $brm-white; // Texto blanco para contraste
 }
 
 .navigation-buttons {
@@ -248,14 +248,15 @@
 .summary-container {
   width: 100%;
   max-width: 800px;
-  background: $brm-white;
+  background: rgba($brm-white, 0.1); // Fondo semitransparente para modo oscuro
+  border: 1px solid rgba($brm-primary, 0.3); // Borde azul sutil
   border-radius: $border-radius-lg;
   padding: $spacing-xl;
   margin-top: $spacing-lg;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 
   .summary-title {
-    color: $brm-text;
+    color: $brm-white;
     font-size: 1.8rem;
     margin-bottom: $spacing-xl;
     text-align: center;
@@ -272,18 +273,19 @@
       display: flex;
       align-items: center;
       padding: $spacing-md;
-      background: $brm-light;
+      background: rgba($brm-white, 0.05); // Fondo más oscuro para items
+      border: 1px solid rgba($brm-primary, 0.2);
       border-radius: $border-radius-md;
 
       .label {
-        color: $brm-text;
+        color: $brm-white;
         font-weight: bold;
         min-width: 200px;
         padding-right: $spacing-md;
       }
 
       .value {
-        color: $brm-text;
+        color: rgba($brm-white, 0.9);
         flex-grow: 1;
         text-transform: capitalize;
       }

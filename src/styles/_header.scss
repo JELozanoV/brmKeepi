@@ -43,7 +43,7 @@
     display: block;
   }
 
-  .home-button, .back-button, .section-tab, .profile-button {
+  .home-button, .back-button, .section-tab, .profile-button, .menu-button {
     @extend .section-tab;
     min-width: 90px;
     font-size: 1rem;
@@ -62,6 +62,23 @@
     outline: none;
     &:hover, &:focus {
       background: $brm-secondary;
+    }
+  }
+
+  .menu-button {
+    min-width: auto;
+    padding: 0 0.75rem;
+  }
+
+  .header-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .user-greeting {
+      color: $brm-white;
+      font-size: 0.9rem;
+      opacity: 0.9;
     }
   }
 
@@ -98,7 +115,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  .brm-header .home-button, .brm-header .back-button, .brm-header .section-tab, .brm-header .profile-button {
+  .brm-header .home-button, .brm-header .back-button, .brm-header .section-tab, .brm-header .profile-button, .brm-header .menu-button {
     min-width: 70px;
     font-size: 0.95rem;
     height: 38px;
@@ -106,5 +123,13 @@
   }
   .brm-header__right, .brm-header__left {
     gap: 0.3rem;
+  }
+
+  .menu-button {
+    padding: 0 0.5rem;
+  }
+
+  .header-user-info .user-greeting {
+    font-size: 0.8rem;
   }
 }

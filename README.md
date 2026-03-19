@@ -1,76 +1,129 @@
-# App BRM — Aplicación para asesores (React + Vite + TypeScript)
+# App BRM — Aplicación para Asesores de Claro
 
-Aplicación web para asesoría y retención con:
-- Indicadores (KPIs) sincronizados con coaching (KpiCoach)
-- Ranking (Mi equipo / Operación) con TMO, Transferencia, NPS y métrica “Combinado”
-- Tarifas Conectados (filtro por tecnología y precio)
-- Calculadora de Proporcionales (Cambio de ciclo / Cambio de plan inmediato)
-- Autenticación mock con guard y sesión persistente
+Aplicación web interactiva para asesores de Claro en servicios móviles y Call Center, enfocada en el área de filtro. Guía a los asesores en procesos de gestión de atención y retención de clientes, filtrando por tipo de servicio, motivo de llamada y proporcionando soluciones personalizadas para fidelizar al cliente y evitar cancelaciones.
 
-## Requisitos
-- Node 18+
+## 🎯 Objetivos Generales
+- Guiar a asesores nuevos en el trato con clientes.
+- Filtrar llamadas por: tipo de servicio (hogar/móvil), motivo (facturación, soporte técnico, cancelación).
+- Proporcionar soluciones según el motivo: soporte técnico para fallas, beneficios VAS para costos, etc.
+- Prevenir cancelaciones transfiriendo a retención cuando sea posible.
 
-## Instalación y ejecución
+## ✨ Funcionalidades Principales
+- **Flujo de Atención**: Selección de servicio → ánimo del cliente → motivo → soluciones (guiones, beneficios, tarifas, procedimientos).
+- **Indicadores (KPIs)**: Sincronizados con coaching (KpiCoach), semáforo unificado (ok/warn/bad), microcopy natural.
+- **Ranking**: "Mi equipo" / "Operación" con TMO, Transferencia, NPS y métrica "Combinado" (40/40/20).
+- **Tarifas Conectados**: Filtro por tecnología (HFC/FTTH), precio actual del cliente; sugiere planes ≥ precio actual.
+- **Calculadora de Proporcionales**: Cambio de ciclo / Cambio de plan inmediato (base 30 días).
+- **Autenticación Mock**: Login con hash SHA-256 + pepper, bloqueo por intentos, sesión persistente (8h en localStorage).
+- **Chatbot y Toasts**: Soporte conversacional y recomendaciones basadas en ánimo del cliente.
+
+## 🏗️ Arquitectura Técnica
+Basada en separación clara entre UI y datos, componentes reutilizables, tipado fuerte con TypeScript.
+
+### Mapa de Carpetas (Alto Nivel)
+```
+src/
+├── App.tsx                 # Orquestación de rutas y flujo principal
+├── components/             # UI: perfil, ranking, layout/header, soluciones, etc.
+│   ├── profile/            # KPIs, KpiCoach, Ranking
+│   ├── solutions/          # Soluciones específicas (HogarCostos, etc.)
+│   ├── layout/Header.tsx   # Navegación y menú
+│   └── common/             # Reutilizables: Modal, Toast
+├── pages/                  # Páginas: LoginPage, RatesPage, ProporcionalesPage, ProfilePage
+├── services/               # Integraciones: api.ts (backend), iaService.ts (IA)
+├── utils/                  # Lógica pura: kpiSelector, rankingUtils, prorrateo
+├── hooks/                  # useTransparentLogo
+├── styles/                 # Sass: dark UI, variables de color
+├── config/                 # constants.ts (metas, mocks)
+├── types/                  # index.ts (tipos compartidos)
+└── data/                   # Datos locales: rates.ts, benefits.ts, scripts.ts
+```
+
+### Flujo de Datos y Navegación
+- Estado local en `App.tsx` (sin store global).
+- Rutas protegidas con Guard; persistencia en localStorage.
+- Integración futura con backend (Express) y IA (OpenAI).
+
+### Servicios y Integraciones
+- **API Backend**: `src/services/api.ts` (BASE_URL: localhost:3000/api) para tarifas, guiones, complementos.
+- **IA Service**: `src/services/iaService.ts` para soporte conversacional y guiones dinámicos.
+- **Autenticación**: Mock actual; TODO migrar a cookies httpOnly + CSRF.
+
+## 🛠️ Tecnologías y Librerías
+- **Frontend Stack**: React 19 + Vite 6 + TypeScript + Sass.
+- **Enrutamiento**: React Router DOM 7.
+- **Estilos**: Sass con variables; UI oscura con borde azul `#1A4DFF`.
+- **Librerías Adicionales**: Ninguna externa principal; lógica pura en utils.
+- **Herramientas**: ESLint, TypeScript compiler.
+
+## 🎨 Paleta de Colores y Estilos
+- **Azul Principal**: `#1A4DFF` (bordes, acentos).
+- **Azul Claro**: `#007BFF` (acentos secundarios).
+- **Gris Claro**: `#F2F2F2` (superficies claras).
+- **Blanco**: `#FFFFFF`.
+- **Negro Suave**: `#222222` (fondos oscuros).
+- **Patrones UI**: Cards oscuras con borde azul, chips/botones segmentados, microcopy natural (sin símbolos técnicos), contraste accesible.
+
+## 📋 Requisitos
+- Node.js 18+
+
+## 🚀 Instalación y Ejecución
 ```bash
 npm install
-npm run dev
-# build de producción
-npm run build
-# previsualización
-npm run preview
+npm run dev          # Desarrollo (localhost:5173)
+npm run build        # Build de producción
+npm run preview      # Previsualización del build
 ```
 
-### Cómo probar rápidamente
-- Ir a `/login` y autenticar con usuario `001` y contraseña `contraseña`.
-- Tras login, verás el dashboard. Abre el menú Perfil en el header para “Ver perfil” o “Cerrar sesión”.
-- Calculadora de Proporcionales: botón “Proporcionales” en el header.
-  - Caso Cambio de ciclo: Valor mensual 90.000, día 1 → 17 → resultado `$48.000`.
-  - Caso Cambio inmediato: 38.900 / 54.900, corte 1, cambio 21 → `$44.233,33`.
-
-## Scripts útiles
+### Scripts Útiles
 ```bash
-npm run typecheck   # verificación de tipos
-npm run lint        # lint del repositorio
-npm run docs:open   # abre docs/ARCHITECTURE.md (macOS)
+npm run typecheck    # Verificación de tipos TypeScript
+npm run lint         # Linting del repositorio
+npm run docs:open    # Abre docs/ARCHITECTURE.md (macOS)
 ```
 
-## Rutas principales
-- `/login`: acceso (mock) con bloqueo por intentos y sesión persistente
-- `/`: flujo principal de soluciones
-- `/perfil`: Mi Perfil (KPIs + KpiCoach + Ranking)
-- `/tarifas`: Tarifas Conectados
-- `/proporcionales`: Calculadora de Proporcionales
+## 🧪 Cómo Probar Rápidamente
+- **Login**: Ir a `/login`, autenticar con usuario `001` y contraseña `contraseña`.
+- **Dashboard**: Tras login, flujo principal en `/`.
+- **Perfil**: Menú en header → "Ver perfil" (`/perfil`: KPIs + KpiCoach + Ranking).
+- **Tarifas**: Botón "Tarifas Conectados" en header (`/tarifas`).
+- **Proporcionales**: Botón "Proporcionales" en header (`/proporcionales`).
+  - Cambio de ciclo: Valor 90.000, día 1→17 → `$48.000`.
+  - Cambio inmediato: 38.900/54.900, corte 1, cambio 21 → `$44.233,33`.
 
-## Estructura (alto nivel)
-```text
-src/
-  components/           # UI (perfil, ranking, layout/header, soluciones, etc.)
-  pages/                # Páginas: Login, RatesPage, ProporcionalesPage, ProfilePage
-  services/             # Servicios mock: api, ranking, prorrateo (stub)
-  utils/                # Lógica pura: kpiSelector, rankingUtils, prorrateo, transparentLogo
-  hooks/                # useTransparentLogo
-  styles/               # Sass (dark UI, borde azul #1A4DFF)
-  config/               # constants (metas y mock de usuario actual)
-  types/                # tipos compartidos
-```
+## 🛣️ Rutas Principales
+- `/login`: Acceso mock con bloqueo por intentos.
+- `/`: Flujo principal de soluciones.
+- `/perfil`: Mi Perfil (KPIs + KpiCoach + Ranking).
+- `/tarifas`: Tarifas Conectados.
+- `/proporcionales`: Calculadora de Proporcionales.
 
-## Funcionalidades clave (estado actual)
-- Login mock con hash SHA-256 + pepper, bloqueo por intentos, expiración de 8h (localStorage)
-- Guard de rutas y menú de perfil (logout) accesible en el header
-- KPIs con semáforo unificado (ok/warn/bad) y microcopy natural (sin símbolos)
-- KpiCoach alineado 1:1 con el estado de las tarjetas KPI
-- Ranking con Top 3 + tu fila + vecinos (6 filas), selector de métrica y score combinado (40/40/20)
-- Calculadora de Proporcionales (base 30 días) y stub de servicio para futura API; entradas de monto con separador de miles (ej. 90.000)
-- Logo PNG procesado en cliente para transparencias (cacheado)
+## 📚 Documentación Completa
+Consulta `docs/` para detalles:
+- `ARCHITECTURE.md`: Arquitectura técnica (diagramas Mermaid).
+- `FRONTEND.md`: Stack, patrones UI, rutas, estados.
+- `AUTH.md`: Autenticación mock y migración a backend.
+- `KPI_LOGIC.md`: Lógica de KPIs y KpiCoach.
+- `RANKING.md`: Reglas de ranking y view-model.
+- `PROPORCIONALES.md`: Calculadora de proporcionales.
+- `STYLEGUIDE.md`: Guía de estilos y paleta.
+- `ACCESSIBILITY.md`: Prácticas de accesibilidad (A11y).
+- `SECURITY.md`: Seguridad actual y plan de migración.
+- `SERVICES.md`: Servicios API e interfaces.
+- `TYPES.md`: Tipos e interfaces de datos.
+- `API_CONTRACTS/prorrateo_v1.md`: Contrato API para prorrateo.
+- `INFORME_AUDITORIA_APP_BRM.md`: Auditoría completa (arquitectura, componentes, mejoras).
+- `CHANGELOG.md`: Historial de cambios.
+- `ROADMAP.md`: Plan de desarrollo.
+- `CONVENTIONS.md`: Convenciones de código.
 
-## Documentación
-Consulta la carpeta `docs/`:
-- `ARCHITECTURE.md`: arquitectura técnica (Mermaid)
-- `FRONTEND.md`: stack, patrones de UI (dark + borde azul), rutas y estados
-- `AUTH.md`: autenticación mock y migración a backend (TODO endpoints reales)
-- `KPI_LOGIC.md`, `RANKING.md`, `PROPORCIONALES.md`: lógicas de negocio
-- `STYLEGUIDE.md`, `ACCESSIBILITY.md`, `SECURITY.md`
-- `CHANGELOG.md`, `ROADMAP.md`
+## 🔄 Estado Actual y TODOs
+- **Funcionalidades Implementadas**: Flujo completo, KPIs, ranking, calculadora, auth mock.
+- **TODOs**: Integrar backend real para auth y prorrateo; pruebas unitarias; telemetría; i18n; PWA.
+- **Reglas de Negocio**: "Marcación" obligatoria (ej. CAN ICS para retención); no ofrecer planes < precio actual; "Creer en el Cliente" con ajustes internos.
 
-## Notas
-- TODO: integrar backend real para auth y prorrateo; contratos en `docs/API_CONTRACTS/`.
+## 🤝 Contribuciones
+Sigue `docs/CONVENTIONS.md` para nombrado, estilos y Git (commits con prefijos: feat:, fix:, docs:).
+
+## 📄 Licencia
+Propiedad de Claro. Consulta términos internos.
