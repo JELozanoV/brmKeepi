@@ -1,20 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import '../../styles/_header.scss';
 import BrandLogo from '../BrandLogo';
 
 // Removed modal-based rates view; navigation will take the user to a dedicated route
 
 interface HeaderProps {
-  onHome?: () => void;
-  onBack?: () => void;
   showMenuButton?: boolean;
   onMenuToggle?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onHome, onBack, showMenuButton, onMenuToggle }) => {
-  const navigate = useNavigate();
-
+const Header: React.FC<HeaderProps> = ({ showMenuButton, onMenuToggle }) => {
   // Handler for keyboard accessibility
   const handleKey = (action: () => void) => (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -37,30 +32,6 @@ const Header: React.FC<HeaderProps> = ({ onHome, onBack, showMenuButton, onMenuT
               onKeyDown={handleKey(onMenuToggle || (() => {}))}
             >
               <span className="button-icon" role="img" aria-label="Menú">☰</span>
-            </button>
-          )}
-          
-          <button
-            className="home-button"
-            aria-label="Ir al inicio"
-            tabIndex={0}
-            onClick={() => (onHome ? onHome() : navigate('/'))}
-            onKeyDown={handleKey(() => (onHome ? onHome() : navigate('/')))}
-          >
-            <span className="button-icon" role="img" aria-label="Inicio">🏠</span>
-            <span className="button-text">Inicio</span>
-          </button>
-          
-          {onBack && (
-            <button
-              className="back-button"
-              aria-label="Volver atrás"
-              tabIndex={0}
-              onClick={onBack}
-              onKeyDown={handleKey(onBack)}
-            >
-              <span className="button-icon" role="img" aria-label="Atrás">�</span>
-              <span className="button-text">Atrás</span>
             </button>
           )}
         </div>

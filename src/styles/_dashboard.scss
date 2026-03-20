@@ -17,12 +17,95 @@
   &__content {
     flex: 1;
     padding: 1rem;
+    padding-top: 5rem; // Espacio suficiente para botones y contenido
+    overflow-x: hidden; // Evitar scroll horizontal
     overflow-y: auto;
     background: $brm-text; // Negro suave para fondo principal
+    position: relative; // Para posicionar botones
     
     // Espacio para el header fijo
     margin-top: 56px; // Altura del header
     min-height: calc(100vh - 56px);
+
+    // Contenedor de botones de navegación
+    .navigation-buttons {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      gap: $spacing-md;
+      z-index: 10;
+
+      .home-button,
+      .back-button {
+        background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+        border: 1px solid $brm-primary;
+        border-radius: $border-radius-md;
+        padding: $spacing-sm $spacing-md;
+        color: $brm-white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        transition: all $transition-normal;
+        font-size: 0.9rem;
+
+        .button-icon {
+          font-size: 1.1rem;
+        }
+
+        &:hover {
+          background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          background: linear-gradient(to bottom, #222222, #000000);
+          border: 1px solid transparent;
+          border-image: linear-gradient(to bottom, $brm-secondary, $brm-primary) 1;
+          transform: translateY(0);
+        }
+      }
+
+      .home-button {
+        border-color: transparent;
+
+        &:hover {
+          background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+        }
+      }
+    }
+
+    // Ajustar el contenido para que no se tape
+    .app-content {
+      margin-top: 1rem; // Espacio adicional después de los botones
+    }
+
+    // Ajustes específicos para ServiceSelector
+    .selector-container {
+      .welcome-message {
+        margin-bottom: $spacing-xl * 2;
+        padding: 0 $spacing-xl;
+        margin-top: 1rem; // Espacio extra para evitar solapamiento
+
+        .description {
+          color: $brm-white;
+          font-size: 1.5rem;
+          line-height: 1.6;
+          max-width: 800px;
+          margin: 0 auto;
+          opacity: 1;
+          font-weight: 500;
+        }
+      }
+
+      .section-title {
+        color: $brm-white;
+        font-size: 1.5rem;
+        margin-bottom: $spacing-xl;
+        margin-top: $spacing-lg; // Espacio extra después del texto
+      }
+    }
   }
 }
 
@@ -31,6 +114,19 @@
   .brm-dashboard {
     &__main {
       margin-left: 260px; // Ancho del sidebar
+    }
+
+    &__content {
+      // Ajustes específicos para desktop
+      .selector-container {
+        .welcome-message {
+          margin-top: 2rem; // Más espacio en desktop
+        }
+
+        .section-title {
+          margin-top: $spacing-xl; // Más espacio en desktop
+        }
+      }
     }
   }
 }
@@ -52,6 +148,43 @@
 
     &__content {
       padding: 0.75rem;
+      padding-top: 4rem; // Espacio ajustado para móvil
+
+      .navigation-buttons {
+        top: 10px;
+        left: 10px;
+        gap: $spacing-sm;
+
+        .home-button,
+        .back-button {
+          padding: 6px 12px;
+          font-size: 0.8rem;
+
+          .button-icon {
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .app-content {
+        margin-top: 0.5rem; // Menos espacio en móvil
+      }
+
+      .selector-container {
+        .welcome-message {
+          margin-top: 0.5rem;
+          padding: 0 $spacing-md;
+
+          .description {
+            font-size: 1.3rem; // Ligeramente más pequeño en móvil
+          }
+        }
+
+        .section-title {
+          margin-top: $spacing-md; // Menos espacio en móvil
+          font-size: 1.3rem;
+        }
+      }
     }
   }
 }

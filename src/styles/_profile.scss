@@ -2,10 +2,12 @@
 
 .profile-page {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%; // Ocupar todo el ancho disponible
   margin: 0 auto;
-  padding: $spacing-md;
+  padding: $spacing-sm; // Padding reducido
   color: $brm-white;
+  overflow-x: hidden; // Evitar scroll horizontal en toda la página
+  box-sizing: border-box; // Asegurar que el padding no afecte el ancho total
 
   .profile-page__header {
     display: flex;
@@ -40,15 +42,30 @@
 
   .kpi-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: $spacing-md;
+    grid-template-columns: repeat(3, minmax(150px, 1fr)); // Reducido a 150px máximo
+    gap: $spacing-sm; // Reducido gap
+    max-width: 100%; // No exceder el contenedor
+    width: 100%; // Asegurar que ocupe todo el ancho disponible
+
+    // Forzar que todas las celdas del grid tengan la misma altura
+    grid-auto-rows: 1fr; // Todas las filas tienen igual altura
 
     @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, minmax(140px, 1fr)); // Un poco más pequeñas en tablet
+      gap: $spacing-xs; // Gap más pequeño en tablet
     }
 
-    @media (max-width: 600px) {
-      grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr; // Una columna en móvil
+      gap: $spacing-md;
+      max-width: 250px; // Reducido ancho máximo en móvil
+      margin: 0 auto; // Centrar en móvil
+    }
+
+    // Pantallas pequeñas (13 pulgadas y similares)
+    @media (max-width: 1280px) and (min-width: 1025px) {
+      grid-template-columns: repeat(3, minmax(160px, 1fr)); // Tamaño intermedio
+      gap: $spacing-sm;
     }
   }
 
@@ -56,9 +73,18 @@
     background: $brm-light; // Fondo por defecto
     color: $brm-text; // Texto
     border-radius: $border-radius-lg;
-    padding: $spacing-lg;
+    padding: $spacing-sm; // Padding más reducido
     box-shadow: $box-shadow;
     border: 2px solid transparent;
+    aspect-ratio: 1/1; // Forzar relación cuadrada perfecta (1:1)
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Distribuir espacio uniformemente
+    width: 100%; // Ocupar todo el ancho disponible
+    height: 100%; // Ocupar toda la altura disponible
+    max-width: 150px; // Ancho máximo reducido para pantallas pequeñas
+    overflow: hidden; // Evitar que el contenido se salga
+    box-sizing: border-box; // Incluir padding en dimensiones
 
     // Colores de fondo según semáforo
     &.kpi-good {
@@ -86,30 +112,93 @@
     .kpi-card__label {
       font-weight: 600;
       color: $brm-secondary; // Títulos / acentos
-      margin-bottom: $spacing-sm;
+      margin-bottom: 4px; // Margen muy reducido
+      font-size: 0.75rem; // Fuente más pequeña
+      text-align: center; // Centrar para mejor uso del espacio
+      overflow: hidden; // Evitar desbordamiento
+      text-overflow: ellipsis; // Puntos suspensivos si es muy largo
+      white-space: nowrap; // Mantener en una línea
     }
 
     .kpi-card__value {
-      font-size: 1.8rem;
+      font-size: 1.2rem; // Reducida significativamente
       font-weight: 700;
-      margin-bottom: $spacing-xs;
+      margin-bottom: 4px;
       color: $brm-text;
+      line-height: 1.1; // Menos espaciado
+      flex: 1; // Ocupar espacio disponible
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; // Evitar desbordamiento
+      word-wrap: break-word; // Romper si es necesario
     }
 
     .kpi-card__hint {
-      font-size: 0.85rem;
+      font-size: 0.65rem; // Fuente mucho más pequeña
       color: $text-secondary;
+      line-height: 1.1; // Mínimo espaciado
+      margin-top: auto; // Empujar hacia abajo
+      text-align: center; // Centrar para mejor uso del espacio
+      overflow: hidden; // Evitar desbordamiento
+      word-wrap: break-word; // Romper palabras largas
+      max-width: 100%; // No exceder contenedor
+    }
+
+    // Responsive adjustments para móvil
+    @media (max-width: 768px) {
+      aspect-ratio: 1/1; // Mantener cuadrada en móvil
+      padding: $spacing-xs; // Padding mínimo en móvil
+      max-width: 140px; // Un poco más pequeña en móvil
+
+      .kpi-card__value {
+        font-size: 1.1rem; // Un poco más pequeña en móvil
+      }
+
+      .kpi-card__label {
+        font-size: 0.7rem;
+      }
+
+      .kpi-card__hint {
+        font-size: 0.6rem;
+      }
+    }
+
+    // Pantallas pequeñas (13 pulgadas)
+    @media (max-width: 1280px) and (min-width: 1025px) {
+      max-width: 160px; // Un poco más grande que en móvil pero pequeña
+      padding: $spacing-sm;
+
+      .kpi-card__value {
+        font-size: 1.3rem;
+      }
+
+      .kpi-card__label {
+        font-size: 0.8rem;
+      }
+
+      .kpi-card__hint {
+        font-size: 0.7rem;
+      }
     }
   }
 
   // Chip de estado en tarjetas KPI
   .kpi-chip {
     display: inline-block;
-    padding: 2px 8px;
+    padding: 2px 4px; // Padding lateral reducido
     border-radius: 999px;
-    font-size: 0.8rem;
-    margin-bottom: $spacing-sm;
+    font-size: 0.6rem; // Fuente más pequeña
+    margin-bottom: 4px; // Margen reducido
     color: $brm-white;
+    font-weight: 500;
+    line-height: 1.0; // Sin espaciado extra
+    text-align: center;
+    white-space: normal; // Permitir saltos de línea
+    word-wrap: break-word; // Romper palabras largas
+    overflow-wrap: break-word; // Alternativa para compatibilidad
+    max-width: 100%; // No exceder el contenedor
+    box-sizing: border-box; // Incluir padding en el ancho
   }
   .kpi-chip-good { background: #22c55e; }
   .kpi-chip-warn { background: #f59e0b; }
@@ -128,12 +217,25 @@
 // Layout de perfil (sidebar izquierda + contenido principal)
 .profile-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: $spacing-lg;
+  grid-template-columns: 280px 1fr; // Reducido ancho de sidebar
+  gap: $spacing-md; // Gap reducido
   align-items: start;
+  max-width: 100%; // No exceder contenedor
 
   @media (max-width: 1024px) {
+    grid-template-columns: 1fr; // Una columna en tablet
+    gap: $spacing-sm;
+  }
+
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: $spacing-sm;
+  }
+
+  // Pantallas pequeñas (13 pulgadas)
+  @media (max-width: 1280px) and (min-width: 1025px) {
+    grid-template-columns: 260px 1fr; // Sidebar más pequeño
+    gap: $spacing-sm;
   }
 }
 

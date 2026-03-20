@@ -30,6 +30,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
     setSidebarOpen(!sidebarOpen);
   };
 
+  // Handler para botones
+  const handleKey = (action: () => void) => (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
+
   return (
     <div className="brm-dashboard">
       {/* Sidebar */}
@@ -37,16 +45,45 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
 
       {/* Contenido Principal */}
       <div className="brm-dashboard__main">
-        {/* Header simplificado */}
+        {/* Header simplificado - solo logo y menú */}
         <Header 
-          onHome={onHome}
-          onBack={onBack}
           showMenuButton={true}
           onMenuToggle={toggleSidebar}
         />
 
         {/* Área de contenido */}
         <main className="brm-dashboard__content">
+          {/* Botones de navegación */}
+          <div className="navigation-buttons">
+            {/* Botón Inicio */}
+            {onHome && (
+              <button
+                className="home-button"
+                aria-label="Ir al inicio"
+                tabIndex={0}
+                onClick={onHome}
+                onKeyDown={handleKey(onHome)}
+              >
+                <span className="button-icon" role="img" aria-label="Inicio">🏠</span>
+                <span className="button-text">Inicio</span>
+              </button>
+            )}
+            
+            {/* Botón Atrás */}
+            {onBack && (
+              <button
+                className="back-button"
+                aria-label="Volver atrás"
+                tabIndex={0}
+                onClick={onBack}
+                onKeyDown={handleKey(onBack)}
+              >
+                <span className="button-icon" role="img" aria-label="Atrás">⬅️</span>
+                <span className="button-text">Atrás</span>
+              </button>
+            )}
+          </div>
+          
           {children}
         </main>
       </div>

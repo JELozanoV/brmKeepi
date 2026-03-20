@@ -110,17 +110,40 @@ $color-black-soft: #222222;
 
 // KpiCoach layout (reutiliza estilos de cards y semáforo)
 .kpi-coach-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex; // Layout vertical
+  flex-direction: column; // Uno encima del otro verticalmente
   gap: $spacing-md;
+  width: 100%; // Ocupar todo el ancho disponible
+
+  @media (max-width: 768px) {
+    gap: $spacing-sm; // Gap más pequeño en móvil
+  }
+
+  // Pantallas pequeñas (13 pulgadas)
+  @media (max-width: 1280px) and (min-width: 1025px) {
+    gap: $spacing-sm; // Gap más pequeño
+  }
 }
+
 .kpi-coach-item {
   border: 1px solid $color-primary;
   border-radius: $border-radius-lg;
   padding: $spacing-md;
   background: $color-black-soft;
   color: $color-white;
+  width: 100%; // Cada item ocupa todo el ancho
+  box-sizing: border-box; // Incluir padding en el cálculo
+
+  @media (max-width: 768px) {
+    padding: $spacing-sm; // Padding reducido en móvil
+  }
+
+  // Pantallas pequeñas (13 pulgadas)
+  @media (max-width: 1280px) and (min-width: 1025px) {
+    padding: $spacing-sm; // Padding reducido
+  }
 }
+
 .kpi-coach-item .kpi-chip {
   display: inline-block;
   padding: 2px 8px;
