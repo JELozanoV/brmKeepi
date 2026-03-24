@@ -17,7 +17,7 @@
   &__content {
     flex: 1;
     padding: 1rem;
-    padding-top: 5rem; // Espacio suficiente para botones y contenido
+    padding-top: 1.5rem; // Aumentado para dar espacio a botones subidos
     overflow-x: hidden; // Evitar scroll horizontal
     overflow-y: auto;
     background: $brm-text; // Negro suave para fondo principal
@@ -26,15 +26,18 @@
     // Espacio para el header fijo
     margin-top: 56px; // Altura del header
     min-height: calc(100vh - 56px);
+    
+    // Asegurar que los botones estén siempre encima
+    isolation: isolate; // Crear nuevo stacking context
 
     // Contenedor de botones de navegación
     .navigation-buttons {
       position: absolute;
-      top: 20px;
+      top: -30px; // Subido para evitar superposición con texto
       left: 20px;
       display: flex;
       gap: $spacing-md;
-      z-index: 10;
+      z-index: 100; // Aumentado z-index para traer al frente
 
       .home-button,
       .back-button {
@@ -47,8 +50,11 @@
         display: flex;
         align-items: center;
         gap: $spacing-xs;
-        transition: all $transition-normal;
+        font-weight: 600;
         font-size: 0.9rem;
+        transition: $transition-normal;
+        position: relative; // Para asegurar stack context
+        z-index: 101; // z-index individual para los botones
 
         .button-icon {
           font-size: 1.1rem;
@@ -78,15 +84,15 @@
 
     // Ajustar el contenido para que no se tape
     .app-content {
-      margin-top: 1rem; // Espacio adicional después de los botones
+      margin-top: 0.25rem; // Reducido para compensar botones subidos
     }
 
     // Ajustes específicos para ServiceSelector
     .selector-container {
       .welcome-message {
-        margin-bottom: $spacing-xl * 2;
+        margin-top: 0.25rem; // Reducido para compensar botones subidos
+        margin-bottom: $spacing-xl;
         padding: 0 $spacing-xl;
-        margin-top: 1rem; // Espacio extra para evitar solapamiento
 
         .description {
           color: $brm-white;
@@ -120,11 +126,11 @@
       // Ajustes específicos para desktop
       .selector-container {
         .welcome-message {
-          margin-top: 2rem; // Más espacio en desktop
+          margin-top: 0.5rem; // Mantener margen reducido en desktop
         }
 
         .section-title {
-          margin-top: $spacing-xl; // Más espacio en desktop
+          margin-top: $spacing-md; // Mantener margen reducido en desktop
         }
       }
     }
@@ -148,7 +154,7 @@
 
     &__content {
       padding: 0.75rem;
-      padding-top: 4rem; // Espacio ajustado para móvil
+      padding-top: 0.75rem; // Padding reducido en móvil
 
       .navigation-buttons {
         top: 10px;
@@ -167,12 +173,12 @@
       }
 
       .app-content {
-        margin-top: 0.5rem; // Menos espacio en móvil
+        margin-top: 0.25rem; // Menos espacio en móvil
       }
 
       .selector-container {
         .welcome-message {
-          margin-top: 0.5rem;
+          margin-top: 0.25rem;
           padding: 0 $spacing-md;
 
           .description {
@@ -181,7 +187,7 @@
         }
 
         .section-title {
-          margin-top: $spacing-md; // Menos espacio en móvil
+          margin-top: $spacing-sm; // Menos espacio en móvil
           font-size: 1.3rem;
         }
       }

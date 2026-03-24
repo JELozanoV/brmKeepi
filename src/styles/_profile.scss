@@ -46,13 +46,17 @@
     gap: $spacing-sm; // Reducido gap
     max-width: 100%; // No exceder el contenedor
     width: 100%; // Asegurar que ocupe todo el ancho disponible
+    margin: 0 auto; // Centrar el grid
+    justify-items: center; // Centrar items horizontalmente
 
     // Forzar que todas las celdas del grid tengan la misma altura
     grid-auto-rows: 1fr; // Todas las filas tienen igual altura
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(3, minmax(140px, 1fr)); // Un poco más pequeñas en tablet
-      gap: $spacing-xs; // Gap más pequeño en tablet
+      gap: $spacing-md;
+      max-width: 250px; // Reducido ancho máximo en móvil
+      margin: 0 auto; // Centrar en móvil
     }
 
     @media (max-width: 768px) {
@@ -62,7 +66,7 @@
       margin: 0 auto; // Centrar en móvil
     }
 
-    // Pantallas pequeñas (13 pulgadas y similares)
+    // Pantallas pequeñas (13 pulgadas)
     @media (max-width: 1280px) and (min-width: 1025px) {
       grid-template-columns: repeat(3, minmax(160px, 1fr)); // Tamaño intermedio
       gap: $spacing-sm;
@@ -85,6 +89,7 @@
     max-width: 150px; // Ancho máximo reducido para pantallas pequeñas
     overflow: hidden; // Evitar que el contenido se salga
     box-sizing: border-box; // Incluir padding en dimensiones
+    margin: 0 auto; // Centrar cada tarjeta individualmente
 
     // Colores de fondo según semáforo
     &.kpi-good {

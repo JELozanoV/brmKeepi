@@ -285,9 +285,13 @@ function DashboardApp() {
     return <SolutionCard onApplySolution={() => setSolutionApplied(true)} />
   }
 
+  // Rutas que no deben mostrar botones de navegación
+  const routesWithoutNavigation = ['/facturacion-rr', '/proporcionales', '/tarifas', '/perfil'];
+  const shouldHideNavigation = routesWithoutNavigation.some(route => location.pathname.startsWith(route));
+
   return (
     <>
-      <DashboardLayout onHome={handleHeaderHome} onBack={!isRatesRoute ? handleBack : undefined}>
+      <DashboardLayout onHome={!shouldHideNavigation ? handleHeaderHome : undefined} onBack={!isRatesRoute && !shouldHideNavigation ? handleBack : undefined}>
         <Routes>
           <Route path="/" element={
             <div className="app-content">
