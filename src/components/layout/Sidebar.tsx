@@ -6,12 +6,14 @@ import '../../styles/_sidebar.scss';
 interface SidebarProps {
   isOpen: boolean;
   onToggle: () => void;
+  onCollapseToggle?: (collapsed: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { logout, isLoggingOut } = useAuth();
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
     {
@@ -51,6 +53,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
     }
   ];
 
+  const handleCollapseToggle = () => {
+    const newCollapsedState = !isCollapsed;
+    setIsCollapsed(newCollapsedState);
+    if (onCollapseToggle) {
+      onCollapseToggle(newCollapsedState);
+    }
+  };
+
   const handleNavigation = (path: string) => {
     navigate(path);
     // Cerrar sidebar en móvil después de navegación
@@ -86,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
       )}
       
       {/* Sidebar */}
-      <aside className={`brm-sidebar ${isOpen ? 'brm-sidebar--open' : ''}`}>
+      <aside className={`brm-sidebar ${isOpen ? 'brm-sidebar--open' : ''} ${isCollapsed ? 'brm-sidebar--collapsed' : ''}`}>
         {/* Header del Sidebar */}
         <div className="brm-sidebar__header">
           <div className="brm-sidebar__logo">
@@ -94,11 +104,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle }) => {
             <span className="logo-text">BRM</span>
           </div>
           <button
-            className="sidebar-toggle"
-            onClick={onToggle}
-            aria-label="Cerrar menú"
+            className="sidebar-collapse-toggle"
+            onClick={handleCollapseToggle}
+            aria-label="Contraer sidebar"
           >
-            <span className="toggle-icon">✕</span>
+            <span className="collapse-icon">{isCollapsed ? '☰' : '◀'}</span>
           </button>
         </div>
 

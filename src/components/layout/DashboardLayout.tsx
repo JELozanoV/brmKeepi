@@ -11,6 +11,7 @@ interface DashboardLayoutProps {
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   // Detectar viewport para manejo responsive
   useEffect(() => {
@@ -26,6 +27,10 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  const handleSidebarCollapseToggle = (collapsed: boolean) => {
+    setSidebarCollapsed(collapsed);
+  };
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -39,9 +44,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
   };
 
   return (
-    <div className="brm-dashboard">
+    <div className={`brm-dashboard ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       {/* Sidebar */}
-      <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} />
+      <Sidebar isOpen={sidebarOpen} onToggle={toggleSidebar} onCollapseToggle={handleSidebarCollapseToggle} />
 
       {/* Contenido Principal */}
       <div className="brm-dashboard__main">

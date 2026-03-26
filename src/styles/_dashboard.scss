@@ -12,12 +12,13 @@
     margin-left: 0;
     transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 0; // Evita overflow en flex
+    width: 100%; // Por defecto ocupa todo el ancho
   }
 
   &__content {
     flex: 1;
     padding: 1rem;
-    padding-top: 1.5rem; // Aumentado para dar espacio a botones subidos
+    padding-top: 1rem; // Reducido para compensar botones fixed
     overflow-x: hidden; // Evitar scroll horizontal
     overflow-y: auto;
     background: $brm-text; // Negro suave para fondo principal
@@ -26,18 +27,15 @@
     // Espacio para el header fijo
     margin-top: 56px; // Altura del header
     min-height: calc(100vh - 56px);
-    
-    // Asegurar que los botones estén siempre encima
-    isolation: isolate; // Crear nuevo stacking context
 
     // Contenedor de botones de navegación
     .navigation-buttons {
-      position: absolute;
-      top: -30px; // Subido para evitar superposición con texto
+      position: fixed; // Cambiado a fixed para evitar ser cubierto
+      top: 66px; // Ajustado para estar justo debajo del header
       left: 20px;
       display: flex;
       gap: $spacing-md;
-      z-index: 100; // Aumentado z-index para traer al frente
+      z-index: 1000; // Z-index muy alto para estar siempre encima
 
       .home-button,
       .back-button {
@@ -54,7 +52,8 @@
         font-size: 0.9rem;
         transition: $transition-normal;
         position: relative; // Para asegurar stack context
-        z-index: 101; // z-index individual para los botones
+        z-index: 1001; // Z-index individual aún más alto
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); // Sombra para destacar
 
         .button-icon {
           font-size: 1.1rem;
@@ -106,10 +105,12 @@
       }
 
       .section-title {
-        color: $brm-white;
-        font-size: 1.5rem;
+        margin-top: $spacing-md; // Reducido margen superior
         margin-bottom: $spacing-xl;
-        margin-top: $spacing-lg; // Espacio extra después del texto
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: $brm-white;
+        text-align: center;
       }
     }
   }
@@ -120,10 +121,16 @@
   .brm-dashboard {
     &__main {
       margin-left: 260px; // Ancho del sidebar
+      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &__content {
       // Ajustes específicos para desktop
+      .navigation-buttons {
+        left: 280px; // Ajustado para desktop con sidebar
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
       .selector-container {
         .welcome-message {
           margin-top: 0.5rem; // Mantener margen reducido en desktop
@@ -134,6 +141,17 @@
         }
       }
     }
+
+    // Cuando el sidebar está colapsado
+    &.sidebar-collapsed {
+      &__main {
+        margin-left: 50px; // Ancho ultra-angosto del sidebar colapsado
+      }
+
+      &__content .navigation-buttons {
+        left: 70px; // Ajustado para sidebar ultra-angosto
+      }
+    }
   }
 }
 
@@ -141,6 +159,25 @@
   .brm-dashboard {
     &__main {
       margin-left: 280px; // Ancho del sidebar en desktop grande
+      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &__content {
+      .navigation-buttons {
+        left: 300px; // Ajustado para desktop grande
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    // Cuando el sidebar está colapsado en desktop grande
+    &.sidebar-collapsed {
+      &__main {
+        margin-left: 50px; // Ancho ultra-angosto consistente
+      }
+
+      &__content .navigation-buttons {
+        left: 70px; // Posición consistente
+      }
     }
   }
 }
