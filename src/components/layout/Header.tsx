@@ -9,31 +9,12 @@ interface HeaderProps {
   onMenuToggle?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ showMenuButton, onMenuToggle }) => {
-  // Handler for keyboard accessibility
-  const handleKey = (action: () => void) => (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      action();
-    }
-  };
-
+const Header: React.FC<HeaderProps> = () => {
   return (
     <header className="brm-header" role="banner">
       <div className="brm-header__container">
         <div className="brm-header__left">
-          {/* Botón de menú para móvil */}
-          {showMenuButton && (
-            <button
-              className="menu-button"
-              aria-label="Abrir menú"
-              tabIndex={0}
-              onClick={onMenuToggle}
-              onKeyDown={handleKey(onMenuToggle || (() => {}))}
-            >
-              <span className="button-icon" role="img" aria-label="Menú">☰</span>
-            </button>
-          )}
+          {/* Espacio vacío - botón de menú eliminado */}
         </div>
         <div className="brm-header__center" aria-label="Logo Reten+">
           <BrandLogo variant="header" />
