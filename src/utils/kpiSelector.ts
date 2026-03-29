@@ -151,7 +151,7 @@ export function computeKpiViewModels(
     messages: { warnHint: npsWarnHint, nowText: npsNow, actionText: npsAction },
   };
 
-  const isDev = (typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.DEV) || (typeof process !== 'undefined' && process.env && process.env.NODE_ENV !== 'production');
+  const isDev = (typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.DEV);
   if (typeof window !== 'undefined' && isDev) {
     // eslint-disable-next-line no-console
     console.group('KPI STATUS');

@@ -121,14 +121,15 @@
   .brm-dashboard {
     &__main {
       margin-left: 260px; // Ancho del sidebar
-      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: calc(100% - 260px); // Ancho calculado dinámicamente
     }
 
     &__content {
       // Ajustes específicos para desktop
       .navigation-buttons {
         left: 280px; // Ajustado para desktop con sidebar
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
       .selector-container {
@@ -142,13 +143,14 @@
       }
     }
 
-    // Cuando el sidebar está colapsado
+    // Cuando el sidebar está colapsado - EXPANDIR CONTENIDO
     &.sidebar-collapsed {
-      &__main {
+      .brm-dashboard__main {
         margin-left: 50px; // Ancho ultra-angosto del sidebar colapsado
+        width: calc(100% - 50px); // Expandir para aprovechar el espacio
       }
 
-      &__content .navigation-buttons {
+      .brm-dashboard__content .navigation-buttons {
         left: 70px; // Ajustado para sidebar ultra-angosto
       }
     }
@@ -159,23 +161,25 @@
   .brm-dashboard {
     &__main {
       margin-left: 280px; // Ancho del sidebar en desktop grande
-      transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: calc(100% - 280px); // Ancho calculado dinámicamente
     }
 
     &__content {
       .navigation-buttons {
         left: 300px; // Ajustado para desktop grande
-        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
 
-    // Cuando el sidebar está colapsado en desktop grande
+    // Cuando el sidebar está colapsado en desktop grande - EXPANDIR CONTENIDO
     &.sidebar-collapsed {
-      &__main {
+      .brm-dashboard__main {
         margin-left: 50px; // Ancho ultra-angosto consistente
+        width: calc(100% - 50px); // Expandir para aprovechar el espacio
       }
 
-      &__content .navigation-buttons {
+      .brm-dashboard__content .navigation-buttons {
         left: 70px; // Posición consistente
       }
     }

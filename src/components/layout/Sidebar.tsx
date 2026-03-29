@@ -106,9 +106,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle })
           <button
             className="sidebar-collapse-toggle"
             onClick={handleCollapseToggle}
-            aria-label="Contraer sidebar"
+            aria-label={isCollapsed ? "Expandir sidebar" : "Contraer sidebar"}
           >
-            <span className="collapse-icon">{isCollapsed ? '☰' : '◀'}</span>
+            <span className="collapse-icon">{isCollapsed ? '▶' : '◀'}</span>
           </button>
         </div>
 

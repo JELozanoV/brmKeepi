@@ -27,23 +27,11 @@ interface BackendTarifa {
   name: string;
   price: number;
   codigoTarifa: string[];
-  // Los siguientes campos pueden no existir en la respuesta real
-  // description?: string;
-  // currency?: string;
-  // period?: string;
-  // isActive?: boolean;
-}
-
-interface BackendTarifa {
-  id: number;
-  name: string;
-  price: number;
-  codigoTarifa: string[];
-  // Los siguientes campos pueden no existir en la respuesta real
-  // description?: string;
-  // currency?: string;
-  // period?: string;
-  // isActive?: boolean;
+  tipoServicio?: string;
+  tipoTech?: string;
+  complementos?: string | string[];
+  estrato?: string | string[];
+  ptar?: string;
 }
 
 // Props para permitir reutilización en hogar, móvil, etc.
@@ -69,7 +57,7 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
       .then((data: BackendTarifa[]) => {
         setRates(data);
         // Obtener todas las opciones distintas de tipo de servicio
-        const tipos = Array.from(new Set(data.map(r => r.tipoServicio).filter(Boolean)));
+        const tipos = Array.from(new Set(data.map(r => r.tipoServicio).filter(Boolean))) as string[];
         setServiceTypeOptions(tipos);
         setLoading(false);
       })

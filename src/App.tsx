@@ -194,15 +194,15 @@ function DashboardApp() {
       return <CustomerServiceTypeSelector onSelect={setCustomerServiceType} />
     }
 
-    if (cancellationReason === 'competencia' && !competitorType) {
-      return <CompetitorSolution onSelect={setCompetitorType} />
+    if (cancellationReason === 'competencia' && competitorType) {
+      return <CompetitorSolution competitor={competitorType} onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'activacion-demora') {
       if (!activationDelayType) {
         return <ActivationDelaySelector onSelect={setActivationDelayType} />
       }
-      return <HogarActivacionDemoradaSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarActivacionDemoradaSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (cancellationReason === 'fallas' && serviceType === 'hogar' && homeFailureType === 'cliente-reincidente' && !reincidentClientType) {
@@ -211,78 +211,102 @@ function DashboardApp() {
 
     // Render solutions based on selections
     if (serviceType === 'movil' && cancellationReason === 'costo' && costReason === 'claro-pay') {
-      return <ClaroPaySolution onApplySolution={() => setSolutionApplied(true)} />
+      return <ClaroPaySolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'costo') {
-      return <HogarCostosSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarCostosSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'competencia') {
-      return <HogarMejorOfertaSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarMejorOfertaSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'internet-lento') {
-      return <HogarInternetLentoSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarInternetLentoSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'fallas-intermitentes') {
-      return <HogarFallasIntermitentesSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarFallasIntermitentesSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'cortes-frecuentes') {
-      return <HogarCortesFrecuentesSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarCortesFrecuentesSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'fallas-navegador') {
-      return <HogarFallasNavegadorSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarFallasNavegadorSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'wifi-inestable') {
-      return <HogarWifiInestableSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarWifiInestableSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'viaje' && travelType === 'trabajo') {
-      return <HogarViajeTrabajoSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarViajeTrabajoSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'viaje' && travelType === 'vacaciones') {
-      return <HogarViajeVacacionesSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarViajeVacacionesSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'viaje' && travelType === 'mudanza') {
-      return <HogarViajeMudanzaSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarViajeMudanzaSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'asesor-inapropiado') {
-      return <HogarServicioClienteAsesorInapropiadoSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarServicioClienteAsesorInapropiadoSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
     
     if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'llamada-colgada') {
-      return <HogarColgaronSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarColgaronSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'largas-esperas') {
-      return <HogarServicioClienteLargasEsperasSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarServicioClienteLargasEsperasSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'sin-solucion') {
-      return <HogarServicioClienteSinSolucionPreviaSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarServicioClienteSinSolucionPreviaSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'servicio-cliente' && customerServiceType === 'promesas-incumplidas') {
-      return <HogarServicioClientePromesasIncumplidasSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <HogarServicioClientePromesasIncumplidasSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (serviceType === 'hogar' && cancellationReason === 'fallas' && homeFailureType === 'cliente-reincidente') {
-      return <ReincidentClientSolution onApplySolution={() => setSolutionApplied(true)} />
+      return <ReincidentClientSolution onSolutionApplied={() => setSolutionApplied(true)} />
     }
 
     if (solutionApplied) {
-      return <SummaryScreen onReset={handleReset} />
+      return <SummaryScreen 
+        serviceType={serviceType}
+        planType={planType}
+        reason={cancellationReason}
+        costReason={costReason}
+        failureType={failureType}
+        travelType={travelType}
+        customerServiceType={customerServiceType}
+        competitorType={competitorType}
+        homeFailureType={homeFailureType}
+        activationDelayType={activationDelayType}
+        onReset={handleReset} 
+      />
     }
 
-    return <SolutionCard onApplySolution={() => setSolutionApplied(true)} />
+    return <SolutionCard 
+      serviceType={serviceType}
+      planType={planType}
+      reason={cancellationReason}
+      costReason={costReason}
+      failureType={failureType}
+      homeFailureType={homeFailureType}
+      travelType={travelType}
+      customerServiceType={customerServiceType}
+      competitorType={competitorType}
+      activationDelayType={activationDelayType}
+      onSolutionApplied={() => setSolutionApplied(true)} 
+    />
   }
 
   // Rutas que no deben mostrar botones de navegación

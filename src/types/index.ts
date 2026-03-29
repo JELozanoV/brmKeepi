@@ -29,6 +29,7 @@ export type CostReason =
   | 'falta-trabajo'
   | 'plan-alto'
   | 'mejor-oferta'
+  | 'claro-pay'
   | null;
 
 export type CancellationReason = 
@@ -61,6 +62,7 @@ export type HomeFailureType =
   | 'wifi-inestable'
   | 'fallas-navegador'
   | 'activacion-demora'
+  | 'cliente-reincidente'
   | null;
 
 export type ActivationDelayType = 

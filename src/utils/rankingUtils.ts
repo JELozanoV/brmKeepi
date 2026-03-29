@@ -10,23 +10,13 @@ function formatSec(sec?: number): string {
 }
 function round1(n: number): number { return Math.round(n * 10) / 10; }
 
-function normalize(arr: number[], higherIsBetter: boolean): number[] {
-  const vals = arr.filter(v => typeof v === 'number') as number[];
-  const min = Math.min(...vals);
-  const max = Math.max(...vals);
-  if (!isFinite(min) || !isFinite(max) || max - min === 0) return arr.map(() => 0.5);
-  return arr.map(v => {
-    if (v == null) return 0.5;
-    return higherIsBetter ? (v - min) / (max - min) : (max - v) / (max - min);
-  });
-}
-
 function buildRows(metric: MetricKey, list: Participant[], meId: string): RankingRowVM[] {
-  return list.map(p => ({
+  return list.map((p, index) => ({
     id: p.id,
     name: p.name,
     valueLabel: metric === 'tmo' ? formatSec(p.tmoSec) : `${round1(metric === 'transfers' ? (p.transfersPct ?? 0) : (p.npsPct ?? 0))}%`,
     isMe: p.id === meId,
+    position: index + 1,
   }));
 }
 
@@ -78,7 +68,6 @@ export function buildRankingVM(metric: MetricKey, dataset: { participants: Parti
         const hasTmo = typeof p.tmoSec === 'number' && p.tmoSec! > 0;
         const hasTr = typeof p.transfersPct === 'number' && p.transfersPct! >= 0;
         const hasNps = typeof p.npsPct === 'number' && p.npsPct! >= 0;
-        const present = [hasTmo, hasTr, hasNps];
         const sumW = (hasTmo?weightsBase.tmo:0) + (hasTr?weightsBase.tr:0) + (hasNps?weightsBase.nps:0) || 1;
         const wTmo = (hasTmo?weightsBase.tmo:0) / sumW;
         const wTr = (hasTr?weightsBase.tr:0) / sumW;
@@ -185,7 +174,7 @@ export function buildRankingVM(metric: MetricKey, dataset: { participants: Parti
     const meIdx = list.findIndex(p => p.id === dataset.currentUserId);
     const meP = list[meIdx];
     if (meP) {
-      const combinedLabel = baseMetric === 'combined' ? `Índice ${round1(((meP as any).__combined ?? 0)*100)/100}` : undefined;
+      const combinedLabel = metric === 'combined' ? `Índice ${round1(((meP as any).__combined ?? 0)*100)/100}` : undefined;
       meRow = {
         id: meP.id,
         name: meP.name,
@@ -213,7 +202,7 @@ export function buildRankingVM(metric: MetricKey, dataset: { participants: Parti
       isMe: p.id === dataset.currentUserId,
       ariaLabel: `Puesto ${idx+1} de ${total} en ${metric.toUpperCase()}`,
     };
-    if (baseMetric === 'combined') {
+    if (metric === 'combined') {
       row.secondary = `TMO ${formatSec(p.tmoSec ?? 0)} · Trans ${round1(p.transfersPct ?? 0)}% · NPS ${round1(p.npsPct ?? 0)}%`;
     }
     return row as RankingRowVM;
