@@ -4,8 +4,8 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: $brm-primary;
-  box-shadow: 0 2px 8px rgba(26, 77, 255, 0.05);
+  background: linear-gradient(90deg, $brm-secondary 0%, $brm-primary 100%);
+  box-shadow: 0 2px 8px rgba(2, 21, 38, 0.2);
   width: 100%;
   padding: 0;
 
@@ -53,15 +53,17 @@
     gap: 0.5rem;
     cursor: pointer;
     border-radius: 12px;
-    border: none;
-    background: $brm-primary;
-    color: $brm-white;
-    box-shadow: 0 2px 8px rgba(26, 77, 255, 0.07);
-    transition: background 0.2s;
+    border: 1px solid rgba(110, 172, 218, 0.3);
+    background: rgba(110, 172, 218, 0.1);
+    color: $brm-light;
+    box-shadow: 0 2px 8px rgba(2, 21, 38, 0.15);
+    transition: all 0.2s;
     padding: 0 1.2rem;
     outline: none;
     &:hover, &:focus {
-      background: $brm-secondary;
+      background: rgba(110, 172, 218, 0.25);
+      border-color: $brm-accent;
+      box-shadow: 0 4px 12px rgba(110, 172, 218, 0.3);
     }
   }
 
@@ -76,9 +78,9 @@
     gap: 0.5rem;
     
     .user-greeting {
-      color: $brm-white;
+      color: $brm-light;
       font-size: 0.9rem;
-      opacity: 0.9;
+      opacity: 0.95;
     }
   }
 
@@ -89,7 +91,8 @@
     background: $brm-white;
     color: $brm-text;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(34,34,34,0.07);
+    border: 1px solid rgba(110, 172, 218, 0.2);
+    box-shadow: 0 4px 16px rgba(2, 21, 38, 0.15);
     display: flex;
     flex-direction: column;
     min-width: 140px;
@@ -103,8 +106,9 @@
       font-size: 1rem;
       color: $brm-text;
       cursor: pointer;
+      transition: background 0.2s;
       &:hover {
-        background: $brm-light;
+        background: rgba(110, 172, 218, 0.1);
       }
     }
   }

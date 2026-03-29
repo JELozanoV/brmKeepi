@@ -6,8 +6,8 @@
   left: 0;
   width: 280px;
   height: 100vh;
-  background: $brm-primary;
-  border-right: 1px solid rgba(26, 77, 255, 0.2);
+  background: linear-gradient(180deg, $brm-secondary 0%, $brm-primary 100%);
+  border-right: 1px solid rgba(110, 172, 218, 0.2);
   z-index: 1200;
   display: flex;
   flex-direction: column;
@@ -148,7 +148,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.5rem 1rem;
-    border-bottom: 1px solid rgba(26, 77, 255, 0.1);
+    border-bottom: 1px solid rgba(110, 172, 218, 0.15);
     min-height: 70px;
   }
 
@@ -160,13 +160,13 @@
 
     .logo-icon {
       font-size: 1.5rem;
-      filter: drop-shadow(0 2px 4px rgba(26, 77, 255, 0.3));
+      filter: drop-shadow(0 2px 4px rgba(110, 172, 218, 0.4));
     }
 
     .logo-text {
       font-size: 1.25rem;
       font-weight: 700;
-      color: $brm-white;
+      color: $brm-light;
       letter-spacing: 0.5px;
       transition: opacity 0.3s ease, visibility 0.3s ease;
     }
@@ -201,21 +201,21 @@
     padding: 1rem 1.5rem;
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(226, 226, 182, 0.7);
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: left;
     position: relative;
 
     &:hover {
-      background: rgba(26, 77, 255, 0.1);
-      color: $brm-white;
+      background: rgba(110, 172, 218, 0.15);
+      color: $brm-light;
     }
 
     &--active {
-      background: rgba(26, 77, 255, 0.2);
-      color: $brm-white;
-      border-left: 3px solid $brm-secondary;
+      background: rgba(110, 172, 218, 0.25);
+      color: $brm-light;
+      border-left: 3px solid $brm-accent;
 
       &::before {
         content: '';
@@ -224,12 +224,12 @@
         top: 0;
         bottom: 0;
         width: 3px;
-        background: $brm-secondary;
+        background: $brm-accent;
       }
     }
 
     &:focus-visible {
-      outline: 2px solid $brm-secondary;
+      outline: 2px solid $brm-accent;
       outline-offset: -2px;
     }
   }
@@ -264,7 +264,7 @@
   // Footer
   &__footer {
     padding: 1rem;
-    border-top: 1px solid rgba(26, 77, 255, 0.1);
+    border-top: 1px solid rgba(110, 172, 218, 0.15);
   }
 
   .logout-button {
@@ -273,17 +273,17 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.875rem 1rem;
-    background: rgba(220, 53, 69, 0.1);
-    border: 1px solid rgba(220, 53, 69, 0.3);
+    background: rgba(220, 53, 69, 0.15);
+    border: 1px solid rgba(220, 53, 69, 0.4);
     border-radius: 8px;
-    color: #dc3545;
+    color: #ff6b7a;
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 0.9rem;
 
     &:hover:not(:disabled) {
-      background: rgba(220, 53, 69, 0.2);
-      border-color: rgba(220, 53, 69, 0.5);
+      background: rgba(220, 53, 69, 0.25);
+      border-color: rgba(220, 53, 69, 0.6);
     }
 
     &:disabled {

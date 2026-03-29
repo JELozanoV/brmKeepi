@@ -4,10 +4,14 @@
   width: 100%;
   max-width: 100%; // Ocupar todo el ancho disponible
   margin: 0 auto;
-  padding: $spacing-sm; // Padding reducido
-  color: $brm-white;
+  padding: $spacing-lg;
+  background: rgba(2, 21, 38, 0.95); // Fondo oscuro Navy profesional
+  color: $brm-light;
   overflow-x: hidden; // Evitar scroll horizontal en toda la página
   box-sizing: border-box; // Asegurar que el padding no afecte el ancho total
+  border-radius: $border-radius-lg; // Esquinas redondeadas como profile-card
+  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3); // Sombra como profile-card
+  border: 1px solid rgba(110, 172, 218, 0.2); // Borde como profile-card
 
   .profile-page__header {
     display: flex;
@@ -16,7 +20,7 @@
     margin-bottom: $spacing-lg;
 
     .profile-title {
-      color: $brm-white;
+      color: $brm-light;
       margin: 0;
     }
 
@@ -25,16 +29,22 @@
       gap: $spacing-sm;
 
       .range-btn {
-        background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
-        color: $brm-white;
-        border: none;
+        background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+        color: $brm-light;
+        border: 1px solid $brm-accent;
         border-radius: $border-radius-md;
         padding: $spacing-sm $spacing-md;
         cursor: pointer;
         transition: $transition-normal;
+        box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
+
+        &:hover {
+          background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
+          box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+        }
 
         &.active {
-          outline: 2px solid $brm-white;
+          outline: 2px solid $brm-accent;
         }
       }
     }
@@ -74,12 +84,12 @@
   }
 
   .kpi-card {
-    background: $brm-light; // Fondo por defecto
-    color: $brm-text; // Texto
+    background: rgba(2, 21, 38, 0.95); // Fondo oscuro Navy
+    color: $brm-light; // Texto Beige
     border-radius: $border-radius-lg;
     padding: $spacing-sm; // Padding más reducido
-    box-shadow: $box-shadow;
-    border: 2px solid transparent;
+    box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
+    border: 2px solid rgba(110, 172, 218, 0.2);
     aspect-ratio: 1/1; // Forzar relación cuadrada perfecta (1:1)
     display: flex;
     flex-direction: column;
@@ -91,32 +101,32 @@
     box-sizing: border-box; // Incluir padding en dimensiones
     margin: 0 auto; // Centrar cada tarjeta individualmente
 
-    // Colores de fondo según semáforo
+    // Colores de fondo según semáforo - MANTENER LÓGICA SEMÁFORO
     &.kpi-good {
       border-color: #22c55e;
-      background: rgba(#22c55e, 0.12);
-      color: $brm-white;
-      .kpi-card__label, .kpi-card__value { color: $brm-white; }
-      .kpi-card__hint { color: rgba($brm-white, 0.85); }
+      background: linear-gradient(135deg, rgba(#22c55e, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+      color: $brm-light;
+      .kpi-card__label, .kpi-card__value { color: $brm-light; }
+      .kpi-card__hint { color: rgba($brm-light, 0.85); }
     }
     &.kpi-warn {
       border-color: #f59e0b;
-      background: rgba(#f59e0b, 0.12);
-      color: $brm-white;
-      .kpi-card__label, .kpi-card__value { color: $brm-white; }
-      .kpi-card__hint { color: rgba($brm-white, 0.85); }
+      background: linear-gradient(135deg, rgba(#f59e0b, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+      color: $brm-light;
+      .kpi-card__label, .kpi-card__value { color: $brm-light; }
+      .kpi-card__hint { color: rgba($brm-light, 0.85); }
     }
     &.kpi-bad  {
       border-color: #ef4444;
-      background: rgba(#ef4444, 0.12);
-      color: $brm-white;
-      .kpi-card__label, .kpi-card__value { color: $brm-white; }
-      .kpi-card__hint { color: rgba($brm-white, 0.85); }
+      background: linear-gradient(135deg, rgba(#ef4444, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+      color: $brm-light;
+      .kpi-card__label, .kpi-card__value { color: $brm-light; }
+      .kpi-card__hint { color: rgba($brm-light, 0.85); }
     }
 
     .kpi-card__label {
       font-weight: 600;
-      color: $brm-secondary; // Títulos / acentos
+      color: $brm-light; // Texto Beige
       margin-bottom: 4px; // Margen muy reducido
       font-size: 0.75rem; // Fuente más pequeña
       text-align: center; // Centrar para mejor uso del espacio
@@ -129,7 +139,7 @@
       font-size: 1.2rem; // Reducida significativamente
       font-weight: 700;
       margin-bottom: 4px;
-      color: $brm-text;
+      color: $brm-light; // Texto Beige
       line-height: 1.1; // Menos espaciado
       flex: 1; // Ocupar espacio disponible
       display: flex;
@@ -141,7 +151,7 @@
 
     .kpi-card__hint {
       font-size: 0.65rem; // Fuente mucho más pequeña
-      color: $text-secondary;
+      color: rgba($brm-light, 0.8); // Beige con transparencia
       line-height: 1.1; // Mínimo espaciado
       margin-top: auto; // Empujar hacia abajo
       text-align: center; // Centrar para mejor uso del espacio
@@ -196,7 +206,7 @@
     font-size: 0.6rem; // Fuente más pequeña
     margin-bottom: 4px; // Margen reducido
     color: $brm-white;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.0; // Sin espaciado extra
     text-align: center;
     white-space: normal; // Permitir saltos de línea
@@ -205,14 +215,16 @@
     max-width: 100%; // No exceder el contenedor
     box-sizing: border-box; // Incluir padding en el ancho
   }
+  // MANTENER COLORES SEMÁFORO
   .kpi-chip-good { background: #22c55e; }
   .kpi-chip-warn { background: #f59e0b; }
   .kpi-chip-bad  { background: #ef4444; }
 
   .kpi-loading,
   .kpi-error {
-    background: $brm-light;
-    color: $brm-text;
+    background: rgba(2, 21, 38, 0.95);
+    color: $brm-light;
+    border: 1px solid rgba(110, 172, 218, 0.2);
     border-radius: $border-radius-md;
     padding: $spacing-md;
     margin-bottom: $spacing-md;
@@ -254,12 +266,12 @@
 
 // Tarjeta de perfil (estilo alineado con kpi-card)
 .profile-card {
-  background: $brm-light;
-  color: $brm-text;
+  background: rgba(2, 21, 38, 0.95);
+  color: $brm-light;
   border-radius: $border-radius-lg;
   padding: $spacing-lg;
-  box-shadow: $box-shadow;
-  border: 2px solid transparent;
+  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
+  border: 1px solid rgba(110, 172, 218, 0.2);
 
   .profile-card__header {
     display: flex;
@@ -272,14 +284,15 @@
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
-    color: $brm-white;
+    background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+    color: $brm-light;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     font-size: 1.5rem;
-    box-shadow: $box-shadow;
+    box-shadow: 0 4px 12px rgba(110, 172, 218, 0.3);
+    border: 2px solid $brm-accent;
     flex-shrink: 0;
   }
 
@@ -291,12 +304,12 @@
     .profile-name {
       font-size: 1.2rem;
       font-weight: 700;
-      color: $brm-text;
+      color: $brm-light;
     }
 
     .profile-role {
       font-size: 0.9rem;
-      color: $text-secondary;
+      color: rgba($brm-light, 0.75);
     }
   }
 
@@ -309,19 +322,20 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba($brm-white, 0.05);
+      background: rgba(3, 52, 110, 0.3);
+      border: 1px solid rgba(110, 172, 218, 0.2);
       border-radius: $border-radius-md;
       padding: $spacing-sm $spacing-md;
 
       .label {
-        color: $brm-text;
+        color: $brm-light;
         font-weight: 600;
         padding-right: $spacing-md;
         min-width: 120px;
       }
 
       .value {
-        color: $brm-text;
+        color: rgba($brm-light, 0.9);
         text-transform: none;
       }
     }

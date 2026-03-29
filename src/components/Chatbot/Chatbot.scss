@@ -1,9 +1,10 @@
-// Variables basadas en la paleta de colores
-$azul-principal: #1A4DFF;
-$azul-claro: #007BFF;
-$gris-claro: #F2F2F2;
+// Variables basadas en la paleta de colores Navy Blue/Beige
+$azul-principal: #03346E;      // Navy Blue
+$azul-claro: #6EACDA;          // Sky Blue
+$gris-claro: #eef1f9;          // Gris claro neutro
 $blanco: #FFFFFF;
-$negro-suave: #222222;
+$negro-suave: #021526;         // Black Navy
+$beige: #E2E2B6;               // Beige
 
 .chatbot-container {
   position: fixed;
@@ -17,8 +18,8 @@ $negro-suave: #222222;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: $azul-principal;
-  color: $blanco;
+  background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
+  color: $beige;
   border: none;
   cursor: pointer;
   display: flex;
@@ -40,20 +41,20 @@ $negro-suave: #222222;
     right: 0;
     bottom: 0;
     border-radius: 50%;
-    background-color: $azul-principal;
-    transition: background-color 0.3s ease;
+    background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
+    transition: background 0.3s ease;
     z-index: 0;
   }
   
   /* Estilo para el estado hover */
   &:hover::after {
-    background-color: darken($azul-principal, 10%);
+    background: linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%);
   }
   
   /* Estilo para el estado focus */
   &:focus::after {
-    background-color: darken($azul-principal, 10%);
-    box-shadow: 0 0 0 3px rgba($azul-principal, 0.3);
+    background: linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%);
+    box-shadow: 0 0 0 3px rgba($azul-claro, 0.3);
   }
   
   /* Contenedor del ícono que se posiciona sobre el fondo */
@@ -99,8 +100,8 @@ $negro-suave: #222222;
 }
 
 .chatbot-header {
-  background-color: $azul-principal;
-  color: $blanco;
+  background: linear-gradient(90deg, $azul-principal 0%, $negro-suave 100%);
+  color: $beige;
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -221,16 +222,16 @@ $negro-suave: #222222;
 
 .bot-message {
   align-self: flex-start;
-  background-color: $azul-principal;
-  color: $blanco;
+  background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
+  color: $beige;
   border-bottom-left-radius: 4px;
-  box-shadow: 0 2px 8px #1A4DFF22;
+  box-shadow: 0 2px 8px rgba($azul-claro, 0.2);
   .message-content {
-    background: $azul-principal;
-    color: $blanco;
+    background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
+    color: $beige;
     
     h1, h2, h3, h4 {
-      color: $blanco;
+      color: $beige;
     }
     a {
       color: $azul-claro;
@@ -298,8 +299,8 @@ $negro-suave: #222222;
   }
   
   button {
-    background-color: $azul-principal;
-    color: $blanco;
+    background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
+    color: $beige;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -312,7 +313,7 @@ $negro-suave: #222222;
     transition: background-color 0.3s;
     
     &:hover:not(:disabled) {
-      background-color: darken($azul-principal, 10%);
+      background: linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%);
     }
     
     &:disabled {

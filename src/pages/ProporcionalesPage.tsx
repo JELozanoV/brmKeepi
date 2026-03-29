@@ -130,27 +130,27 @@ const ProporcionalesPage: React.FC = () => {
 
   return (
     <div className="app-content">
-      <div className="filtered-rates-section" style={{ background: '#222', color: 'rgba(255,255,255,0.96)', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid #1A4DFF', boxShadow: '0 1px 8px rgba(26,77,255,0.08)' }}>
-        <h2 style={{color: 'rgba(255,255,255,0.98)', fontWeight: 700, marginBottom: 6, fontSize: 22, letterSpacing: 0.3}}>Calculadora de Proporcionales</h2>
-        <p style={{ color: 'rgba(255,255,255,0.75)', marginTop: 0, marginBottom: 14, fontSize: 14 }}>Simula cobros por cambio de ciclo o cambio de plan inmediato.</p>
+      <div className="filtered-rates-section" style={{ background: 'rgba(2, 21, 38, 0.95)', color: '#E2E2B6', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid #6EACDA', boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)' }}>
+        <h2 style={{color: '#E2E2B6', fontWeight: 700, marginBottom: 6, fontSize: 22, letterSpacing: 0.3}}>Calculadora de Proporcionales</h2>
+        <p style={{ color: 'rgba(226, 226, 182, 0.8)', marginTop: 0, marginBottom: 14, fontSize: 14 }}>Simula cobros por cambio de ciclo o cambio de plan inmediato.</p>
 
         {/* Paso 0: Tipo de servicio */}
         <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10 }} role="tablist" aria-label="Tipo de servicio">
           <button type="button" role="tab" aria-selected={service === 'hogar'}
-            style={{ background: service === 'hogar' ? '#1A4DFF' : 'rgba(255,255,255,0.08)', color: service === 'hogar' ? '#fff' : '#8db0ff', border: '2px solid #1A4DFF', borderRadius: 8, padding: '6px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none' }}
+            style={{ background: service === 'hogar' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: service === 'hogar' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '6px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none' }}
             onClick={() => setService('hogar')}>Hogar</button>
           <button type="button" role="tab" aria-selected={service === 'movil'}
-            style={{ background: service === 'movil' ? '#1A4DFF' : 'rgba(255,255,255,0.08)', color: service === 'movil' ? '#fff' : '#8db0ff', border: '2px solid #1A4DFF', borderRadius: 8, padding: '6px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none' }}
+            style={{ background: service === 'movil' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: service === 'movil' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '6px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none' }}
             onClick={() => setService('movil')}>Móvil</button>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 16 }}>
           <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }} role="tablist" aria-label="Tipo de cálculo">
             <button type="button" role="tab" aria-selected={tab === 'ciclo'}
-              style={{ background: tab === 'ciclo' ? '#1A4DFF' : 'rgba(255,255,255,0.08)', color: tab === 'ciclo' ? '#fff' : '#8db0ff', border: '2px solid #1A4DFF', borderRadius: 8, padding: '8px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', outline: 'none', boxShadow: tab === 'ciclo' ? '0 2px 8px #1A4DFF33' : 'none', transition: 'all .2s' }}
+              style={{ background: tab === 'ciclo' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: tab === 'ciclo' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '8px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', outline: 'none', boxShadow: tab === 'ciclo' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none', transition: 'all .2s' }}
               onClick={() => setTab('ciclo')}>Cambio de ciclo</button>
             <button type="button" role="tab" aria-selected={tab === 'inmediato'}
-              style={{ background: tab === 'inmediato' ? '#1A4DFF' : 'rgba(255,255,255,0.08)', color: tab === 'inmediato' ? '#fff' : '#8db0ff', border: '2px solid #1A4DFF', borderRadius: 8, padding: '8px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', outline: 'none', boxShadow: tab === 'inmediato' ? '0 2px 8px #1A4DFF33' : 'none', transition: 'all .2s' }}
+              style={{ background: tab === 'inmediato' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: tab === 'inmediato' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '8px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', outline: 'none', boxShadow: tab === 'inmediato' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none', transition: 'all .2s' }}
               onClick={() => setTab('inmediato')}>Cambio de plan inmediato</button>
           </div>
           <div />
@@ -158,31 +158,31 @@ const ProporcionalesPage: React.FC = () => {
 
         {tab === 'ciclo' && service === 'hogar' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(200px, 1fr))', gap: 12 }}>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Valor mensual (COP)
-              <input aria-label="Valor mensual (COP)" placeholder="Ej: 90.000" value={valorPlan} onChange={e => { const cleaned = cleanPrice(e.target.value); setValorPlan(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Valor mensual (COP)" placeholder="Ej: 90.000" value={valorPlan} onChange={e => { const cleaned = cleanPrice(e.target.value); setValorPlan(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Día de facturación actual
-              <input aria-label="Día de facturación actual" placeholder="Ej: 1" value={diaActual} onChange={e => setDiaActual(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Día de facturación actual" placeholder="Ej: 1" value={diaActual} onChange={e => setDiaActual(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Nuevo día de facturación
-              <input aria-label="Nuevo día de facturación" placeholder="Ej: 17" value={nuevoDia} onChange={e => setNuevoDia(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Nuevo día de facturación" placeholder="Ej: 17" value={nuevoDia} onChange={e => setNuevoDia(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
           </div>
         )}
 
         {tab === 'ciclo' && service === 'movil' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(220px, 1fr))', gap: 12 }}>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Valor mensual (COP)
-              <input aria-label="Valor mensual (COP)" placeholder="Ej: 90.000" value={valorPlan} onChange={e => { const cleaned = cleanPrice(e.target.value); setValorPlan(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 180, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Valor mensual (COP)" placeholder="Ej: 90.000" value={valorPlan} onChange={e => { const cleaned = cleanPrice(e.target.value); setValorPlan(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 180, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
             <div />
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Región
-              <select aria-label={`Región seleccionada: ${region || 'ninguna'}`} value={region} onChange={e => { setRegion(e.target.value); setDiaActual(''); setNuevoDia(''); }} disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 220, fontSize: 15, color: 'rgba(255,255,255,0.95)', background: '#111' }}>
+              <select aria-label={`Región seleccionada: ${region || 'ninguna'}`} value={region} onChange={e => { setRegion(e.target.value); setDiaActual(''); setNuevoDia(''); }} disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 220, fontSize: 15, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }}>
                 <option value="">Selecciona región…</option>
                 {['Oriente','Occidente','Costa'].map(r => (
                   <option key={r} value={r}>{r}</option>
@@ -190,33 +190,33 @@ const ProporcionalesPage: React.FC = () => {
               </select>
             </label>
             <div />
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Día de ciclo actual
               <select aria-label="Día de ciclo actual"
                 value={diaActual}
                 onChange={e => setDiaActual(e.target.value)}
                 disabled={submitting || !region}
-                style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 15, color: 'rgba(255,255,255,0.95)', background: '#111' }}>
+                style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 15, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }}>
                 <option value="">—</option>
                 {region && MOBILE_REGION_DAYS[region]?.map(d => (
                   <option key={d} value={d}>{d}</option>
                 ))}
               </select>
-              <div className="kpi-subtle" style={{ marginTop: 6, color: 'rgba(255,255,255,0.7)' }}>Selecciona un día válido según la política de la región.</div>
+              <div className="kpi-subtle" style={{ marginTop: 6, color: 'rgba(226, 226, 182, 0.75)' }}>Selecciona un día válido según la política de la región.</div>
             </label>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Nuevo día de ciclo
               <select aria-label="Nuevo día de ciclo"
                 value={nuevoDia}
                 onChange={e => setNuevoDia(e.target.value)}
                 disabled={submitting || !region}
-                style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 15, color: 'rgba(255,255,255,0.95)', background: '#111' }}>
+                style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 15, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }}>
                 <option value="">—</option>
                 {region && MOBILE_REGION_DAYS[region]?.map(d => (
                   <option key={d} value={d}>{d}</option>
                 ))}
               </select>
-              <div className="kpi-subtle" style={{ marginTop: 6, color: 'rgba(255,255,255,0.7)' }}>Selecciona un día válido según la política de la región.</div>
+              <div className="kpi-subtle" style={{ marginTop: 6, color: 'rgba(226, 226, 182, 0.75)' }}>Selecciona un día válido según la política de la región.</div>
             </label>
             {/* Validación implícita por opciones filtradas; sin alertas rojas */}
           </div>
@@ -224,21 +224,21 @@ const ProporcionalesPage: React.FC = () => {
 
         {tab === 'inmediato' && (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(200px, 1fr))', gap: 12 }}>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Valor plan actual (COP)
-              <input aria-label="Valor plan actual (COP)" placeholder="Ej: 38.900" value={planActual} onChange={e => { const cleaned = cleanPrice(e.target.value); setPlanActual(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Valor plan actual (COP)" placeholder="Ej: 38.900" value={planActual} onChange={e => { const cleaned = cleanPrice(e.target.value); setPlanActual(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Valor plan nuevo (COP)
-              <input aria-label="Valor plan nuevo (COP)" placeholder="Ej: 54.900" value={planNuevo} onChange={e => { const cleaned = cleanPrice(e.target.value); setPlanNuevo(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Valor plan nuevo (COP)" placeholder="Ej: 54.900" value={planNuevo} onChange={e => { const cleaned = cleanPrice(e.target.value); setPlanNuevo(cleaned ? formatNumber(Number(cleaned)) : ''); }} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Día de corte
-              <input aria-label="Día de corte" placeholder="Ej: 1" value={diaCorte} onChange={e => setDiaCorte(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Día de corte" placeholder="Ej: 1" value={diaCorte} onChange={e => setDiaCorte(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
-            <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+            <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
               Día del cambio
-              <input aria-label="Día del cambio" placeholder="Ej: 21" value={diaCambio} onChange={e => setDiaCambio(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #1A4DFF', width: 160, fontSize: 16, color: 'rgba(255,255,255,0.95)', background: '#111' }} />
+              <input aria-label="Día del cambio" placeholder="Ej: 21" value={diaCambio} onChange={e => setDiaCambio(e.target.value)} inputMode="numeric" disabled={submitting} style={{ marginLeft: 12, padding: 8, borderRadius: 8, border: '1.5px solid #6EACDA', width: 160, fontSize: 16, color: '#E2E2B6', background: 'rgba(3, 52, 110, 0.3)' }} />
             </label>
           </div>
         )}
@@ -246,15 +246,15 @@ const ProporcionalesPage: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 16, flexWrap: 'wrap' }}>
           <button
             style={{
-              background: canCalculate ? '#1A4DFF' : 'rgba(255,255,255,0.2)',
-              color: '#fff',
-              border: '1px solid #1A4DFF',
+              background: canCalculate ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
+              color: '#E2E2B6',
+              border: '1px solid #6EACDA',
               borderRadius: 8,
               padding: '10px 28px',
               fontWeight: 700,
               fontSize: 16,
               cursor: canCalculate ? 'pointer' : 'not-allowed',
-              boxShadow: canCalculate ? '0 2px 8px #1A4DFF33' : 'none',
+              boxShadow: canCalculate ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
               letterSpacing: 0.3
             }}
             onClick={handleCalcular}
@@ -266,8 +266,8 @@ const ProporcionalesPage: React.FC = () => {
 
         {/* Resultados */}
         <div role="region" aria-live="polite" style={{ marginTop: 16 }}>
-          <div className="rate-card" style={{ background: '#111', border: '1.5px solid #1A4DFF', borderRadius: 12, padding: 16, color: 'white' }}>
-            <h3 style={{ marginTop: 0, marginBottom: 8, color: 'white' }}>
+          <div className="rate-card" style={{ background: 'rgba(3, 52, 110, 0.2)', border: '1.5px solid #6EACDA', borderRadius: 12, padding: 16, color: '#E2E2B6' }}>
+            <h3 style={{ marginTop: 0, marginBottom: 8, color: '#E2E2B6' }}>
               {tab === 'ciclo' ? 'Resultado — Cambio de ciclo' : 'Resultado — Cambio inmediato'}
             </h3>
             {errorMsg && (
@@ -277,7 +277,7 @@ const ProporcionalesPage: React.FC = () => {
             )}
 
             {!errorMsg && !resCiclo && !resInmediato && (
-              <div className="kpi-subtle" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              <div className="kpi-subtle" style={{ color: 'rgba(226, 226, 182, 0.8)' }}>
                 Calcula para ver el resultado aquí.
               </div>
             )}
@@ -286,7 +286,7 @@ const ProporcionalesPage: React.FC = () => {
               <div>
                 <div style={{ fontSize: 20, fontWeight: 800 }}>Cobro proporcional: {formatCOP(resCiclo.cargo)}</div>
                 {!errorMsg && (
-                  <p style={{ marginTop: 8, color: 'rgba(255,255,255,0.92)', lineHeight: 1.45 }}>
+                  <p style={{ marginTop: 8, color: 'rgba(226, 226, 182, 0.9)', lineHeight: 1.45 }}>
                     {Number.isFinite(resCiclo.diasProrrateo as any)
                       ? (
                         service === 'movil'
@@ -304,13 +304,13 @@ const ProporcionalesPage: React.FC = () => {
                 {/* Total estimado próxima factura (Cambio de ciclo) */}
                 <div style={{ marginTop: 10 }}>
                   {resCiclo.totalFactura === 0 ? (
-                    <div className="kpi-subtle" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                    <div className="kpi-subtle" style={{ color: 'rgba(226, 226, 182, 0.85)' }}>
                       {resCiclo.descripcion}
                     </div>
                   ) : (
                     <>
                       <div style={{ fontSize: 17, fontWeight: 700 }}>Total estimado de la próxima factura: {formatCOP(resCiclo.totalFactura)}</div>
-                      <div style={{ marginTop: 4, color: 'rgba(255,255,255,0.75)', fontSize: 13 }}>
+                      <div style={{ marginTop: 4, color: 'rgba(226, 226, 182, 0.75)', fontSize: 13 }}>
                         {resCiclo.descripcion}
                       </div>
                     </>
@@ -323,7 +323,7 @@ const ProporcionalesPage: React.FC = () => {
               <div>
                 <div style={{ fontSize: 20, fontWeight: 800 }}>Cargo proporcional del mes: {formatCOP(resInmediato.cargo)}</div>
                 {!errorMsg && (
-                  <p style={{ marginTop: 8, color: 'rgba(255,255,255,0.92)', lineHeight: 1.45 }}>
+                  <p style={{ marginTop: 8, color: 'rgba(226, 226, 182, 0.9)', lineHeight: 1.45 }}>
                     {(Number.isFinite(resInmediato.diasConsumidos as any) && Number.isFinite(resInmediato.diasRestantes as any))
                       ? (
                         <>En tu próxima factura verás una sola vez un cargo de {formatCOP(resInmediato.cargo)}. Reconoce lo que ya usaste con tu plan anterior ({resInmediato.diasConsumidos} días) y lo que falta del mes con tu plan nuevo ({resInmediato.diasRestantes} días). Después de este ajuste, seguirás pagando únicamente el valor mensual de tu plan vigente.</>
@@ -335,13 +335,13 @@ const ProporcionalesPage: React.FC = () => {
                 {/* Total estimado próxima factura (Cambio inmediato) */}
                 <div style={{ marginTop: 10 }}>
                   {resInmediato.totalFactura === 0 ? (
-                    <div className="kpi-subtle" style={{ color: 'rgba(255,255,255,0.85)' }}>
+                    <div className="kpi-subtle" style={{ color: 'rgba(226, 226, 182, 0.85)' }}>
                       {resInmediato.descripcion}
                     </div>
                   ) : (
                     <>
                       <div style={{ fontSize: 17, fontWeight: 700 }}>Total estimado de la próxima factura: {formatCOP(resInmediato.totalFactura)}</div>
-                      <div style={{ marginTop: 4, color: 'rgba(255,255,255,0.75)', fontSize: 13 }}>
+                      <div style={{ marginTop: 4, color: 'rgba(226, 226, 182, 0.75)', fontSize: 13 }}>
                         {resInmediato.descripcion}
                       </div>
                     </>

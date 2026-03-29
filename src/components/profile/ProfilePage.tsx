@@ -97,15 +97,15 @@ const ProfilePage: React.FC = () => {
           <div style={{ marginTop: 16, textAlign: 'center' }}>
             <button
               style={{
-                background: '#1A4DFF',
-                color: '#fff',
-                border: 'none',
+                background: 'linear-gradient(135deg, #03346E 0%, #021526 100%)',
+                color: '#E2E2B6',
+                border: '1px solid #6EACDA',
                 borderRadius: 8,
                 padding: '10px 20px',
                 fontWeight: 700,
                 fontSize: 14,
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px #1A4DFF33',
+                boxShadow: '0 2px 8px rgba(110, 172, 218, 0.3)',
                 letterSpacing: 0.3,
                 width: '100%'
               }}

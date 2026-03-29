@@ -34,9 +34,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: $brm-text; // Negro suave consistente con dashboard
+  background-color: #eef1f9; // Gris claro neutro profesional
   padding: 0.3rem 0.5rem 3rem;
-  color: $brm-white; // Texto blanco para contraste
+  color: $brm-text; // Texto oscuro para contraste
 }
 
 .navigation-buttons {
@@ -49,31 +49,32 @@
 
   .back-button,
   .home-button {
-    background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
-    border: 1px solid $brm-primary;
+    background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+    border: 1px solid $brm-accent;
     border-radius: $border-radius-md;
     padding: $spacing-sm $spacing-md;
-    color: $brm-white;
+    color: $brm-light;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: $spacing-xs;
     transition: all $transition-normal;
     font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
 
     .button-icon {
       font-size: 1.1rem;
     }
 
     &:hover {
-      background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+      background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
     }
 
     &:active {
-      background: linear-gradient(to bottom, #222222, #000000);
-      border: 1px solid transparent;
-      border-image: linear-gradient(to bottom, $brm-secondary, $brm-primary) 1;
+      background: linear-gradient(135deg, $brm-primary 0%, $brm-secondary 100%);
+      border-color: $brm-accent;
       transform: translateY(0);
     }
   }
@@ -82,7 +83,7 @@
     border-color: transparent;
 
     &:hover {
-      background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+      background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
     }
   }
 }
@@ -133,7 +134,7 @@
   padding: 0 $spacing-md;
 
   .main-title {
-    color: $brm-white;
+    color: $brm-text;
     font-size: 3rem;
     margin-bottom: $spacing-lg;
     font-weight: bold;
@@ -144,7 +145,7 @@
     padding: 0 $spacing-xl;
 
     .description {
-      color: $brm-white;
+      color: $brm-text;
       font-size: 1.5rem;
       line-height: 1.6;
       max-width: 800px;
@@ -155,7 +156,7 @@
   }
 
   .section-title {
-    color: $brm-white;
+    color: $brm-text;
     font-size: 1.5rem;
     margin-bottom: $spacing-xl;
   }
@@ -169,11 +170,11 @@
     justify-content: center;
 
     .option-button {
-      background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
-      border: none;
+      background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+      border: 1px solid $brm-accent;
       border-radius: $border-radius-lg;
       padding: $spacing-md $spacing-lg;
-      color: $brm-white;
+      color: $brm-light;
       font-size: 1rem;
       cursor: pointer;
       display: flex;
@@ -185,6 +186,7 @@
       width: 280px;
       text-align: center;
       flex: 0 0 280px;
+      box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
 
       @media (max-width: 768px) {
         width: 100%;
@@ -227,8 +229,9 @@
       }
 
       &:hover {
-        background: linear-gradient(to bottom, $brm-primary, $brm-secondary);
+        background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
         transform: translateX(5px);
+        box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
 
         .arrow-icon {
           opacity: 1;
@@ -237,9 +240,9 @@
       }
 
       &:active {
-        background: linear-gradient(to bottom, #222222, #000000);
-        border: 1px solid transparent;
-        border-image: linear-gradient(to bottom, $brm-secondary, $brm-primary) 1;
+        background: linear-gradient(135deg, $brm-primary 0%, $brm-secondary 100%);
+        border-color: $brm-accent;
+        transform: translateX(0);
       }
     }
   }
@@ -294,19 +297,21 @@
 
   .reset-button {
     width: 100%;
-    background: rgba(26, 77, 255, 1);
-    color: $brm-white;
-    border: none;
+    background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+    color: $brm-light;
+    border: 1px solid $brm-accent;
     border-radius: $border-radius-md;
     padding: $spacing-md;
     font-size: 1.1rem;
     cursor: pointer;
     transition: $transition-fast;
     margin-top: $spacing-lg;
+    box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
 
     &:hover {
-      background: rgba(26, 77, 255, 0.9);
+      background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
       transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
     }
 
     &:active {

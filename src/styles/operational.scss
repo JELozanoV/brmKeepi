@@ -1,11 +1,12 @@
 @use './_variables.scss' as *;
 
-// Paleta solicitada
-$color-primary: #1A4DFF;
-$color-blue-light: #007BFF;
-$color-gray-light: #F2F2F2;
+// Paleta Navy Blue/Beige CRM Professional
+$color-primary: #021526;      // Black Navy
+$color-blue-light: #03346E;   // Navy Blue
+$color-accent: #6EACDA;       // Sky Blue
+$color-gray-light: #E2E2B6;   // Beige
 $color-white: #FFFFFF;
-$color-black-soft: #222222;
+$color-black-soft: #021526;
 
 .op-card,
 .operational-grid .op-card {
@@ -126,13 +127,14 @@ $color-black-soft: #222222;
 }
 
 .kpi-coach-item {
-  border: 1px solid $color-primary;
+  border: 1px solid rgba(110, 172, 218, 0.3);
   border-radius: $border-radius-lg;
   padding: $spacing-md;
-  background: $color-black-soft;
-  color: $color-white;
+  background: rgba(2, 21, 38, 0.95);
+  color: #E2E2B6;
   width: 100%; // Cada item ocupa todo el ancho
   box-sizing: border-box; // Incluir padding en el cálculo
+  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
 
   @media (max-width: 768px) {
     padding: $spacing-sm; // Padding reducido en móvil
@@ -151,13 +153,24 @@ $color-black-soft: #222222;
   font-size: 0.8rem;
   margin-bottom: $spacing-sm;
   color: $color-white;
+  font-weight: 600;
 }
+// MANTENER COLORES SEMÁFORO
 .kpi-coach-item .kpi-chip-good { background: #22c55e; }
 .kpi-coach-item .kpi-chip-warn { background: #f59e0b; }
 .kpi-coach-item .kpi-chip-bad  { background: #ef4444; }
-.kpi-coach-item.kpi-good { border-color: #22c55e; background: rgba(#22c55e, 0.12); }
-.kpi-coach-item.kpi-warn { border-color: #f59e0b; background: rgba(#f59e0b, 0.12); }
-.kpi-coach-item.kpi-bad  { border-color: #ef4444; background: rgba(#ef4444, 0.12); }
+.kpi-coach-item.kpi-good { 
+  border-color: #22c55e; 
+  background: linear-gradient(135deg, rgba(#22c55e, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+}
+.kpi-coach-item.kpi-warn { 
+  border-color: #f59e0b; 
+  background: linear-gradient(135deg, rgba(#f59e0b, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+}
+.kpi-coach-item.kpi-bad  { 
+  border-color: #ef4444; 
+  background: linear-gradient(135deg, rgba(#ef4444, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+}
 
 // Ranking styles
 .ranking-tabs { display: inline-flex; gap: $spacing-sm; }

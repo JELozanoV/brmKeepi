@@ -32,12 +32,12 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
   if (loading) {
     return (
       <div style={{
-        background: '#111',
-        border: '1px solid #1A4DFF',
+        background: 'rgba(2, 21, 38, 0.95)',
+        border: '1px solid rgba(110, 172, 218, 0.3)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(255,255,255,0.75)',
+        color: 'rgba(226, 226, 182, 0.8)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -49,12 +49,12 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
   if (!rankingData || !rankingData.participants || rankingData.participants.length === 0) {
     return (
       <div style={{
-        background: '#111',
-        border: '1px solid #333',
+        background: 'rgba(2, 21, 38, 0.95)',
+        border: '1px solid rgba(110, 172, 218, 0.3)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(255,255,255,0.5)',
+        color: 'rgba(226, 226, 182, 0.5)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -71,18 +71,31 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
     teamRanking = buildRankingVM('combined', rankingData, 'team', 'c-1');
     operationRanking = buildRankingVM('combined', rankingData, 'operation');
   } catch {
-    return null;
+    return (
+      <div style={{
+        background: 'rgba(2, 21, 38, 0.95)',
+        border: '1px solid rgba(110, 172, 218, 0.3)',
+        borderRadius: 12,
+        padding: 16,
+        marginTop: 16,
+        color: 'rgba(226, 226, 182, 0.5)',
+        fontSize: 14,
+        textAlign: 'center'
+      }}>
+        Error al cargar rankings
+      </div>
+    );
   }
 
   if (!teamRanking || !operationRanking) {
     return (
       <div style={{
-        background: '#111',
-        border: '1px solid #333',
+        background: 'rgba(2, 21, 38, 0.95)',
+        border: '1px solid rgba(110, 172, 218, 0.3)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(255,255,255,0.5)',
+        color: 'rgba(226, 226, 182, 0.5)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -108,14 +121,15 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
 
   return (
     <div style={{
-      background: '#111',
-      border: '1px solid #1A4DFF',
+      background: 'rgba(2, 21, 38, 0.95)',
+      border: '1px solid rgba(110, 172, 218, 0.3)',
       borderRadius: 12,
       padding: 16,
-      marginTop: 16
+      marginTop: 16,
+      boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)'
     }}>
       <h4 style={{
-        color: 'rgba(255,255,255,0.95)',
+        color: '#E2E2B6',
         fontSize: 16,
         fontWeight: 700,
         margin: '0 0 12px 0',
@@ -127,13 +141,13 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {/* Team Ranking */}
         <div style={{
-          background: 'rgba(26,77,255,0.08)',
+          background: 'rgba(3, 52, 110, 0.3)',
           borderRadius: 8,
           padding: 12,
-          border: '1px solid rgba(26,77,255,0.2)'
+          border: '1px solid rgba(110, 172, 218, 0.3)'
         }}>
           <div style={{
-            color: 'rgba(255,255,255,0.9)',
+            color: 'rgba(226, 226, 182, 0.9)',
             fontSize: 13,
             fontWeight: 600,
             marginBottom: 4
@@ -141,7 +155,7 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
             En mi equipo
           </div>
           <div style={{
-            color: '#1A4DFF',
+            color: '#6EACDA',
             fontSize: 18,
             fontWeight: 800
           }}>
@@ -151,13 +165,13 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
 
         {/* Operation Ranking */}
         <div style={{
-          background: 'rgba(26,77,255,0.08)',
+          background: 'rgba(3, 52, 110, 0.3)',
           borderRadius: 8,
           padding: 12,
-          border: '1px solid rgba(26,77,255,0.2)'
+          border: '1px solid rgba(110, 172, 218, 0.3)'
         }}>
           <div style={{
-            color: 'rgba(255,255,255,0.9)',
+            color: 'rgba(226, 226, 182, 0.9)',
             fontSize: 13,
             fontWeight: 600,
             marginBottom: 4
@@ -165,7 +179,7 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
             En la operación
           </div>
           <div style={{
-            color: '#1A4DFF',
+            color: '#6EACDA',
             fontSize: 18,
             fontWeight: 800
           }}>
