@@ -130,27 +130,27 @@ const ProporcionalesPage: React.FC = () => {
 
   return (
     <div className="app-content">
-      <div className="filtered-rates-section" style={{ background: 'rgba(2, 21, 38, 0.95)', color: '#E2E2B6', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid #6EACDA', boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)' }}>
-        <h2 style={{color: '#E2E2B6', fontWeight: 700, marginBottom: 6, fontSize: 22, letterSpacing: 0.3}}>Calculadora de Proporcionales</h2>
-        <p style={{ color: 'rgba(226, 226, 182, 0.8)', marginTop: 0, marginBottom: 14, fontSize: 14 }}>Simula cobros por cambio de ciclo o cambio de plan inmediato.</p>
+      <div className="filtered-rates-section" style={{ background: 'rgba(2, 21, 38, 0.95)', color: '#E2E2B6', padding: '16px 14px', borderRadius: 12, maxWidth: '95%', margin: '0 auto', border: '1px solid #6EACDA', boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)' }}>
+        <h2 style={{color: '#E2E2B6', fontWeight: 700, marginBottom: 6, fontSize: 20, letterSpacing: 0.3}}>Calculadora de Proporcionales</h2>
+        <p style={{ color: 'rgba(226, 226, 182, 0.8)', marginTop: 0, marginBottom: 12, fontSize: 13 }}>Simula cobros por cambio de ciclo o cambio de plan inmediato.</p>
 
         {/* Paso 0: Tipo de servicio */}
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10 }} role="tablist" aria-label="Tipo de servicio">
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap', marginBottom: 10 }} role="tablist" aria-label="Tipo de servicio">
           <button type="button" role="tab" aria-selected={service === 'hogar'}
-            style={{ background: service === 'hogar' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: service === 'hogar' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '6px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none' }}
+            style={{ background: service === 'hogar' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: service === 'hogar' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '5px 12px', fontWeight: 700, fontSize: 12, cursor: 'pointer', outline: 'none' }}
             onClick={() => setService('hogar')}>Hogar</button>
           <button type="button" role="tab" aria-selected={service === 'movil'}
-            style={{ background: service === 'movil' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: service === 'movil' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '6px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none' }}
+            style={{ background: service === 'movil' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: service === 'movil' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '5px 12px', fontWeight: 700, fontSize: 12, cursor: 'pointer', outline: 'none' }}
             onClick={() => setService('movil')}>Móvil</button>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 16 }}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }} role="tablist" aria-label="Tipo de cálculo">
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, flexWrap: 'wrap', alignItems: 'center', marginBottom: 14 }}>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }} role="tablist" aria-label="Tipo de cálculo">
             <button type="button" role="tab" aria-selected={tab === 'ciclo'}
-              style={{ background: tab === 'ciclo' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: tab === 'ciclo' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '8px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', outline: 'none', boxShadow: tab === 'ciclo' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none', transition: 'all .2s' }}
+              style={{ background: tab === 'ciclo' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: tab === 'ciclo' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '7px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none', boxShadow: tab === 'ciclo' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none', transition: 'all .2s' }}
               onClick={() => setTab('ciclo')}>Cambio de ciclo</button>
             <button type="button" role="tab" aria-selected={tab === 'inmediato'}
-              style={{ background: tab === 'inmediato' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: tab === 'inmediato' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '8px 18px', fontWeight: 700, fontSize: 14, cursor: 'pointer', outline: 'none', boxShadow: tab === 'inmediato' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none', transition: 'all .2s' }}
+              style={{ background: tab === 'inmediato' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)', color: tab === 'inmediato' ? '#E2E2B6' : '#6EACDA', border: '2px solid #6EACDA', borderRadius: 8, padding: '7px 14px', fontWeight: 700, fontSize: 13, cursor: 'pointer', outline: 'none', boxShadow: tab === 'inmediato' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none', transition: 'all .2s' }}
               onClick={() => setTab('inmediato')}>Cambio de plan inmediato</button>
           </div>
           <div />

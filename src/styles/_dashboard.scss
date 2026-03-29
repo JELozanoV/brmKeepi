@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     margin-left: 0;
-    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 0; // Evita overflow en flex
     width: 100%; // Por defecto ocupa todo el ancho
   }
@@ -119,7 +120,8 @@
   .brm-dashboard {
     &__main {
       margin-left: 260px; // Ancho del sidebar
-      transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       width: calc(100% - 260px); // Ancho calculado dinámicamente
     }
 
@@ -159,7 +161,8 @@
   .brm-dashboard {
     &__main {
       margin-left: 280px; // Ancho del sidebar en desktop grande
-      transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                  width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       width: calc(100% - 280px); // Ancho calculado dinámicamente
     }
 
