@@ -14,14 +14,15 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #1A4DFF 0%, #0066FF 100%)',
+      background: 'linear-gradient(135deg, #03346E 0%, #021526 100%)',
       borderRadius: 16,
       padding: 24,
       marginBottom: 24,
       textAlign: 'center',
       position: 'relative',
       overflow: 'hidden',
-      boxShadow: '0 8px 32px rgba(26, 77, 255, 0.3)'
+      border: '1px solid rgba(110, 172, 218, 0.4)',
+      boxShadow: '0 8px 32px rgba(2, 21, 38, 0.4)'
     }}>
       {/* Efecto de fondo */}
       <div style={{
@@ -44,7 +45,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
       </div>
 
       <h3 style={{
-        color: 'white',
+        color: '#E2E2B6',
         margin: '0 0 8px 0',
         fontSize: 24,
         fontWeight: 700,
@@ -54,7 +55,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
       </h3>
 
       <p style={{
-        color: 'rgba(255,255,255,0.9)',
+        color: 'rgba(226, 226, 182, 0.9)',
         margin: '0 0 16px 0',
         fontSize: 16,
         lineHeight: 1.5
@@ -101,15 +102,15 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
       </div>
 
       <div style={{
-        background: 'rgba(255,255,255,0.15)',
+        background: 'rgba(110, 172, 218, 0.15)',
         borderRadius: 12,
         padding: '12px 20px',
         display: 'inline-block',
         backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(255,255,255,0.2)'
+        border: '1px solid rgba(110, 172, 218, 0.3)'
       }}>
         <div style={{
-          color: 'white',
+          color: '#E2E2B6',
           fontSize: 14,
           fontWeight: 600,
           marginBottom: 4
@@ -117,7 +118,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
           Tu posición actual
         </div>
         <div style={{
-          color: 'white',
+          color: '#6EACDA',
           fontSize: 28,
           fontWeight: 800,
           lineHeight: 1
@@ -125,7 +126,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
           #{currentPosition} de {totalParticipants}
         </div>
         <div style={{
-          color: 'rgba(255,255,255,0.8)',
+          color: 'rgba(226, 226, 182, 0.8)',
           fontSize: 12,
           marginTop: 4
         }}>
@@ -237,23 +238,23 @@ const RankingPage: React.FC = () => {
   return (
     <div className="app-content">
       <div className="filtered-rates-section" style={{
-        background: '#222',
-        color: 'rgba(255,255,255,0.96)',
+        background: 'rgba(2, 21, 38, 0.95)',
+        color: '#E2E2B6',
         padding: 20,
         borderRadius: 12,
         maxWidth: 1200,
         margin: '0 auto',
-        border: '1px solid #1A4DFF',
-        boxShadow: '0 1px 8px rgba(26,77,255,0.08)'
+        border: '1px solid rgba(110, 172, 218, 0.3)',
+        boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)'
       }}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
-          <h2 style={{ color: 'rgba(255,255,255,0.98)', fontWeight: 700, margin: 0, fontSize: 22, letterSpacing: 0.3 }}>
+          <h2 style={{ color: '#E2E2B6', fontWeight: 700, margin: 0, fontSize: 22, letterSpacing: 0.3 }}>
             Rankings
           </h2>
         </div>
 
-        {loading && <div style={{ textAlign: 'center', color: 'rgba(255,255,255,0.75)' }}>Cargando rankings…</div>}
-        {error && <div style={{ textAlign: 'center', color: '#ef4444', background: '#3b0d0d', padding: 12, borderRadius: 8 }}>{error}</div>}
+        {loading && <div style={{ textAlign: 'center', color: 'rgba(226, 226, 182, 0.8)' }}>Cargando rankings…</div>}
+        {error && <div style={{ textAlign: 'center', color: 'rgba(226, 226, 182, 0.95)', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(2, 21, 38, 0.95) 100%)', border: '1px solid rgba(239, 68, 68, 0.5)', padding: 12, borderRadius: 8 }}>{error}</div>}
 
         {rankingData && (
           <div style={{ display: 'grid', gap: 24 }}>

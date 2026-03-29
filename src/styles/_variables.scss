@@ -40,9 +40,9 @@ $transition-slow: 0.4s ease;
 // Convertimos el archivo en un módulo Sass
 @forward 'variables-module';
 
-// Colores principales
-$primary-color: #2196F3;    // Azul principal
-$secondary-color: #757575;   // Gris secundario
+// Colores principales (legacy - usar variables $brm-* para nuevos componentes)
+$primary-color: #03346E;    // Navy Blue (migrado de #2196F3)
+$secondary-color: #6EACDA;   // Sky Blue (migrado de azul claro)
 $success-color: #2ecc71;     // Verde para éxito
 $error-color: #e74c3c;       // Rojo para errores
 $text-color: #333333;        // Color de texto principal

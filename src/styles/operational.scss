@@ -10,21 +10,22 @@ $color-black-soft: #021526;
 
 .op-card,
 .operational-grid .op-card {
-  background: $color-black-soft;
-  border: 1px solid $color-primary;
+  background: rgba(2, 21, 38, 0.95);
+  border: 1px solid rgba(110, 172, 218, 0.3);
   border-radius: $border-radius-lg;
   padding: $spacing-md;
-  color: $color-white;
+  color: $color-gray-light;
+  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
 }
 
 .card-title {
   font-weight: 700;
   margin-bottom: $spacing-sm;
-  color: $color-white;
+  color: $color-gray-light;
 }
 
 .kpi-subtle {
-  color: rgba($color-white, 0.7);
+  color: rgba($color-gray-light, 0.75);
   font-size: 0.9rem;
 }
 
@@ -62,8 +63,8 @@ $color-black-soft: #021526;
 .traffic-content .traffic-values {
   display: flex;
   gap: $spacing-sm;
-  .current { color: $color-white; font-weight: 600; }
-  .target { color: rgba($color-white, 0.7); }
+  .current { color: $color-gray-light; font-weight: 600; }
+  .target { color: rgba($color-gray-light, 0.7); }
 }
 
 .dot {
@@ -175,15 +176,55 @@ $color-black-soft: #021526;
 // Ranking styles
 .ranking-tabs { display: inline-flex; gap: $spacing-sm; }
 .ranking-tab { 
-  background: $color-black-soft; color: $color-white; border: 1px solid $color-primary; 
-  border-radius: $border-radius-sm; padding: 4px 10px; cursor: pointer;
+  background: rgba(3, 52, 110, 0.3);
+  color: $color-gray-light;
+  border: 1px solid rgba(110, 172, 218, 0.3);
+  border-radius: $border-radius-sm;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(3, 52, 110, 0.5);
+    border-color: $color-accent;
+  }
 }
-.ranking-tab.active { background: $color-primary; }
-.ranking-row { border: 1px solid rgba($color-gray-light, 0.2); border-radius: $border-radius-sm; padding: 6px 10px; }
-.ranking-row-me { border-color: $color-primary; padding: 8px 12px; }
-.me-name { font-weight: 700; color: $color-white; }
-.me-badge { display: inline-block; margin-left: 6px; padding: 2px 6px; border: 1px solid $color-primary; color: $color-white; border-radius: $border-radius-sm; font-size: 0.75rem; background: rgba($color-primary, 0.15); }
-.rank-num { font-weight: 700; }
+.ranking-tab.active {
+  background: linear-gradient(135deg, $color-blue-light 0%, $color-primary 100%);
+  border-color: $color-accent;
+  box-shadow: 0 2px 8px rgba(110, 172, 218, 0.3);
+}
+.ranking-row {
+  border: 1px solid rgba(110, 172, 218, 0.2);
+  border-radius: $border-radius-sm;
+  padding: 6px 10px;
+  color: $color-gray-light;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(3, 52, 110, 0.2);
+    border-color: rgba(110, 172, 218, 0.4);
+  }
+}
+.ranking-row-me {
+  border-color: $color-accent;
+  border-width: 2px;
+  padding: 8px 12px;
+  background: rgba(110, 172, 218, 0.1);
+  box-shadow: 0 2px 8px rgba(110, 172, 218, 0.2);
+}
+.me-name { font-weight: 700; color: $color-accent; }
+.me-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border: 1px solid $color-accent;
+  color: $color-gray-light;
+  border-radius: $border-radius-sm;
+  font-size: 0.75rem;
+  background: rgba(110, 172, 218, 0.15);
+}
+.rank-num { font-weight: 700; color: $color-accent; }
 .medal { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .medal-gold { background: #d4af37; }
 .medal-silver { background: #c0c0c0; }

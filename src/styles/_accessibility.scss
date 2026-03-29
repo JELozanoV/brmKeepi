@@ -1,5 +1,18 @@
 @import '_variables.scss';
 
+/**
+ * Estilos globales de accesibilidad
+ * 
+ * Paleta de colores Navy Blue/Beige CRM Professional:
+ * - $brm-primary: #021526 (Black Navy)
+ * - $brm-secondary: #03346E (Navy Blue)
+ * - $brm-accent: #6EACDA (Sky Blue)
+ * - $brm-light: #E2E2B6 (Beige)
+ * - $brm-white: #FFFFFF
+ * 
+ * Contraste mínimo WCAG AA: 4.5:1 para texto normal, 3:1 para texto grande
+ */
+
 // Estilos globales de accesibilidad
 // Aplicar focus-visible a todos los elementos interactivos
 *:focus-visible {
