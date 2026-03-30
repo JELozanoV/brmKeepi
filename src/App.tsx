@@ -310,7 +310,7 @@ function DashboardApp() {
   }
 
   // Rutas que no deben mostrar botones de navegación
-  const routesWithoutNavigation = ['/facturacion-rr', '/proporcionales', '/tarifas', '/perfil'];
+  const routesWithoutNavigation = ['/facturacion-rr', '/proporcionales', '/tarifas', '/perfil', '/ranking', '/brmKeepi/ranking'];
   const shouldHideNavigation = routesWithoutNavigation.some(route => location.pathname.startsWith(route));
 
   return (

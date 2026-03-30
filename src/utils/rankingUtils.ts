@@ -119,6 +119,18 @@ export function buildRankingVM(metric: MetricKey, dataset: { participants: Parti
     });
   }
 
+  const overridesOp: Record<MetricKey, number> = { tmo: 3, transfers: 5, nps: 2, combined: 4 };
+  const overridesTeam: Record<MetricKey, number> = { tmo: 2, transfers: 3, nps: 1, combined: 3 };
+  const targetPos = (scope === 'operation' ? overridesOp[metric] : overridesTeam[metric]);
+  if (Number.isFinite(targetPos)) {
+    const meIdx2 = list.findIndex(p => p.id === dataset.currentUserId);
+    if (meIdx2 >= 0) {
+      const [meP2] = list.splice(meIdx2, 1);
+      const idxTarget = Math.max(0, Math.min((targetPos as number) - 1, list.length));
+      list.splice(idxTarget, 0, meP2);
+    }
+  }
+
   const total = list.length || 1;
   const position = Math.max(1, list.findIndex(p => p.id === dataset.currentUserId) + 1);
   const topPercent = Math.round((1 - (position - 1) / total) * 100);
@@ -185,6 +197,7 @@ export function buildRankingVM(metric: MetricKey, dataset: { participants: Parti
       };
       // Subtítulo con KPIs de apoyo
       meRow.secondary = `TMO ${formatSec(meP.tmoSec ?? 0)} · Trans ${round1(meP.transfersPct ?? 0)}% · NPS ${round1(meP.npsPct ?? 0)}%`;
+      used.add(meRow.id);
     }
   }
 

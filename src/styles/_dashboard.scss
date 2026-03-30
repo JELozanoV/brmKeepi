@@ -26,13 +26,13 @@
     position: relative; // Para posicionar botones
     
     // Espacio para el header fijo
-    margin-top: 56px; // Altura del header
-    min-height: calc(100vh - 56px);
+    margin-top: 0; // Altura del header
+    min-height: calc(100vh - 104px);
 
     // Contenedor de botones de navegación
     .navigation-buttons {
       position: fixed; // Cambiado a fixed para evitar ser cubierto
-      top: 66px; // Ajustado para estar justo debajo del header
+      top: 114px; // Debajo del header (56px) + KPI bar (48px) + margen
       left: 20px;
       display: flex;
       gap: $spacing-md;
@@ -82,13 +82,13 @@
 
     // Ajustar el contenido para que no se tape
     .app-content {
-      margin-top: 0.25rem; // Reducido para compensar botones subidos
+      margin-top: 0; // Reducido para compensar botones subidos
     }
 
     // Ajustes específicos para ServiceSelector
     .selector-container {
       .welcome-message {
-        margin-top: 0.25rem; // Reducido para compensar botones subidos
+        margin-top: 0.25rem; // margen móvil por defecto
         margin-bottom: $spacing-xl;
         padding: 0 $spacing-xl;
 
@@ -110,6 +110,14 @@
         font-weight: 700;
         color: $brm-text;
         text-align: center;
+      }
+    }
+
+    &.has-nav-buttons {
+      .mood-selector {
+        .section-title {
+          margin-top: 56px;
+        }
       }
     }
   }
@@ -134,11 +142,19 @@
       
       .selector-container {
         .welcome-message {
-          margin-top: 0.5rem; // Mantener margen reducido en desktop
+          margin-top: 88px; // espacio suficiente bajo los botones fijos
         }
 
         .section-title {
           margin-top: $spacing-md; // Mantener margen reducido en desktop
+        }
+      }
+
+      &.has-nav-buttons {
+        .mood-selector {
+          .section-title {
+            margin-top: 88px;
+          }
         }
       }
     }
@@ -199,7 +215,7 @@
       padding-top: 0.75rem; // Padding reducido en móvil
 
       .navigation-buttons {
-        top: 10px;
+        top: 110px;
         left: 10px;
         gap: $spacing-sm;
 
@@ -215,12 +231,12 @@
       }
 
       .app-content {
-        margin-top: 0.25rem; // Menos espacio en móvil
+        margin-top: 0; // Menos espacio en móvil
       }
 
       .selector-container {
         .welcome-message {
-          margin-top: 0.25rem;
+          margin-top: 56px;
           padding: 0 $spacing-md;
 
           .description {

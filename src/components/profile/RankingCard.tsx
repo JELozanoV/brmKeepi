@@ -44,7 +44,6 @@ const RankingCard: React.FC<RankingCardProps> = ({ title, metric, onMetricChange
             </div>
             <div style={{ textAlign: 'right' }}>
               <div>{r.valueLabel}</div>
-              {r.isMe && r.secondary && <div className="kpi-subtle">{r.secondary}</div>}
             </div>
           </div>
         ))}

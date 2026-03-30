@@ -43,6 +43,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
     }
   };
 
+  const hasNavButtons = Boolean(onHome || onBack);
+
   return (
     <div className={`brm-dashboard ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       {/* Sidebar */}
@@ -57,7 +59,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
         />
 
         {/* Área de contenido */}
-        <main className="brm-dashboard__content">
+        <main className={`brm-dashboard__content ${hasNavButtons ? 'has-nav-buttons' : ''}`}>
           {/* Botones de navegación */}
           <div className="navigation-buttons">
             {/* Botón Inicio */}
