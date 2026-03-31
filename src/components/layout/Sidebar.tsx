@@ -99,6 +99,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle })
       <aside className={`brm-sidebar ${isOpen ? 'brm-sidebar--open' : ''} ${isCollapsed ? 'brm-sidebar--collapsed' : ''}`}>
         {/* Header del Sidebar */}
         <div className="brm-sidebar__header">
+          <button
+            className="rail-open-button"
+            aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+            onClick={onToggle}
+          >
+            ☰
+          </button>
           <div className="brm-sidebar__logo">
             <span className="logo-icon">📱</span>
             <span className="logo-text">BRM</span>
