@@ -50,30 +50,77 @@
     }
   }
 
+  .range-selector--mobile {
+    display: none;
+    gap: $spacing-sm;
+
+    .range-btn {
+      background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+      color: $brm-light;
+      border: 1px solid $brm-accent;
+      border-radius: $border-radius-md;
+      padding: $spacing-sm $spacing-md;
+      cursor: pointer;
+      transition: $transition-normal;
+      box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
+        box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+      }
+
+      &.active {
+        outline: 2px solid $brm-accent;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .profile-page__header {
+      .range-selector { display: none; }
+    }
+    .range-selector--mobile { display: inline-flex; margin-bottom: $spacing-md; }
+  }
+
+  .kpi-section-card {
+    background: rgba(2, 21, 38, 0.95);
+    color: $brm-light;
+    border: 1px solid rgba(110, 172, 218, 0.2);
+    border-radius: $border-radius-lg;
+    padding: $spacing-lg;
+    box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
+
+    @media (max-width: 768px) {
+      padding: $spacing-md;
+    }
+  }
+
   .kpi-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(150px, 1fr)); // Reducido a 150px máximo
     gap: $spacing-sm; // Reducido gap
-    max-width: 100%; // No exceder el contenedor
-    width: 100%; // Asegurar que ocupe todo el ancho disponible
-    margin: 0 auto; // Centrar el grid
-    justify-items: center; // Centrar items horizontalmente
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    justify-items: center;
 
     // Forzar que todas las celdas del grid tengan la misma altura
     grid-auto-rows: 1fr; // Todas las filas tienen igual altura
 
     @media (max-width: 1024px) {
-      grid-template-columns: repeat(3, minmax(140px, 1fr)); // Un poco más pequeñas en tablet
+      grid-template-columns: repeat(3, minmax(140px, 1fr));
       gap: $spacing-md;
-      max-width: 250px; // Reducido ancho máximo en móvil
-      margin: 0 auto; // Centrar en móvil
+      max-width: 100%;
+      margin: 0;
     }
 
     @media (max-width: 768px) {
-      grid-template-columns: 1fr; // Una columna en móvil
+      grid-template-columns: 1fr;
       gap: $spacing-md;
-      max-width: 250px; // Reducido ancho máximo en móvil
-      margin: 0 auto; // Centrar en móvil
+      max-width: none;
+      width: 100%;
+      margin: 0;
+      justify-items: stretch;
     }
 
     // Pantallas pequeñas (13 pulgadas)
@@ -94,9 +141,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between; // Distribuir espacio uniformemente
-    width: 100%; // Ocupar todo el ancho disponible
-    height: 100%; // Ocupar toda la altura disponible
-    max-width: 150px; // Ancho máximo reducido para pantallas pequeñas
+    width: 100%;
+    height: 100%;
+    max-width: 150px;
     overflow: hidden; // Evitar que el contenido se salga
     box-sizing: border-box; // Incluir padding en dimensiones
     margin: 0 auto; // Centrar cada tarjeta individualmente
@@ -162,9 +209,9 @@
 
     // Responsive adjustments para móvil
     @media (max-width: 768px) {
-      aspect-ratio: 1/1; // Mantener cuadrada en móvil
-      padding: $spacing-xs; // Padding mínimo en móvil
-      max-width: 140px; // Un poco más pequeña en móvil
+      aspect-ratio: auto;
+      padding: $spacing-xs;
+      max-width: none;
 
       .kpi-card__value {
         font-size: 1.1rem; // Un poco más pequeña en móvil
@@ -228,6 +275,15 @@
     border-radius: $border-radius-md;
     padding: $spacing-md;
     margin-bottom: $spacing-md;
+  }
+
+  // Ajustes móviles: reducir padding exterior para maximizar ancho útil
+  @media (max-width: 768px) {
+    padding: $spacing-lg;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    border: 0;
   }
 }
 
@@ -328,15 +384,61 @@
       padding: $spacing-sm $spacing-md;
 
       .label {
-        color: $brm-light;
+        color: rgba($brm-light, 0.7);
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        font-size: 0.8rem;
         padding-right: $spacing-md;
         min-width: 120px;
       }
 
       .value {
-        color: rgba($brm-light, 0.9);
+        color: $brm-light;
+        font-weight: 700;
+        font-size: 0.95rem;
         text-transform: none;
+      }
+    }
+  }
+
+  // Ajustes móviles específicos para evitar recortes laterales
+  @media (max-width: 768px) {
+    padding: $spacing-md;
+
+    .profile-card__header {
+      gap: $spacing-sm;
+    }
+
+    .profile-avatar {
+      width: 56px;
+      height: 56px;
+      font-size: 1.2rem;
+    }
+
+    .profile-identity {
+      .profile-name { font-size: 1rem; }
+    }
+
+    .profile-fields {
+      .profile-field {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: $spacing-xs;
+        
+        .label {
+          min-width: 0;
+          width: 100%;
+          padding-right: 0;
+        }
+
+        .value {
+          width: 100%;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          margin-top: 2px;
+        }
       }
     }
   }

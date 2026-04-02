@@ -8,14 +8,25 @@ import KpiHeaderBar from './KpiHeaderBar';
 interface HeaderProps {
   showMenuButton?: boolean;
   onMenuToggle?: () => void;
+  menuOpen?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({ showMenuButton, onMenuToggle, menuOpen }) => {
   return (
     <header className="brm-header" role="banner">
       <div className="brm-header__container">
         <div className="brm-header__left">
-          {/* Espacio vacío - botón de menú eliminado */}
+          {showMenuButton && (
+            <button
+              className="menu-button"
+              aria-label="Abrir menú"
+              aria-controls="brm-sidebar"
+              aria-expanded={menuOpen ? true : false}
+              onClick={onMenuToggle}
+            >
+              ☰
+            </button>
+          )}
         </div>
         <div className="brm-header__center" aria-label="Logo Reten+">
           <BrandLogo variant="header" />

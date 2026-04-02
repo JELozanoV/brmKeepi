@@ -56,6 +56,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ onHome, onBack, child
         <Header 
           showMenuButton={true}
           onMenuToggle={toggleSidebar}
+          menuOpen={sidebarOpen}
         />
 
         {/* Área de contenido */}

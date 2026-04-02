@@ -96,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle })
       )}
       
       {/* Sidebar */}
-      <aside className={`brm-sidebar ${isOpen ? 'brm-sidebar--open' : ''} ${isCollapsed ? 'brm-sidebar--collapsed' : ''}`}>
+      <aside id="brm-sidebar" className={`brm-sidebar ${isOpen ? 'brm-sidebar--open' : ''} ${isCollapsed ? 'brm-sidebar--collapsed' : ''}`}>
         {/* Header del Sidebar */}
         <div className="brm-sidebar__header">
           <button

@@ -211,13 +211,14 @@
     }
 
     &__content {
-      padding: 0.75rem;
-      padding-top: 0.75rem; // Padding reducido en móvil
-      padding-left: calc(0.75rem + 50px); // Espacio para el mini-rail persistente
+      padding: 0;
+      padding-top: 0;
+      padding-left: 0;
+      padding-right: 0;
 
       .navigation-buttons {
         top: 110px;
-        left: 60px; // Alineado a la derecha del mini-rail (50px)
+        left: 10px;
         gap: $spacing-sm;
 
         .home-button,
