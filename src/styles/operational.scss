@@ -10,22 +10,22 @@ $color-black-soft: #021526;
 
 .op-card,
 .operational-grid .op-card {
-  background: rgba(2, 21, 38, 0.95);
-  border: 1px solid rgba(110, 172, 218, 0.3);
+  background: var(--brm-bg-card, rgba(2, 21, 38, 0.95));
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.3));
   border-radius: $border-radius-lg;
   padding: $spacing-md;
-  color: $color-gray-light;
-  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
+  color: var(--brm-text, $color-gray-light);
+  box-shadow: 0 4px 16px var(--brm-shadow, rgba(2, 21, 38, 0.3));
 }
 
 .card-title {
   font-weight: 700;
   margin-bottom: $spacing-sm;
-  color: $color-gray-light;
+  color: var(--brm-text, $color-gray-light);
 }
 
 .kpi-subtle {
-  color: rgba($color-gray-light, 0.75);
+  color: var(--brm-text-secondary, rgba($color-gray-light, 0.75));
   font-size: 0.9rem;
 }
 
@@ -63,8 +63,8 @@ $color-black-soft: #021526;
 .traffic-content .traffic-values {
   display: flex;
   gap: $spacing-sm;
-  .current { color: $color-gray-light; font-weight: 600; }
-  .target { color: rgba($color-gray-light, 0.7); }
+  .current { color: var(--brm-text, $color-gray-light); font-weight: 600; }
+  .target { color: var(--brm-text-secondary, rgba($color-gray-light, 0.7)); }
 }
 
 .dot {
@@ -72,9 +72,9 @@ $color-black-soft: #021526;
   height: 10px;
   border-radius: 50%;
 }
-.dot-ok { background: #22c55e; }
-.dot-warn { background: #f59e0b; }
-.dot-bad { background: #ef4444; }
+.dot-ok { background: var(--brm-success, #22c55e); }
+.dot-warn { background: var(--brm-warning, #f59e0b); }
+.dot-bad { background: var(--brm-error, #ef4444); }
 
 .op-chart-cards {
   display: grid;
@@ -93,16 +93,16 @@ $color-black-soft: #021526;
   gap: $spacing-xs;
 }
 .position { font-size: 1.4rem; font-weight: 700; }
-.percentile { color: $color-blue-light; font-weight: 600; }
+.percentile { color: var(--brm-accent, $color-blue-light); font-weight: 600; }
 .bench-stats .row { display: flex; justify-content: space-between; }
-.divider { height: 1px; background: rgba($color-gray-light, 0.2); margin: $spacing-xs 0; }
+.divider { height: 1px; background: var(--brm-border, rgba($color-gray-light, 0.2)); margin: $spacing-xs 0; }
 
 .alerts-list { display: flex; flex-direction: column; gap: $spacing-sm; }
 .alert-item { display: flex; align-items: center; gap: $spacing-sm; }
 .badge {
   font-size: 0.75rem;
-  border: 1px solid $color-primary;
-  color: $color-white;
+  border: 1px solid var(--brm-border, $color-primary);
+  color: var(--brm-text, $color-white);
   padding: 2px 6px;
   border-radius: $border-radius-sm;
 }
@@ -128,11 +128,11 @@ $color-black-soft: #021526;
 }
 
 .kpi-coach-item {
-  border: 1px solid rgba(110, 172, 218, 0.3);
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.3));
   border-radius: $border-radius-lg;
   padding: $spacing-md;
-  background: rgba(2, 21, 38, 0.95);
-  color: #E2E2B6;
+  background: var(--brm-bg-card, rgba(2, 21, 38, 0.95));
+  color: var(--brm-text, #E2E2B6);
   width: 100%; // Cada item ocupa todo el ancho
   box-sizing: border-box; // Incluir padding en el cálculo
   box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
@@ -153,78 +153,79 @@ $color-black-soft: #021526;
   border-radius: 999px;
   font-size: 0.8rem;
   margin-bottom: $spacing-sm;
-  color: $color-white;
+  color: #000;
   font-weight: 600;
 }
 // MANTENER COLORES SEMÁFORO
-.kpi-coach-item .kpi-chip-good { background: #22c55e; }
-.kpi-coach-item .kpi-chip-warn { background: #f59e0b; }
-.kpi-coach-item .kpi-chip-bad  { background: #ef4444; }
+.kpi-coach-item .kpi-chip-good { background: var(--brm-success, #22c55e); color: #000; }
+.kpi-coach-item .kpi-chip-warn { background: var(--brm-warning, #f59e0b); color: #000; }
+.kpi-coach-item .kpi-chip-bad  { background: var(--brm-error, #ef4444); color: #fff; }
 .kpi-coach-item.kpi-good { 
-  border-color: #22c55e; 
-  background: linear-gradient(135deg, rgba(#22c55e, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+  border-color: var(--brm-success, #22c55e); 
+  background: var(--brm-kpi-ok-bg, linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%));
 }
 .kpi-coach-item.kpi-warn { 
-  border-color: #f59e0b; 
-  background: linear-gradient(135deg, rgba(#f59e0b, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+  border-color: var(--brm-warning, #f59e0b); 
+  background: var(--brm-kpi-warn-bg, linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%));
 }
 .kpi-coach-item.kpi-bad  { 
-  border-color: #ef4444; 
-  background: linear-gradient(135deg, rgba(#ef4444, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+  border-color: var(--brm-error, #ef4444); 
+  background: var(--brm-kpi-bad-bg, linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%));
 }
 
 // Ranking styles
 .ranking-tabs { display: inline-flex; gap: $spacing-sm; }
 .ranking-tab { 
-  background: rgba(3, 52, 110, 0.3);
-  color: $color-gray-light;
-  border: 1px solid rgba(110, 172, 218, 0.3);
+  background: var(--brm-bg-card, rgba(3, 52, 110, 0.3));
+  color: var(--brm-text, $color-gray-light);
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.3));
   border-radius: $border-radius-sm;
   padding: 4px 10px;
   cursor: pointer;
   transition: all 0.3s ease;
   
   &:hover {
-    background: rgba(3, 52, 110, 0.5);
-    border-color: $color-accent;
+    background: var(--brm-bg-card-hover, rgba(3, 52, 110, 0.5));
+    border-color: var(--brm-accent, $color-accent);
   }
 }
 .ranking-tab.active {
-  background: linear-gradient(135deg, $color-blue-light 0%, $color-primary 100%);
-  border-color: $color-accent;
-  box-shadow: 0 2px 8px rgba(110, 172, 218, 0.3);
+  background: var(--brm-btn-active-bg, linear-gradient(135deg, $color-blue-light 0%, $color-primary 100%));
+  border-color: var(--brm-accent, $color-accent);
+  box-shadow: 0 2px 8px rgba(var(--brm-accent-rgb, 110, 172, 218), 0.3);
+  color: var(--brm-btn-active-color, $color-gray-light);
 }
 .ranking-row {
-  border: 1px solid rgba(110, 172, 218, 0.2);
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.2));
   border-radius: $border-radius-sm;
   padding: 6px 10px;
-  color: $color-gray-light;
+  color: var(--brm-text, $color-gray-light);
   transition: all 0.2s ease;
   
   &:hover {
-    background: rgba(3, 52, 110, 0.2);
-    border-color: rgba(110, 172, 218, 0.4);
+    background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
+    border-color: var(--brm-border-strong, rgba(110, 172, 218, 0.4));
   }
 }
 .ranking-row-me {
-  border-color: $color-accent;
+  border-color: var(--brm-accent, $color-accent);
   border-width: 2px;
   padding: 8px 12px;
-  background: rgba(110, 172, 218, 0.1);
-  box-shadow: 0 2px 8px rgba(110, 172, 218, 0.2);
+  background: var(--brm-bg-card, rgba(110, 172, 218, 0.1));
+  box-shadow: 0 2px 8px rgba(var(--brm-accent-rgb, 110, 172, 218), 0.2);
 }
-.me-name { font-weight: 700; color: $color-accent; }
+.me-name { font-weight: 700; color: var(--brm-accent, $color-accent); }
 .me-badge {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 6px;
-  border: 1px solid $color-accent;
-  color: $color-gray-light;
+  border: 1px solid var(--brm-accent, $color-accent);
+  color: var(--brm-text, $color-gray-light);
   border-radius: $border-radius-sm;
   font-size: 0.75rem;
-  background: rgba(110, 172, 218, 0.15);
+  background: var(--brm-bg-card, rgba(110, 172, 218, 0.15));
 }
-.rank-num { font-weight: 700; color: $color-accent; }
+.rank-num { font-weight: 700; color: var(--brm-accent, $color-accent); }
 .medal { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
 .medal-gold { background: #d4af37; }
 .medal-silver { background: #c0c0c0; }

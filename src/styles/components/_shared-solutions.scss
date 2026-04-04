@@ -4,7 +4,7 @@
   width: 100%;
   margin: 0 auto;
   padding: $spacing-lg;
-  background: $dark-gray;
+  background: var(--brm-solution-bg, $dark-gray);
   border-radius: $border-radius-lg;
   min-height: 600px; // Altura mínima fija para el contenedor
   display: flex;
@@ -17,7 +17,7 @@
 }
 
 .solution-title {
-  color: $brm-white;
+  color: var(--brm-text, $brm-white);
   font-size: 1.6rem;
   margin-bottom: $spacing-lg;
   text-align: center;
@@ -40,9 +40,9 @@
     flex: 1;
     min-height: 48px; // Altura mínima para asegurar espacio suficiente
     padding: $spacing-md $spacing-lg;
-    background: rgba($brm-white, 0.1);
+    background: var(--brm-bg-card, rgba($brm-white, 0.1));
     border-radius: $border-radius-md;
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
     cursor: pointer;
     transition: $transition-normal;
     font-size: 0.95rem; // Ajustado para mejor ajuste de texto
@@ -67,11 +67,12 @@
     }
     
     &.active {
-      background: $brm-primary;
+      background: var(--brm-btn-active-bg, $brm-primary);
+      color: var(--brm-btn-active-color, $brm-white);
     }
     
     &:hover:not(.active) {
-      background: rgba($brm-white, 0.2);
+      background: var(--brm-bg-card-hover, rgba($brm-white, 0.2));
     }
     
     // Ajustar el icono y el texto
@@ -109,7 +110,7 @@
 
 .benefit-card,
 .rate-card {
-  background: rgba($brm-white, 0.1);
+  background: var(--brm-bg-card, rgba($brm-white, 0.1));
   padding: $spacing-lg;
   border-radius: $border-radius-md;
   height: 100%;
@@ -118,7 +119,7 @@
   flex-direction: column;
   
   h4 {
-    color: $brm-secondary;
+    color: var(--brm-accent, $brm-secondary);
     margin-bottom: $spacing-sm;
     font-size: 1.1rem;
     height: 40px; // Altura fija para títulos de tarjetas
@@ -127,7 +128,7 @@
   }
   
   ul {
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
     flex: 1;
     margin: 0;
     padding-left: 20px;
@@ -142,14 +143,14 @@
   height: 100%;
   
   .script-card {
-    background: rgba($brm-white, 0.1);
+    background: var(--brm-bg-card, rgba($brm-white, 0.1));
     border-radius: $border-radius-lg;
     padding: $spacing-lg;
     height: 100%;
     min-height: 300px; // Altura mínima para el guión
     
     h3 {
-      color: $brm-secondary;
+      color: var(--brm-accent, $brm-secondary);
       margin-bottom: $spacing-md;
       font-size: 1.3rem;
       height: 40px; // Altura fija para el título
@@ -170,14 +171,14 @@
     min-height: 300px; // Altura mínima para FAQs
     
     .faq-item {
-      background: rgba($brm-white, 0.1);
+      background: var(--brm-bg-card, rgba($brm-white, 0.1));
       padding: $spacing-lg;
       border-radius: $border-radius-md;
       height: 100%;
       min-height: 150px; // Altura mínima para cada FAQ
       
       h4 {
-        color: $brm-secondary;
+        color: var(--brm-accent, $brm-secondary);
         margin-bottom: $spacing-sm;
         font-size: 1.1rem;
         height: 40px; // Altura fija para títulos de FAQ
@@ -186,7 +187,7 @@
       }
       
       p {
-        color: $brm-white;
+        color: var(--brm-text, $brm-white);
         line-height: 1.5;
       }
     }
@@ -225,20 +226,20 @@
     }
     
     &.accept {
-      background: #2ecc71;
-      color: $brm-white;
+      background: var(--brm-success, #2ecc71);
+      color: #000;
       
       &:hover {
-        background: darken(#2ecc71, 10%);
+        filter: brightness(0.85);
       }
     }
     
     &.reject {
-      background: #e74c3c;
-      color: $brm-white;
+      background: var(--brm-error, #e74c3c);
+      color: #fff;
       
       &:hover {
-        background: darken(#e74c3c, 10%);
+        filter: brightness(0.85);
       }
     }
     

@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/_header.scss';
 import BrandLogo from '../BrandLogo';
 import KpiHeaderBar from './KpiHeaderBar';
+import ProfileDropdown from './ProfileDropdown';
 
 // Removed modal-based rates view; navigation will take the user to a dedicated route
 
@@ -32,10 +33,7 @@ const Header: React.FC<HeaderProps> = ({ showMenuButton, onMenuToggle, menuOpen 
           <BrandLogo variant="header" />
         </div>
         <div className="brm-header__right">
-          {/* Perfil simplificado - logout movido al sidebar */}
-          <div className="header-user-info">
-            <span className="user-greeting">👤 Asesor</span>
-          </div>
+          <ProfileDropdown />
         </div>
       </div>
       <KpiHeaderBar />

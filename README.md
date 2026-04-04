@@ -52,17 +52,18 @@ src/
 ## 🛠️ Tecnologías y Librerías
 - **Frontend Stack**: React 19 + Vite 6 + TypeScript + Sass.
 - **Enrutamiento**: React Router DOM 7.
-- **Estilos**: Sass con variables; UI oscura con borde azul `#1A4DFF`.
+- **Estilos**: Sass con variables; UI oscura Navy Blue con acentos Sky Blue y textos Beige.
 - **Librerías Adicionales**: Ninguna externa principal; lógica pura en utils.
 - **Herramientas**: ESLint, TypeScript compiler.
 
 ## 🎨 Paleta de Colores y Estilos
-- **Azul Principal**: `#1A4DFF` (bordes, acentos).
-- **Azul Claro**: `#007BFF` (acentos secundarios).
-- **Gris Claro**: `#F2F2F2` (superficies claras).
-- **Blanco**: `#FFFFFF`.
-- **Negro Suave**: `#222222` (fondos oscuros).
-- **Patrones UI**: Cards oscuras con borde azul, chips/botones segmentados, microcopy natural (sin símbolos técnicos), contraste accesible.
+- **Navy Blue (Principal)**: `#03346E` (fondos oscuros, gradientes).
+- **Black Navy**: `#021526` (fondos muy oscuros, gradientes).
+- **Sky Blue (Acento)**: `#6EACDA` (bordes, acentos, elementos interactivos).
+- **Beige**: `#E2E2B6` (textos principales sobre fondos oscuros).
+- **Blanco**: `#FFFFFF` (fondos claros, textos sobre oscuro).
+- **Gris Claro Neutro**: `#eef1f9` (fondos de áreas principales).
+- **Patrones UI**: Cards oscuras Navy con bordes Sky Blue, gradientes Navy/Black, textos Beige, chips/botones con gradientes, microcopy natural, alto contraste accesible.
 
 ## 📋 Requisitos
 - Node.js 18+

@@ -3,17 +3,17 @@
   width: 100%;
   margin: 0 auto;
   padding: 1.5rem;
-  background: linear-gradient(180deg, #1d1d1f, #302b3d);
+  background: var(--brm-solution-bg, linear-gradient(180deg, #1d1d1f, #302b3d));
   border-radius: 12px;
   min-height: 600px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  box-shadow: 0 2px 4px rgba($black, 0.3);
+  box-shadow: 0 2px 4px var(--brm-shadow, rgba(0,0,0, 0.3));
 }
 
 .solution-title {
-  color: $brm-white;
+  color: var(--brm-text, $brm-white);
   font-size: 1.6rem;
   margin-bottom: $spacing-lg;
 }
@@ -21,8 +21,8 @@
 .section-content {
   min-height: 400px;
   padding: $spacing-lg;
-  color: $brm-white;
-  background: $dark-gray;
+  color: var(--brm-text, $brm-white);
+  background: var(--brm-solution-bg, $dark-gray);
 }
 
 .sections-navigation {
@@ -33,19 +33,19 @@
   .section-tab {
     padding: $spacing-md;
     border: none;
-    background: rgba($brm-white, 0.1);
+    background: var(--brm-bg-card, rgba($brm-white, 0.1));
     border-radius: $border-radius-md;
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
     cursor: pointer;
     transition: $transition-normal;
     
     &.active {
-      background: $brm-primary;
-      color: $brm-white;
+      background: var(--brm-btn-active-bg, $brm-primary);
+      color: var(--brm-btn-active-color, $brm-white);
     }
     
     &:hover:not(.active) {
-      background: rgba($brm-white, 0.2);
+      background: var(--brm-bg-card-hover, rgba($brm-white, 0.2));
     }
   }
 }
@@ -59,19 +59,19 @@
 
 .benefit-card,
 .rate-card {
-  background: rgba($brm-white, 0.1);
+  background: var(--brm-bg-card, rgba($brm-white, 0.1));
   padding: $spacing-lg;
   border-radius: $border-radius-md;
   transition: $transition-normal;
   
   h4 {
-    color: $brm-secondary;
+    color: var(--brm-accent, $brm-secondary);
     margin-bottom: $spacing-sm;
     font-size: 1.1rem;
   }
   
   ul {
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
     li {
       margin-bottom: $spacing-xs;
     }
@@ -80,8 +80,8 @@
 
 .rate-card {
   &.highlighted {
-    border: 2px solid $brm-secondary;
-    background: rgba($brm-white, 0.15);
+    border: 2px solid var(--brm-accent, $brm-secondary);
+    background: var(--brm-bg-card, rgba($brm-white, 0.15));
   }
   
   .rate-header {
@@ -91,7 +91,7 @@
     margin-bottom: $spacing-md;
     
     .price {
-      color: $brm-secondary;
+      color: var(--brm-accent, $brm-secondary);
       font-weight: bold;
       font-size: 1.2rem;
     }
@@ -101,14 +101,14 @@
 .script-text {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: $brm-white;
+  color: var(--brm-text, $brm-white);
   
   .solution-line {
     margin-bottom: $spacing-md;
     padding: $spacing-md;
-    background: rgba($brm-white, 0.1);
+    background: var(--brm-bg-card, rgba($brm-white, 0.1));
     border-radius: $border-radius-md;
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
   }
 }
 
@@ -118,18 +118,18 @@
   gap: $spacing-md;
   
   .faq-item {
-    background: rgba($brm-white, 0.1);
+    background: var(--brm-bg-card, rgba($brm-white, 0.1));
     padding: $spacing-md;
     border-radius: $border-radius-md;
     
     h4 {
-      color: $brm-secondary;
+      color: var(--brm-accent, $brm-secondary);
       margin-bottom: $spacing-sm;
       font-size: 1.1rem;
     }
     
     p {
-      color: $brm-white;
+      color: var(--brm-text, $brm-white);
       line-height: 1.5;
     }
   }
@@ -152,20 +152,20 @@
     transition: $transition-normal;
     
     &.accept {
-      background: #2ecc71;
-      color: $brm-white;
+      background: var(--brm-success, #2ecc71);
+      color: #000;
       
       &:hover {
-        background: darken(#2ecc71, 10%);
+        filter: brightness(0.85);
       }
     }
     
     &.reject {
-      background: #e74c3c;
-      color: $brm-white;
+      background: var(--brm-error, #e74c3c);
+      color: #fff;
       
       &:hover {
-        background: darken(#e74c3c, 10%);
+        filter: brightness(0.85);
       }
     }
   }

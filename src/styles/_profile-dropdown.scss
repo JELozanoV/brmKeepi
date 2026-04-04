@@ -1,0 +1,290 @@
+@import './_variables.scss';
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: var(--brm-bg-card, rgba(110, 172, 218, 0.1));
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.3));
+  border-radius: $border-radius-lg;
+  padding: 4px 12px 4px 4px;
+  transition: all 0.2s ease;
+  outline: none;
+  position: relative;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--brm-bg-card-hover, rgba(110, 172, 218, 0.25));
+    border-color: var(--brm-accent, $brm-accent);
+  }
+
+  .profile-trigger__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--brm-gradient, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+    color: var(--brm-text, $brm-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border: 1.5px solid var(--brm-accent, $brm-accent);
+    flex-shrink: 0;
+  }
+
+  .profile-trigger__name {
+    color: var(--brm-text, $brm-light);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .profile-trigger__chevron {
+    font-size: 0.6rem;
+    color: var(--brm-text-secondary, rgba($brm-light, 0.6));
+    transition: transform 0.2s ease;
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ─── Dropdown Panel ───
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 280px;
+  background: var(--brm-bg-solid, $brm-primary);
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.2));
+  border-radius: $border-radius-lg;
+  box-shadow: 0 8px 32px var(--brm-shadow, rgba(2, 21, 38, 0.4));
+  z-index: 1200;
+  overflow: hidden;
+
+  // Animation
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &.profile-dropdown--open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  // ─── Sections ───
+  .dropdown-section {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--brm-border, rgba(110, 172, 218, 0.15));
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // ─── User Header ───
+  .dropdown-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .dropdown-user__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--brm-gradient, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+      color: var(--brm-text, $brm-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 2px solid var(--brm-accent, $brm-accent);
+      flex-shrink: 0;
+    }
+
+    .dropdown-user__info {
+      flex: 1;
+      min-width: 0;
+
+      .dropdown-user__name {
+        color: var(--brm-text, $brm-light);
+        font-weight: 700;
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .dropdown-user__role {
+        color: var(--brm-text-secondary, rgba($brm-light, 0.6));
+        font-size: 0.75rem;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  // ─── Nav Items ───
+  .dropdown-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: none;
+    border-radius: $border-radius-md;
+    color: var(--brm-text, $brm-light);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    text-align: left;
+
+    &:hover {
+      background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
+    }
+
+    .dropdown-nav-btn__icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+  }
+
+  // ─── Theme Selector ───
+  .dropdown-theme-label {
+    color: var(--brm-text-muted, rgba($brm-light, 0.5));
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+
+  .dropdown-theme-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: $border-radius-md;
+    border: 1.5px solid var(--brm-border, rgba(110, 172, 218, 0.2));
+    background: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 100%;
+    text-align: left;
+    box-sizing: border-box;
+
+    &:hover {
+      background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
+      border-color: var(--brm-accent, $brm-accent);
+    }
+
+    &.theme-option--active {
+      border-color: var(--brm-accent, $brm-accent);
+      background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
+      box-shadow: 0 0 0 1px var(--brm-accent, $brm-accent);
+    }
+
+    .theme-option__swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--brm-border, rgba(110, 172, 218, 0.3));
+      flex-shrink: 0;
+    }
+
+    .theme-option__info {
+      flex: 1;
+      min-width: 0;
+
+      .theme-option__name {
+        color: var(--brm-text, $brm-light);
+        font-size: 0.78rem;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      .theme-option__desc {
+        color: var(--brm-text-muted, rgba($brm-light, 0.5));
+        font-size: 0.65rem;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  // ─── Logout ───
+  .dropdown-logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    background: none;
+    border: none;
+    border-radius: $border-radius-md;
+    color: var(--brm-error, #ef4444);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    text-align: left;
+
+    &:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .dropdown-logout__icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+  }
+}
+
+// ─── Overlay to close dropdown ───
+.profile-dropdown-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1199;
+  background: transparent;
+}
+
+// ─── Mobile ───
+@media (max-width: 600px) {
+  .profile-trigger {
+    padding: 4px 8px 4px 4px;
+
+    .profile-trigger__name {
+      display: none;
+    }
+  }
+
+  .profile-dropdown {
+    width: calc(100vw - 32px);
+    right: -8px;
+  }
+}

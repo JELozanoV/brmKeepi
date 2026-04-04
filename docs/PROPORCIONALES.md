@@ -21,7 +21,7 @@ Validaciones: números > 0, días 1..31, `diaCambio >= diaCorte`. Redondeo a cen
 - Cambio inmediato: 38.900/54.900, corte 1, cambio 21 → `$44.233,33`.
 
 ### UI y estilo
-- Misma card dark de Tarifas Conectados (borde `#1A4DFF`).
+- Card oscura Navy con borde Sky Blue (`rgba(110, 172, 218, 0.3)`), texto Beige, gradientes Navy/Black en botones.
 - Chips: “Cambio de ciclo” / “Cambio de plan inmediato”, “30 días” / “Días del mes (disabled)”.
 - Línea de estado (aria-live):
   - Ciclo: `Método: 30 días | Días a prorratear: N | Cobro proporcional: $X`

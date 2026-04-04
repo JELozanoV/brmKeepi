@@ -104,30 +104,30 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
     setShowResults(false);
   }, [technology, clientRate]);
 
-  if (loading) return <div style={{ color: 'rgba(255,255,255,0.9)' }}>Cargando tarifas...</div>;
+  if (loading) return <div style={{ color: 'rgba(226, 226, 182, 0.9)' }}>Cargando tarifas...</div>;
   if (error) return <div style={{color: '#ef4444'}}>{error}</div>;
 
   return (
-    <div className="filtered-rates-section" style={{ background: '#222', color: 'rgba(255,255,255,0.96)', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid #1A4DFF', boxShadow: '0 1px 8px rgba(26,77,255,0.08)' }}>
-      <h2 style={{color: 'rgba(255,255,255,0.98)', fontWeight: 700, marginBottom: 8, fontSize: 22, letterSpacing: 0.3}}>Tarifas Conectados</h2>
-      <p style={{color: 'rgba(255,255,255,0.85)', fontSize: 15, marginBottom: 22}}>
-        Selecciona la <span style={{color: '#8db0ff', fontWeight: 600}}>tecnología</span> y coloca el <span style={{color: '#8db0ff', fontWeight: 600}}>precio actual del cliente</span> para ver solo las tarifas que puedes ofrecer.
+    <div className="filtered-rates-section" style={{ background: 'rgba(2, 21, 38, 0.95)', color: '#E2E2B6', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid rgba(110, 172, 218, 0.3)', boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)' }}>
+      <h2 style={{color: '#E2E2B6', fontWeight: 700, marginBottom: 8, fontSize: 22, letterSpacing: 0.3}}>Tarifas Conectados</h2>
+      <p style={{color: 'rgba(226, 226, 182, 0.85)', fontSize: 15, marginBottom: 22}}>
+        Selecciona la <span style={{color: '#6EACDA', fontWeight: 600}}>tecnología</span> y coloca el <span style={{color: '#6EACDA', fontWeight: 600}}>precio actual del cliente</span> para ver solo las tarifas que puedes ofrecer.
       </p>
       <div style={{marginBottom: 22, display: 'flex', gap: 18, alignItems: 'center'}}>
-        <span style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)'}}>Tecnología:</span>
+        <span style={{fontWeight: 600, color: '#E2E2B6'}}>Tecnología:</span>
         <button
           type="button"
           style={{
-            background: technology === 'HFC' ? '#1A4DFF' : 'rgba(255,255,255,0.08)',
-            color: technology === 'HFC' ? '#fff' : '#8db0ff',
-            border: '2px solid #1A4DFF',
+            background: technology === 'HFC' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
+            color: technology === 'HFC' ? '#E2E2B6' : '#6EACDA',
+            border: '2px solid #6EACDA',
             borderRadius: 8,
             padding: '8px 28px',
             fontWeight: 700,
             fontSize: 16,
             cursor: 'pointer',
             outline: 'none',
-            boxShadow: technology === 'HFC' ? '0 2px 8px #1A4DFF33' : 'none',
+            boxShadow: technology === 'HFC' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
             transition: 'all .2s'
           }}
           onClick={() => setTechnology('HFC')}
@@ -137,16 +137,16 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
         <button
           type="button"
           style={{
-            background: technology === 'FTTH' ? '#1A4DFF' : 'rgba(255,255,255,0.08)',
-            color: technology === 'FTTH' ? '#fff' : '#8db0ff',
-            border: '2px solid #1A4DFF',
+            background: technology === 'FTTH' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
+            color: technology === 'FTTH' ? '#E2E2B6' : '#6EACDA',
+            border: '2px solid #6EACDA',
             borderRadius: 8,
             padding: '8px 28px',
             fontWeight: 700,
             fontSize: 16,
             cursor: 'pointer',
             outline: 'none',
-            boxShadow: technology === 'FTTH' ? '0 2px 8px #1A4DFF33' : 'none',
+            boxShadow: technology === 'FTTH' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
             transition: 'all .2s'
           }}
           onClick={() => setTechnology('FTTH')}
@@ -155,7 +155,7 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
         </button>
       </div>
       <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 16}}>
-        <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15, minWidth: 120}}>
+        <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15, minWidth: 120}}>
           Tipo de servicio:
           <select
             value={serviceType}
@@ -164,10 +164,10 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
               marginLeft: 12,
               padding: '8px 18px',
               borderRadius: 8,
-              border: '1.5px solid #1A4DFF',
+              border: '1.5px solid #6EACDA',
               fontSize: 16,
-              color: 'rgba(255,255,255,0.95)',
-              background: '#111',
+              color: '#E2E2B6',
+              background: 'rgba(3, 52, 110, 0.3)',
               minWidth: 170,
               fontWeight: 600
             }}
@@ -180,7 +180,7 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
         </label>
       </div>
       <div style={{marginBottom: 18}}>
-        <label style={{fontWeight: 600, color: 'rgba(255,255,255,0.95)', fontSize: 15}}>
+        <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
           {minPriceLabel}:
           <input
             type="text"
@@ -198,27 +198,27 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
               marginLeft: 12,
               padding: 8,
               borderRadius: 8,
-              border: '1.5px solid #1A4DFF',
+              border: '1.5px solid #6EACDA',
               width: 160,
               fontSize: 16,
-              color: 'rgba(255,255,255,0.95)',
-              background: '#111'
+              color: '#E2E2B6',
+              background: 'rgba(3, 52, 110, 0.3)'
             }}
           />
         </label>
       </div>
       <button
         style={{
-          background: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '#1A4DFF' : 'rgba(255,255,255,0.2)',
-          color: '#fff',
-          border: '1px solid #1A4DFF',
+          background: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
+          color: '#E2E2B6',
+          border: '1px solid #6EACDA',
           borderRadius: 8,
           padding: '10px 28px',
           fontWeight: 700,
           fontSize: 16,
           cursor: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? 'pointer' : 'not-allowed',
           marginBottom: 20,
-          boxShadow: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '0 2px 8px #1A4DFF33' : 'none',
+          boxShadow: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
           letterSpacing: 0.3
         }}
         onClick={handleBuscar}

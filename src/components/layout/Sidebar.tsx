@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import '../../styles/_sidebar.scss';
 
 interface SidebarProps {
@@ -12,7 +11,6 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { logout, isLoggingOut } = useAuth();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
@@ -44,13 +42,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle })
       path: '/tarifas',
       description: 'Consulta de tarifas'
     },
-    {
-      id: 'perfil',
-      label: 'Mi Perfil',
-      icon: '👤',
-      path: '/perfil',
-      description: 'KPIs y métricas'
-    }
   ];
 
   const handleCollapseToggle = () => {
@@ -67,14 +58,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle })
     if (window.innerWidth < 768) {
       onToggle();
     }
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login', { replace: true });
-    window.dispatchEvent(new CustomEvent('brm-toast', { 
-      detail: { message: 'Sesión cerrada', type: 'success' } 
-    }));
   };
 
   const isActive = (path: string) => {
@@ -144,22 +127,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onToggle, onCollapseToggle })
           </ul>
         </nav>
 
-        {/* Footer del Sidebar */}
-        <div className="brm-sidebar__footer">
-          <button
-            className="logout-button"
-            onClick={handleLogout}
-            disabled={isLoggingOut}
-            aria-label="Cerrar sesión"
-          >
-            <span className="logout-icon" role="img" aria-label="Cerrar sesión">
-              🚪
-            </span>
-            <span className="logout-text">
-              {isLoggingOut ? 'Cerrando...' : 'Cerrar sesión'}
-            </span>
-          </button>
-        </div>
       </aside>
     </>
   );

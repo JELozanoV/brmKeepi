@@ -102,8 +102,14 @@ export interface KpiSelectorOutput {
 ```
 
 ### Estilos y patrones
-- Sass; UI oscura con borde azul `#1A4DFF` en cards y controles.
-- Chips/segmentos reutilizan el mismo patrón de botones con borde azul y fondo activo.
+- **Sass con paleta Navy Blue/Beige CRM Professional**:
+  - Navy Blue (`#03346E`) y Black Navy (`#021526`) para fondos oscuros
+  - Sky Blue (`#6EACDA`) para bordes y acentos
+  - Beige (`#E2E2B6`) para textos sobre fondos oscuros
+  - Gris Claro Neutro (`#eef1f9`) para fondos principales
+- **UI oscura** con gradientes Navy/Black en cards y controles.
+- **Chips/segmentos** reutilizan patrón de gradientes Navy con bordes Sky Blue y estado activo destacado.
+- **Alto contraste** y accesibilidad en todos los componentes.
 
 ### TODOs
 - Integración real de auth y prorrateo (contratos en `docs/API_CONTRACTS/`).

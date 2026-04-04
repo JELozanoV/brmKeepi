@@ -5,18 +5,18 @@
   max-width: 800px;
   margin: 0 auto;
   padding: $spacing-xl;
-  color: $brm-white;
+  color: var(--brm-text, $brm-white);
 
   .solution-title {
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
     font-size: 2.5rem;
     font-weight: 600;
     text-align: center;
     margin-bottom: 100px;
     padding: $spacing-xl;
-    background: rgba($brm-primary, 0.1);
+    background: var(--brm-bg-card, rgba($brm-primary, 0.1));
     border-radius: $border-radius-lg;
-    border-bottom: 3px solid $brm-secondary;
+    border-bottom: 3px solid var(--brm-accent, $brm-secondary);
   }
 
   .sections-navigation {
@@ -25,13 +25,13 @@
     gap: $spacing-xxl;
     margin: $spacing-xl 0;
     padding: $spacing-xl;
-    background: rgba($brm-primary, 0.05);
+    background: var(--brm-bg-card, rgba($brm-primary, 0.05));
     border-radius: $border-radius-lg;
 
     .section-tab {
       background: transparent;
       border: none;
-      color: $brm-white;
+      color: var(--brm-text, $brm-white);
       padding: $spacing-lg $spacing-xl;
       font-size: 1.1rem;
       cursor: pointer;
@@ -40,13 +40,13 @@
       border-radius: $border-radius-md;
       
       &:hover {
-        background: rgba($brm-primary, 0.1);
-        color: $brm-secondary;
+        background: var(--brm-bg-card, rgba($brm-primary, 0.1));
+        color: var(--brm-accent, $brm-secondary);
       }
 
       &.active {
-        background: rgba($brm-primary, 0.2);
-        color: $brm-secondary;
+        background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
+        color: var(--brm-accent, $brm-secondary);
         font-weight: 500;
 
         &::after {
@@ -57,7 +57,7 @@
           transform: translateX(-50%);
           width: 30%;
           height: 3px;
-          background-color: $brm-secondary;
+          background-color: var(--brm-accent, $brm-secondary);
           border-radius: 3px;
         }
       }
@@ -68,15 +68,15 @@
     min-height: 400px;
     margin-top: 100px;
     padding: 100px;
-    background: rgba($brm-primary, 0.1);
+    background: var(--brm-bg-card, rgba($brm-primary, 0.1));
     border-radius: $border-radius-lg;
-    box-shadow: 0 10px 30px rgba($brm-primary, 0.2);
+    box-shadow: 0 10px 30px var(--brm-shadow, rgba($brm-primary, 0.2));
 
     .section-panel {
       animation: fadeIn 0.5s ease-in-out;
 
       h3 {
-        color: $brm-secondary;
+        color: var(--brm-accent, $brm-secondary);
         font-size: 2rem;
         margin-bottom: 100px;
         text-align: center;
@@ -90,7 +90,7 @@
           transform: translateX(-50%);
           width: 100px;
           height: 4px;
-          background-color: $brm-secondary;
+          background-color: var(--brm-accent, $brm-secondary);
           border-radius: 4px;
         }
       }
@@ -106,14 +106,14 @@
     .benefit-item {
       display: flex;
       gap: $spacing-md;
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card, rgba($brm-primary, 0.1));
       padding: $spacing-lg;
       border-radius: $border-radius-lg;
       transition: $transition-normal;
 
       &:hover {
         transform: translateX($spacing-xs);
-        background: rgba($brm-primary, 0.2);
+        background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
       }
 
       .benefit-icon {
@@ -122,12 +122,12 @@
 
       .benefit-text {
         h4 {
-          color: $brm-secondary;
+          color: var(--brm-accent, $brm-secondary);
           margin-bottom: $spacing-xs;
         }
 
         p {
-          color: $brm-white;
+          color: var(--brm-text, $brm-white);
           opacity: 0.9;
         }
       }
@@ -141,7 +141,7 @@
     padding: $spacing-md;
 
     .phrase-card {
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card, rgba($brm-primary, 0.1));
       padding: $spacing-lg;
       border-radius: $border-radius-lg;
       display: flex;
@@ -150,12 +150,12 @@
 
       &:hover {
         transform: translateX($spacing-xs);
-        background: rgba($brm-primary, 0.2);
+        background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
       }
 
       .phrase-number {
-        background: $brm-secondary;
-        color: $brm-white;
+        background: var(--brm-accent, $brm-secondary);
+        color: var(--brm-text, $brm-white);
         width: 24px;
         height: 24px;
         border-radius: 50%;
@@ -179,7 +179,7 @@
     padding: $spacing-md;
 
     .benefit-card {
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card, rgba($brm-primary, 0.1));
       padding: $spacing-lg;
       border-radius: $border-radius-lg;
       text-align: center;
@@ -187,7 +187,7 @@
 
       &:hover {
         transform: translateY(-$spacing-xs);
-        background: rgba($brm-primary, 0.2);
+        background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
       }
 
       .benefit-icon {
@@ -196,12 +196,12 @@
       }
 
       h4 {
-        color: $brm-secondary;
+        color: var(--brm-accent, $brm-secondary);
         margin-bottom: $spacing-sm;
       }
 
       p {
-        color: $brm-white;
+        color: var(--brm-text, $brm-white);
         opacity: 0.9;
       }
     }

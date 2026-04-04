@@ -8,9 +8,11 @@ Stack y patrones vigentes basados en el código actual.
 - React Router DOM 7
 
 ### Patrones de UI
-- Cards oscuras con borde azul `#1A4DFF` (p.ej., Tarifas y Proporcionales comparten look & feel).
-- Chips/botones segmentados con borde azul y estado activo (HFC/FTTH, tabs de la calculadora, etc.).
-- Microcopy en lenguaje natural (sin símbolos técnicos) en KPIs/KpiCoach.
+- **Cards oscuras Navy** con borde Sky Blue `rgba(110, 172, 218, 0.3)` y texto Beige (Tarifas, Proporcionales, Rankings comparten look & feel).
+- **Chips/botones segmentados** con gradientes Navy/Black, borde Sky Blue, estado activo destacado (HFC/FTTH, tabs de calculadora).
+- **Gradientes profesionales**: `linear-gradient(135deg, #03346E 0%, #021526 100%)` en elementos principales.
+- **Microcopy en lenguaje natural** (sin símbolos técnicos) en KPIs/KpiCoach.
+- **Alto contraste**: Texto Beige sobre Navy oscuro, Sky Blue para acentos.
 
 ### Rutas y páginas
 - `/login` (`src/pages/LoginPage.tsx`): acceso mock, muestra el logo procesado.

@@ -12,8 +12,9 @@
   .description {
     text-align: center;
     margin-bottom: 2rem;
-    color: $brm-text;
+    color: $brm-light;
     font-size: 1.1rem;
+    opacity: 0.9;
   }
 
   .mood-options-container {
@@ -33,12 +34,12 @@
     width: 120px;
     height: 120px;
     border-radius: 12px;
-    background-color: $brm-white;
-    border: 2px solid $light-gray;
+    background: rgba(3, 52, 110, 0.3);
+    border: 1px solid rgba(110, 172, 218, 0.3);
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     padding: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(2, 21, 38, 0.3);
 
     &:hover,
     &:focus-visible {
@@ -69,28 +70,29 @@
     .mood-label {
       font-size: 1rem;
       font-weight: 500;
-      color: $brm-text;
+      color: $brm-light;
     }
   }
 
   .mood-selected-message {
-    background-color: rgba($brm-primary, 0.1);
+    background: rgba(3, 52, 110, 0.2);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2rem;
     width: 100%;
     max-width: 600px;
     text-align: center;
+    border: 1px solid rgba(110, 172, 218, 0.15);
 
     p {
       margin: 0;
       margin-bottom: 0.5rem;
-      color: $brm-text;
+      color: $brm-light;
     }
 
     .mood-tip {
       font-style: italic;
-      color: $brm-secondary;
+      color: $brm-accent;
     }
   }
 
@@ -99,18 +101,20 @@
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
-    background-color: $brm-primary;
-    color: $brm-white;
-    border: none;
+    background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+    color: $brm-light;
+    border: 1px solid $brm-accent;
     border-radius: 8px;
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
+    box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
 
     &:hover {
-      background-color: color.adjust($brm-primary, $lightness: -10%);
+      background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
+      box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
     }
 
     .arrow-icon {

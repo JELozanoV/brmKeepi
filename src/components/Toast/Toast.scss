@@ -1,13 +1,13 @@
 @import '../../styles/variables';
 
 .toast-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-top: $spacing-md;
   opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
   
   &.visible {
     opacity: 1;
@@ -17,56 +17,59 @@
 
 .toast {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  min-width: 300px;
-  max-width: 450px;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background-color: $brm-white;
-  margin-bottom: 1rem;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-md;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3);
+  background: rgba(3, 52, 110, 0.2);
+  border: 1px solid rgba(110, 172, 218, 0.2);
+  box-sizing: border-box;
   
   &.toast-info {
-    border-left: 4px solid $brm-primary;
+    border-left: 4px solid $brm-accent;
   }
   
   &.toast-success {
-    border-left: 4px solid #4CAF50;
+    border-left: 4px solid #22c55e;
   }
   
   &.toast-warning {
-    border-left: 4px solid #FF9800;
+    border-left: 4px solid #f59e0b;
   }
   
   &.toast-error {
-    border-left: 4px solid $claro-primary;
+    border-left: 4px solid #ef4444;
   }
 }
 
 .toast-content {
   flex: 1;
+  min-width: 0;
   
   p {
     margin: 0;
-    color: $brm-text;
-    font-size: 1rem;
-    line-height: 1.5;
+    color: $brm-light;
+    font-size: 0.9rem;
+    line-height: 1.55;
   }
 }
 
 .toast-close {
   background: none;
   border: none;
-  color: $medium-gray;
-  font-size: 1.5rem;
+  color: rgba($brm-light, 0.5);
+  font-size: 1.3rem;
   cursor: pointer;
-  padding: 0 0.5rem;
-  margin-left: 0.5rem;
+  padding: 2px 6px;
+  margin-left: $spacing-xs;
   line-height: 1;
   transition: color 0.2s ease;
+  flex-shrink: 0;
   
   &:hover {
-    color: $dark-gray;
+    color: $brm-light;
   }
 }

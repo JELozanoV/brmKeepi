@@ -40,6 +40,7 @@ import { getMoodRecommendation } from './services/moodRecommendations'
 import DashboardLayout from './components/layout/DashboardLayout';
 import { Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import LoginPage from './pages/LoginPage';
 import RatesPage from './pages/RatesPage';
 import ProporcionalesPage from './pages/ProporcionalesPage';
@@ -320,6 +321,13 @@ function DashboardApp() {
           <Route path="/" element={
             <div className="app-content">
               {renderCurrentStep()}
+              <Toast 
+                message={toastMessage} 
+                type={toastType} 
+                isVisible={showToast} 
+                duration={8000}
+                onClose={() => setShowToast(false)}
+              />
             </div>
           } />
           <Route path="/perfil" element={<ProfilePage />} />
@@ -331,14 +339,6 @@ function DashboardApp() {
         </Routes>
 
         <Chatbot />
-
-        <Toast 
-          message={toastMessage} 
-          type={toastType} 
-          isVisible={showToast} 
-          duration={8000}
-          onClose={() => setShowToast(false)}
-        />
       </DashboardLayout>
     </>
   )
@@ -356,12 +356,14 @@ function App() {
   };
 
   return (
-    <AuthProvider>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/*" element={<Guard><DashboardApp /></Guard>} />
-      </Routes>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/*" element={<Guard><DashboardApp /></Guard>} />
+        </Routes>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

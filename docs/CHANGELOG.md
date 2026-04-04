@@ -10,9 +10,11 @@
  - Inputs monetarios de la calculadora con separador de miles (es-CO) y limpieza antes del cálculo.
 
 ### Cambiado
-- Estilo de “Tarifas Conectados” a dark UI (bordes azules) y misma línea visual en Proporcionales.
+- Estilo de toda la aplicación a paleta Navy Blue/Beige profesional CRM.
+- Cards oscuras Navy con bordes Sky Blue y textos Beige.
+- Gradientes Navy/Black en botones y elementos interactivos.
+- Consistencia visual en Tarifas, Proporcionales, Rankings, Profile, y Chatbot.
 
 ### Corregido
 - Ranking combinado: uso de `wNps` correcto y no duplicación del usuario.
 - Eliminado botón de “Cerrar sesión” en la tarjeta de perfil (queda en header).
-

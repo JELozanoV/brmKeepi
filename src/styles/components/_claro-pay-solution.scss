@@ -2,9 +2,9 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: $spacing-lg;
-  background: linear-gradient(180deg, #1d1d1f, #201f24);  
+  background: var(--brm-solution-bg, linear-gradient(180deg, #1d1d1f, #201f24));
   .solution-title {
-    color: $brm-white;
+    color: var(--brm-text, $brm-white);
     font-size: 1.6rem;
     margin-bottom: $spacing-lg;
     text-align: center;
@@ -19,44 +19,44 @@
     .section-tab {
       flex: 1;
       padding: $spacing-md;
-      background: rgba($brm-white, 0.1);
+      background: var(--brm-bg-card, rgba($brm-white, 0.1));
       border-radius: $border-radius-md;
-      color: $brm-white;
+      color: var(--brm-text, $brm-white);
       cursor: pointer;
       transition: $transition-normal;
       font-size: 1rem;
       
       &.active {
-        background: $brm-primary;
-        color: $brm-white;
+        background: var(--brm-btn-active-bg, $brm-primary);
+        color: var(--brm-text, $brm-white);
       }
       
       &:hover:not(.active) {
-        background: rgba($brm-white, 0.2);
+        background: var(--brm-bg-card-hover, rgba($brm-white, 0.2));
       }
     }
   }
 
   .script-section {
     .script-card {
-      background: rgba($brm-white, 0.1);
+      background: var(--brm-bg-card, rgba($brm-white, 0.1));
       border-radius: $border-radius-lg;
       padding: $spacing-lg;
       margin-bottom: $spacing-md;
       
       h3 {
-        color: $brm-secondary;
+        color: var(--brm-accent);
         margin-bottom: $spacing-md;
         font-size: 1.3rem;
       }
       
       .script-text {
         p {
-          color: $brm-white;
+          color: var(--brm-text);
           font-size: 1rem;
           line-height: 1.5;
           padding: $spacing-sm;
-          background: rgba($brm-white, 0.05);
+          background: var(--brm-bg-input);
           border-radius: $border-radius-md;
           margin-bottom: $spacing-sm;
         }
@@ -70,7 +70,7 @@
     gap: $spacing-md;
     
     .benefit-card {
-      background: rgba($brm-white, 0.1);
+      background: var(--brm-bg-card);
       padding: $spacing-lg;
       border-radius: $border-radius-md;
       text-align: center;
@@ -81,13 +81,13 @@
       }
       
       h4 {
-        color: $brm-secondary;
+        color: var(--brm-accent);
         margin-bottom: $spacing-sm;
         font-size: 1.1rem;
       }
       
       p {
-        color: $brm-white;
+        color: var(--brm-text);
         font-size: 0.9rem;
         line-height: 1.4;
       }
@@ -100,18 +100,18 @@
     gap: $spacing-md;
     
     .faq-item {
-      background: rgba($brm-white, 0.1);
+      background: var(--brm-bg-card);
       padding: $spacing-lg;
       border-radius: $border-radius-md;
       
       h4 {
-        color: $brm-secondary;
+        color: var(--brm-accent);
         margin-bottom: $spacing-sm;
         font-size: 1.1rem;
       }
       
       p {
-        color: $brm-white;
+        color: var(--brm-text);
         font-size: 0.9rem;
         line-height: 1.4;
       }
@@ -121,17 +121,17 @@
   .apply-solution-button {
     width: 100%;
     padding: $spacing-lg;
-    background: rgba($brm-white, 0.15);
-    border: 2px solid rgba($brm-white, 0.2);
+    background: var(--brm-bg-card);
+    border: 2px solid var(--brm-border);
     border-radius: $border-radius-md;
-    color: $brm-white;
+    color: var(--brm-text);
     font-size: 1.2rem;
     cursor: pointer;
     margin-top: $spacing-xl;
     transition: $transition-normal;
     
     &:hover {
-      background: rgba($brm-white, 0.2);
+      background: var(--brm-bg-card-hover, rgba($brm-white, 0.2));
       transform: translateY(-2px);
     }
   }
@@ -151,9 +151,9 @@
       align-items: center;
       justify-content: center;
       gap: $spacing-sm;
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card, rgba($brm-primary, 0.1));
       border: none;
-      color: $brm-white;
+      color: var(--brm-text, $brm-white);
       cursor: pointer;
       min-height: 72px;
       
@@ -167,25 +167,25 @@
       }
       
       &:hover {
-        background: rgba($brm-primary, 0.2);
+        background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
         transform: translateX(5px);
       }
 
       &.accept {
-        background: rgba($brm-primary, 0.1);
-        color: $brm-white;
+        background: var(--brm-bg-card, rgba($brm-primary, 0.1));
+        color: var(--brm-text, $brm-white);
         
         &:hover {
-          background: rgba($brm-primary, 0.2);
+          background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
         }
       }
       
       &.reject {
-        background: rgba($brm-primary, 0.1);
-        color: $brm-white;
+        background: var(--brm-bg-card, rgba($brm-primary, 0.1));
+        color: var(--brm-text, $brm-white);
         
         &:hover {
-          background: rgba($brm-primary, 0.2);
+          background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
         }
       }
     }

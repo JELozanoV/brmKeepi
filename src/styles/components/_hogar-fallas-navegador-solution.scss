@@ -5,14 +5,14 @@
   padding: 0 1rem;
 
   .conditions-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--brm-bg-card, rgba(255, 255, 255, 0.1));
     border-radius: 12px;
     padding: 2rem;
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--brm-border, rgba(255, 255, 255, 0.1));
     
     .conditions-list {
       list-style: none;
@@ -23,7 +23,7 @@
       gap: 1rem;
       
       li {
-        color: #fff;
+        color: var(--brm-text, #fff);
         font-size: 1.1rem;
         line-height: 1.5;
         padding-left: 2rem;
@@ -34,7 +34,7 @@
           content: '✓';
           position: absolute;
           left: 0;
-          color: #2ecc71;
+          color: var(--brm-success, #2ecc71);
           font-weight: bold;
         }
       }
@@ -53,11 +53,11 @@
     flex-wrap: wrap;
 
     .option-button {
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card, rgba($brm-primary, 0.1));
       border: none;
       border-radius: $border-radius-lg;
       padding: $spacing-md $spacing-lg;
-      color: $brm-white;
+      color: var(--brm-text, $brm-white);
       font-size: 1rem;
       cursor: pointer;
       display: flex;
@@ -82,7 +82,7 @@
       }
 
       &:hover {
-        background: rgba($brm-primary, 0.2);
+        background: var(--brm-bg-card-hover, rgba($brm-primary, 0.2));
         transform: translateY(-2px);
       }
 
@@ -96,10 +96,10 @@
 .validation-content {
   .back-button {
     background: transparent;
-    border: 1px solid $brm-primary;
+    border: 1px solid var(--brm-btn-active-bg, $brm-primary);
     border-radius: $border-radius-md;
     padding: $spacing-sm $spacing-md;
-    color: $brm-white;
+    color: var(--brm-btn-active-color, $brm-white);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -113,7 +113,7 @@
     }
 
     &:hover {
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card-hover, rgba($brm-primary, 0.1));
       transform: translateY(-2px);
     }
 
@@ -131,11 +131,11 @@
   padding: 1rem 0;
 
   .step-button {
-    background: $brm-primary;
+    background: var(--brm-btn-active-bg, $brm-primary);
     border: none;
     border-radius: $border-radius-md;
     padding: 1rem 3rem;
-    color: white;
+    color: var(--brm-btn-active-color, white);
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -146,7 +146,7 @@
     }
 
     &:not(:disabled):hover {
-      background: darken($brm-primary, 10%);
+      filter: brightness(0.85);
       transform: translateY(-2px);
     }
 
@@ -162,10 +162,10 @@
 
   .back-to-validations-button {
     background: transparent;
-    border: 1px solid $brm-primary;
+    border: 1px solid var(--brm-btn-active-bg, $brm-primary);
     border-radius: $border-radius-md;
     padding: $spacing-sm $spacing-md;
-    color: $brm-white;
+    color: var(--brm-btn-active-color, $brm-white);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -179,7 +179,7 @@
     }
 
     &:hover {
-      background: rgba($brm-primary, 0.1);
+      background: var(--brm-bg-card-hover, rgba($brm-primary, 0.1));
       transform: translateY(-2px);
     }
 
@@ -189,23 +189,23 @@
   }
 
   .step-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--brm-bg-card, rgba(255, 255, 255, 0.1));
     border-radius: 12px;
     padding: 2rem;
     width: 100%;
     max-width: 900px;
     margin: 0 auto;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--brm-border, rgba(255, 255, 255, 0.1));
     
     h3 {
-      color: $brm-secondary;
+      color: var(--brm-accent, $brm-secondary);
       font-size: 1.5rem;
       margin-bottom: 1rem;
     }
 
     p {
-      color: white;
+      color: var(--brm-text, white);
       font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 2rem;
@@ -218,19 +218,19 @@
       margin-bottom: 1.5rem;
 
       .step-description {
-        color: white;
+        color: var(--brm-text, white);
         font-size: 1.1rem;
         line-height: 1.6;
         
         strong {
-          color: $brm-secondary;
+          color: var(--brm-accent, $brm-secondary);
           font-weight: 600;
         }
       }
     }
 
     .step-description {
-      color: white;
+      color: var(--brm-text, white);
       font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 1.5rem;
@@ -247,7 +247,7 @@
         height: auto;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--brm-border, rgba(255, 255, 255, 0.1));
         
         &.td-first-image {
           width: 40%;
@@ -263,14 +263,14 @@
       align-items: center;
       margin-top: 2rem;
       padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid var(--brm-border, rgba(255, 255, 255, 0.1));
 
       .nav-button {
-        background: $brm-primary;
+        background: var(--brm-btn-active-bg, $brm-primary);
         border: none;
         border-radius: $border-radius-md;
         padding: 0.75rem 1.5rem;
-        color: white;
+        color: var(--brm-btn-active-color, white);
         font-size: 1rem;
         cursor: pointer;
         transition: all 0.3s ease;
@@ -281,28 +281,24 @@
         }
 
         &:not(:disabled):hover {
-          background: darken($brm-primary, 10%);
+          filter: brightness(0.85);
           transform: translateY(-2px);
         }
       }
 
       .step-indicator {
-        color: white;
+        color: var(--brm-text, white);
         font-size: 0.9rem;
       }
     }
 
     .intro-text {
-      color: white;
+      color: var(--brm-text, white);
       font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 2rem;
       padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .step-content {
-      // ... estilos anteriores ...
+      border-bottom: 1px solid var(--brm-border, rgba(255, 255, 255, 0.1));
     }
   }
-} 
+}

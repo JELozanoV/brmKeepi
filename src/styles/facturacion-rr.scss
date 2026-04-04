@@ -4,22 +4,23 @@
   padding: $spacing-lg;
   max-width: 800px;
   margin: 0 auto;
+  color: var(--brm-text, $brm-light);
 
   .page-header {
     text-align: center;
     margin-bottom: $spacing-xl;
 
     .page-title {
-      color: $brm-primary;
+      color: var(--brm-text, $brm-light);
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: $spacing-sm;
     }
 
     .page-subtitle {
-      color: $brm-text;
+      color: var(--brm-text-secondary, rgba(226, 226, 182, 0.8));
       font-size: 1.1rem;
-      opacity: 0.8;
+      opacity: 0.9;
     }
   }
 
@@ -31,21 +32,21 @@
 
   .upload-section {
     .upload-area {
-      border: 2px dashed $brm-secondary;
+      border: 2px dashed var(--brm-border, $brm-secondary);
       border-radius: $border-radius-lg;
       padding: $spacing-xl;
       text-align: center;
       cursor: pointer;
       transition: all $transition-fast;
-      background: $brm-white;
+      background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
       min-height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
 
       &:hover {
-        border-color: $brm-primary;
-        background: $brm-light;
+        border-color: var(--brm-accent, $brm-accent);
+        background: var(--brm-bg-card-hover, rgba(3, 52, 110, 0.3));
       }
 
       .upload-placeholder {
@@ -55,14 +56,14 @@
         }
 
         .upload-text {
-          color: $brm-text;
+          color: var(--brm-text, $brm-light);
           font-size: 1.2rem;
           font-weight: 500;
           margin-bottom: $spacing-sm;
         }
 
         .upload-hint {
-          color: $medium-gray;
+          color: var(--brm-text-muted, rgba(226, 226, 182, 0.6));
           font-size: 0.9rem;
         }
       }
@@ -83,9 +84,9 @@
           position: absolute;
           top: -8px;
           right: -8px;
-          background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
-          color: $brm-light;
-          border: 2px solid $brm-accent;
+          background: var(--brm-gradient, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+          color: var(--brm-text, $brm-light);
+          border: 2px solid var(--brm-accent, $brm-accent);
           border-radius: $border-radius-sm;
           width: 32px;
           height: 32px;
@@ -100,7 +101,7 @@
           line-height: 1;
 
           &:hover {
-            background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
+            background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
           }
@@ -125,13 +126,14 @@
   }
 
   .explanation-section {
-    background: $brm-white;
+    background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
     border-radius: $border-radius-lg;
     padding: $spacing-lg;
-    box-shadow: 0 2px 12px rgba(110, 172, 218, 0.12);
+    box-shadow: 0 4px 16px var(--brm-shadow, rgba(2, 21, 38, 0.3));
+    border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.2));
 
     .explanation-title {
-      color: $brm-primary;
+      color: var(--brm-text, $brm-light);
       font-size: 1.4rem;
       font-weight: 600;
       margin-bottom: $spacing-lg;
@@ -145,29 +147,29 @@
       .loading-spinner {
         width: 40px;
         height: 40px;
-        border: 4px solid $brm-light;
-        border-top: 4px solid $brm-primary;
+        border: 4px solid var(--brm-border, rgba(110, 172, 218, 0.3));
+        border-top: 4px solid var(--brm-accent, $brm-accent);
         border-radius: 50%;
         animation: spin 1s linear infinite;
         margin: 0 auto $spacing-md;
       }
 
       p {
-        color: $brm-text;
+        color: var(--brm-text-secondary, rgba(226, 226, 182, 0.8));
         font-size: 1.1rem;
       }
     }
 
     .explanation-content {
       .explanation-text {
-        color: $brm-text;
+        color: var(--brm-text, $brm-light);
         font-size: 1rem;
         line-height: 1.6;
         text-align: justify;
-        background: $brm-light;
+        background: var(--brm-bg-input, rgba(2, 21, 38, 0.6));
         padding: $spacing-lg;
         border-radius: $border-radius-md;
-        border-left: 4px solid $brm-primary;
+        border-left: 4px solid var(--brm-accent, $brm-accent);
       }
     }
   }

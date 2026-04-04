@@ -10,7 +10,7 @@ Fecha: 2025-08-15
 - Rutas actuales: `/` (flujo principal), `/tarifas` (Tarifas Conectados), `/perfil` (stub), `*` → `/`.
 - Integración con backend (Express, sup.) en `src/services/api.ts` y con IA en `src/services/iaService.ts`.
 - Módulo de tarifas filtradas (`FilteredRatesSection`) respeta regla de retención: sugerir ≥ precio actual del cliente.
-- Estilos Sass con variables de marca (azules, gris, blanco, negro). Se requiere revisión de breakpoints.
+- Estilos Sass con variables de marca (Navy Blue, Sky Blue, Beige, blanco, gris neutro). Paleta profesional CRM aplicada consistentemente.
 - Hallazgos: tipados coherentes en `src/types/`, datos locales en `src/data/`, riesgo de rutas huérfanas mitigado con redirect.
 - Recomendaciones: capa de servicios tipada, manejo de errores unificado, checklist de marcación, accesibilidad y telemetría.
 
@@ -179,12 +179,13 @@ A continuación, resumen de responsabilidades y props relevantes. Para component
 ---
 
 ## 4) Estilos y diseño (Sass)
-- Variables principales (paleta): ver `src/styles/_variables.scss` y `_variables-module.scss`.
-  - Azul principal: `#1A4DFF` (`$BRM-Colors-1-hex`).
-  - Azul claro: `#007BFF` (`$BRM-Colors-2-hex`).
-  - Gris claro: `#F2F2F2`.
-  - Blanco: `#FFFFFF`.
-  - Negro suave: `#222222`.
+- Variables principales (paleta Navy Blue/Beige): ver `src/styles/_variables.scss` y `_variables-module.scss`.
+  - Navy Blue (Principal): `#03346E` (`$brm-secondary`).
+  - Black Navy: `#021526` (`$brm-primary`).
+  - Sky Blue (Acento): `#6EACDA` (`$brm-accent`).
+  - Beige: `#E2E2B6` (`$brm-light`).
+  - Blanco: `#FFFFFF` (`$brm-white`).
+  - Gris Claro Neutro: `#eef1f9` (fondos principales).
 - Organización: estilos por feature (`styles/solutions/*`), layout (`_header.scss`), y global (`App.scss`).
 - Botones: consistencia visual en Header y secciones; mantener misma forma y aplicar hover/transiciones suaves (~0.2–0.3s). Confirmar en `App.scss`/`_header.scss` que no hay cambios de border-radius entre estados.
 - Responsive: revisar media queries en `App.scss` y secciones. Recomendado validar en Galaxy S20, iPhone 15 Pro Max y desktop ≥1440px. Ajustar paddings y grid de `RatesSection`.

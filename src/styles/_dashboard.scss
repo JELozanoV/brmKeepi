@@ -3,7 +3,7 @@
 .brm-dashboard {
   display: flex;
   min-height: 100vh;
-  background: #eef1f9; // Gris claro neutro profesional
+  background: var(--brm-bg, rgba(2, 21, 38, 0.95));
 
   &__main {
     flex: 1;
@@ -18,11 +18,10 @@
 
   &__content {
     flex: 1;
-    padding: 1rem;
-    padding-top: 1rem; // Reducido para compensar botones fixed
+    padding: 0;
     overflow-x: hidden; // Evitar scroll horizontal
     overflow-y: auto;
-    background: #eef1f9; // Gris claro neutro profesional
+    background: var(--brm-bg, rgba(2, 21, 38, 0.95));
     position: relative; // Para posicionar botones
     
     // Espacio para el header fijo
@@ -40,11 +39,11 @@
 
       .home-button,
       .back-button {
-        background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
-        border: 1px solid $brm-accent;
+        background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+        border: 1px solid var(--brm-accent, $brm-accent);
         border-radius: $border-radius-md;
         padding: $spacing-sm $spacing-md;
-        color: $brm-light;
+        color: var(--brm-btn-active-color, $brm-light);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -54,51 +53,61 @@
         transition: $transition-normal;
         position: relative;
         z-index: 1001;
-        box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
+        box-shadow: 0 2px 8px var(--brm-shadow, rgba(2, 21, 38, 0.3));
 
         .button-icon {
           font-size: 1.1rem;
         }
 
         &:hover {
-          background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
+          background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
+          color: var(--brm-btn-hover-color, $brm-light);
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+          box-shadow: 0 4px 12px rgba(var(--brm-accent-rgb, 110, 172, 218), 0.4);
         }
 
         &:active {
-          background: linear-gradient(135deg, $brm-primary 0%, $brm-secondary 100%);
-          border-color: $brm-accent;
+          background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-primary 0%, $brm-secondary 100%));
+          border-color: var(--brm-accent, $brm-accent);
           transform: translateY(0);
         }
       }
 
       .home-button {
         &:hover {
-          background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
+          background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
         }
       }
     }
 
     // Ajustar el contenido para que no se tape
     .app-content {
-      margin-top: 0; // Reducido para compensar botones subidos
+      margin: 0;
+      padding: $spacing-lg;
+      min-height: calc(100vh - 104px);
+      color: var(--brm-text, var(--brm-light));
+      background: var(--brm-app-bg, var(--brm-bg, rgba(2, 21, 38, 0.95)));
     }
 
     // Ajustes específicos para ServiceSelector
     .selector-container {
       .welcome-message {
-        margin-top: 0.25rem; // margen móvil por defecto
+        margin-top: 0.25rem;
         margin-bottom: $spacing-xl;
         padding: 0 $spacing-xl;
+        background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
+        border-radius: $border-radius-lg;
+        border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.15));
+        padding-top: $spacing-lg;
+        padding-bottom: $spacing-lg;
 
         .description {
-          color: $brm-text;
+          color: var(--brm-text, var(--brm-light));
           font-size: 1.5rem;
           line-height: 1.6;
           max-width: 800px;
           margin: 0 auto;
-          opacity: 1;
+          opacity: 0.9;
           font-weight: 500;
         }
       }
@@ -108,8 +117,16 @@
         margin-bottom: $spacing-xl;
         font-size: 1.5rem;
         font-weight: 700;
-        color: $brm-text;
+        color: var(--brm-text, var(--brm-light));
         text-align: center;
+      }
+
+      .options-container {
+        background: var(--brm-bg-card, rgba(2, 21, 38, 0.6));
+        border-radius: $border-radius-lg;
+        border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.2));
+        padding: $spacing-lg;
+        box-shadow: 0 4px 16px var(--brm-shadow, rgba(2, 21, 38, 0.3));
       }
     }
 
@@ -233,22 +250,29 @@
       }
 
       .app-content {
-        margin-top: 0; // Menos espacio en móvil
+        margin: 0;
+        padding: $spacing-md;
+        min-height: calc(100vh - 104px);
       }
 
       .selector-container {
         .welcome-message {
           margin-top: 56px;
-          padding: 0 $spacing-md;
+          padding: $spacing-md;
 
           .description {
-            font-size: 1.3rem; // Ligeramente más pequeño en móvil
+            font-size: 1.3rem;
           }
         }
 
         .section-title {
-          margin-top: $spacing-sm; // Menos espacio en móvil
+          margin-top: $spacing-sm;
           font-size: 1.3rem;
+          color: var(--brm-text, var(--brm-light));
+        }
+
+        .options-container {
+          padding: $spacing-md;
         }
       }
     }

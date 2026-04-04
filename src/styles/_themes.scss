@@ -1,0 +1,165 @@
+// ─── Theme CSS Custom Properties ───
+// Applied via [data-theme] on <html>
+// Default: dark (current BRM palette)
+
+:root,
+[data-theme="dark"] {
+  --brm-bg: rgba(2, 21, 38, 0.95);
+  --brm-bg-solid: #021526;
+  --brm-bg-card: rgba(3, 52, 110, 0.2);
+  --brm-bg-card-hover: rgba(3, 52, 110, 0.35);
+  --brm-bg-input: rgba(3, 52, 110, 0.3);
+  --brm-app-bg: rgba(2, 21, 38, 0.95);
+  --brm-solution-bg: #1d1d1f;
+  --brm-text: #E2E2B6;
+  --brm-text-secondary: rgba(226, 226, 182, 0.7);
+  --brm-text-muted: rgba(226, 226, 182, 0.5);
+  --brm-accent: #6EACDA;
+  --brm-accent-rgb: 110, 172, 218;
+  --brm-primary: #021526;
+  --brm-secondary: #03346E;
+  --brm-border: rgba(110, 172, 218, 0.2);
+  --brm-border-strong: rgba(110, 172, 218, 0.4);
+  --brm-shadow: rgba(2, 21, 38, 0.3);
+  --brm-gradient: linear-gradient(135deg, #03346E 0%, #021526 100%);
+  --brm-header-gradient: linear-gradient(90deg, #03346E 0%, #021526 100%);
+  --brm-btn-active-bg: linear-gradient(135deg, #03346E 0%, #021526 100%);
+  --brm-btn-inactive-bg: rgba(3, 52, 110, 0.3);
+  --brm-btn-active-color: #E2E2B6;
+  --brm-btn-inactive-color: #6EACDA;
+  --brm-btn-hover-bg: linear-gradient(to bottom, #222222, #000000);
+  --brm-btn-hover-color: #E2E2B6;
+  --brm-success: #22c55e;
+  --brm-warning: #f59e0b;
+  --brm-error: #ef4444;
+  --brm-kpi-ok-bg: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+  --brm-kpi-warn-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+  --brm-kpi-bad-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(2, 21, 38, 0.95) 100%);
+  --brm-kpi-chip-ok-bg: linear-gradient(135deg, rgba(34, 197, 94, 0.22) 0%, rgba(110, 172, 218, 0.08) 100%);
+  --brm-kpi-chip-ok-border: rgba(34, 197, 94, 0.6);
+  --brm-kpi-chip-warn-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.24) 0%, rgba(110, 172, 218, 0.08) 100%);
+  --brm-kpi-chip-warn-border: rgba(245, 158, 11, 0.6);
+  --brm-kpi-chip-bad-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.24) 0%, rgba(110, 172, 218, 0.08) 100%);
+  --brm-kpi-chip-bad-border: rgba(239, 68, 68, 0.6);
+}
+
+[data-theme="light"] {
+  --brm-bg: #f0f2f5;
+  --brm-bg-solid: #f0f2f5;
+  --brm-bg-card: #ffffff;
+  --brm-bg-card-hover: #f5f7fa;
+  --brm-bg-input: #ffffff;
+  --brm-app-bg: #eef1f9;
+  --brm-solution-bg: #ffffff;
+  --brm-text: #1d1d1f;
+  --brm-text-secondary: #555555;
+  --brm-text-muted: #999999;
+  --brm-accent: #03346E;
+  --brm-accent-rgb: 3, 52, 110;
+  --brm-primary: #f0f2f5;
+  --brm-secondary: #03346E;
+  --brm-border: #d0d7de;
+  --brm-border-strong: #03346E;
+  --brm-shadow: rgba(0, 0, 0, 0.08);
+  --brm-gradient: linear-gradient(135deg, #03346E 0%, #021526 100%);
+  --brm-header-gradient: linear-gradient(90deg, #03346E 0%, #021526 100%);
+  --brm-btn-active-bg: linear-gradient(135deg, #03346E 0%, #021526 100%);
+  --brm-btn-inactive-bg: #e8ecf0;
+  --brm-btn-active-color: #ffffff;
+  --brm-btn-inactive-color: #03346E;
+  --brm-btn-hover-bg: #d0d7de;
+  --brm-btn-hover-color: #1d1d1f;
+  --brm-success: #16a34a;
+  --brm-warning: #d97706;
+  --brm-error: #dc2626;
+  --brm-kpi-ok-bg: linear-gradient(135deg, rgba(22, 163, 74, 0.12) 0%, #ffffff 100%);
+  --brm-kpi-warn-bg: linear-gradient(135deg, rgba(217, 119, 6, 0.12) 0%, #ffffff 100%);
+  --brm-kpi-bad-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.12) 0%, #ffffff 100%);
+  --brm-kpi-chip-ok-bg: linear-gradient(135deg, rgba(22, 163, 74, 0.15) 0%, rgba(3, 52, 110, 0.05) 100%);
+  --brm-kpi-chip-ok-border: rgba(22, 163, 74, 0.6);
+  --brm-kpi-chip-warn-bg: linear-gradient(135deg, rgba(217, 119, 6, 0.15) 0%, rgba(3, 52, 110, 0.05) 100%);
+  --brm-kpi-chip-warn-border: rgba(217, 119, 6, 0.6);
+  --brm-kpi-chip-bad-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(3, 52, 110, 0.05) 100%);
+  --brm-kpi-chip-bad-border: rgba(220, 38, 38, 0.6);
+}
+
+[data-theme="daltonism"] {
+  // Deuteranopia-safe: avoids red/green; uses blue/orange/teal
+  --brm-bg: #1a1a2e;
+  --brm-bg-solid: #1a1a2e;
+  --brm-bg-card: rgba(0, 119, 187, 0.15);
+  --brm-bg-card-hover: rgba(0, 119, 187, 0.28);
+  --brm-bg-input: rgba(0, 119, 187, 0.2);
+  --brm-app-bg: #1a1a2e;
+  --brm-solution-bg: #16162a;
+  --brm-text: #f0f0f0;
+  --brm-text-secondary: rgba(240, 240, 240, 0.7);
+  --brm-text-muted: rgba(240, 240, 240, 0.45);
+  --brm-accent: #EE7733;
+  --brm-accent-rgb: 238, 119, 51;
+  --brm-primary: #1a1a2e;
+  --brm-secondary: #0077BB;
+  --brm-border: rgba(238, 119, 51, 0.3);
+  --brm-border-strong: rgba(238, 119, 51, 0.6);
+  --brm-shadow: rgba(0, 0, 0, 0.3);
+  --brm-gradient: linear-gradient(135deg, #0077BB 0%, #1a1a2e 100%);
+  --brm-header-gradient: linear-gradient(90deg, #0077BB 0%, #1a1a2e 100%);
+  --brm-btn-active-bg: linear-gradient(135deg, #0077BB 0%, #1a1a2e 100%);
+  --brm-btn-inactive-bg: rgba(0, 119, 187, 0.2);
+  --brm-btn-active-color: #f0f0f0;
+  --brm-btn-inactive-color: #EE7733;
+  --brm-btn-hover-bg: linear-gradient(to bottom, #16162a, #0a0a1a);
+  --brm-btn-hover-color: #f0f0f0;
+  --brm-success: #009988;
+  --brm-warning: #EE7733;
+  --brm-error: #CC3311;
+  --brm-kpi-ok-bg: linear-gradient(135deg, rgba(0, 153, 136, 0.25) 0%, rgba(26, 26, 46, 0.95) 100%);
+  --brm-kpi-warn-bg: linear-gradient(135deg, rgba(238, 119, 51, 0.25) 0%, rgba(26, 26, 46, 0.95) 100%);
+  --brm-kpi-bad-bg: linear-gradient(135deg, rgba(204, 51, 17, 0.25) 0%, rgba(26, 26, 46, 0.95) 100%);
+  --brm-kpi-chip-ok-bg: linear-gradient(135deg, rgba(0, 153, 136, 0.25) 0%, rgba(238, 119, 51, 0.08) 100%);
+  --brm-kpi-chip-ok-border: rgba(0, 153, 136, 0.6);
+  --brm-kpi-chip-warn-bg: linear-gradient(135deg, rgba(238, 119, 51, 0.25) 0%, rgba(0, 119, 187, 0.08) 100%);
+  --brm-kpi-chip-warn-border: rgba(238, 119, 51, 0.6);
+  --brm-kpi-chip-bad-bg: linear-gradient(135deg, rgba(204, 51, 17, 0.25) 0%, rgba(0, 119, 187, 0.08) 100%);
+  --brm-kpi-chip-bad-border: rgba(204, 51, 17, 0.6);
+}
+
+[data-theme="high-contrast"] {
+  --brm-bg: #000000;
+  --brm-bg-solid: #000000;
+  --brm-bg-card: #1a1a1a;
+  --brm-bg-card-hover: #2a2a2a;
+  --brm-bg-input: #1a1a1a;
+  --brm-app-bg: #000000;
+  --brm-solution-bg: #1a1a1a;
+  --brm-text: #FFFFFF;
+  --brm-text-secondary: #e0e0e0;
+  --brm-text-muted: #aaaaaa;
+  --brm-accent: #FFFF00;
+  --brm-accent-rgb: 255, 255, 0;
+  --brm-primary: #000000;
+  --brm-secondary: #1a1a1a;
+  --brm-border: #FFFFFF;
+  --brm-border-strong: #FFFF00;
+  --brm-shadow: rgba(255, 255, 255, 0.1);
+  --brm-gradient: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  --brm-header-gradient: linear-gradient(90deg, #1a1a1a 0%, #000000 100%);
+  --brm-btn-active-bg: #FFFF00;
+  --brm-btn-inactive-bg: #1a1a1a;
+  --brm-btn-active-color: #000000;
+  --brm-btn-inactive-color: #FFFFFF;
+  --brm-btn-hover-bg: #FFFF00;
+  --brm-btn-hover-color: #000000;
+  --brm-success: #00FF00;
+  --brm-warning: #FFFF00;
+  --brm-error: #FF0000;
+  --brm-kpi-ok-bg: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, #000000 100%);
+  --brm-kpi-warn-bg: linear-gradient(135deg, rgba(255, 255, 0, 0.2) 0%, #000000 100%);
+  --brm-kpi-bad-bg: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, #000000 100%);
+  --brm-kpi-chip-ok-bg: linear-gradient(135deg, rgba(0, 255, 0, 0.25) 0%, #000000 100%);
+  --brm-kpi-chip-ok-border: #00FF00;
+  --brm-kpi-chip-warn-bg: linear-gradient(135deg, rgba(255, 255, 0, 0.25) 0%, #000000 100%);
+  --brm-kpi-chip-warn-border: #FFFF00;
+  --brm-kpi-chip-bad-bg: linear-gradient(135deg, rgba(255, 0, 0, 0.25) 0%, #000000 100%);
+  --brm-kpi-chip-bad-border: #FF0000;
+}
