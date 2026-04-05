@@ -139,7 +139,6 @@ const ProfileDropdown: React.FC = () => {
                 />
                 <span className="theme-option__info">
                   <span className="theme-option__name">{opt.label}</span>
-                  <span className="theme-option__desc">{opt.description}</span>
                 </span>
                 {theme === opt.id && (
                   <span aria-hidden="true" style={{ fontSize: '0.7rem', marginLeft: 'auto', color: 'var(--brm-accent, #6EACDA)' }}>✓</span>

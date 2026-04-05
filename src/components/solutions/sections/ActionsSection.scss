@@ -3,7 +3,7 @@
   width: 100%;
   
   .actions-title {
-    color: #222222;
+    color: var(--brm-text, #222222);
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 1rem;
@@ -16,15 +16,15 @@
   }
   
   .action-item {
-    background: #FFFFFF;
+    background: var(--brm-bg-card, #FFFFFF);
     border-radius: 6px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid var(--brm-border, #E0E0E0);
     padding: 0.75rem 1rem;
     transition: all 0.2s ease;
     
     &:hover {
-      border-color: #007BFF;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-color: var(--brm-accent, #007BFF);
+      box-shadow: 0 2px 8px var(--brm-shadow, rgba(0, 0, 0, 0.1));
     }
   }
   
@@ -42,13 +42,13 @@
       width: 0;
       
       &:focus + .checkmark {
-        outline: 2px solid #1A4DFF;
+        outline: 2px solid var(--brm-accent, #1A4DFF);
         outline-offset: 2px;
       }
       
       &:checked + .checkmark {
-        background-color: #1A4DFF;
-        border-color: #1A4DFF;
+        background-color: var(--brm-accent, #1A4DFF);
+        border-color: var(--brm-accent, #1A4DFF);
         
         &::after {
           display: block;
@@ -61,8 +61,8 @@
       height: 20px;
       width: 20px;
       min-width: 20px;
-      background-color: #FFFFFF;
-      border: 2px solid #BDBDBD;
+      background-color: var(--brm-bg-input, #FFFFFF);
+      border: 2px solid var(--brm-border, #BDBDBD);
       border-radius: 4px;
       margin-right: 12px;
       margin-top: 2px;
@@ -95,13 +95,13 @@
   
   .action-title {
     font-weight: 600;
-    color: #222222;
+    color: var(--brm-text, #222222);
     margin-right: 0.5rem;
   }
   
   .required-pill {
-    background-color: #FFEBEE;
-    color: #D32F2F;
+    background-color: var(--brm-kpi-bad-bg, #FFEBEE);
+    color: var(--brm-error, #D32F2F);
     font-size: 0.7rem;
     font-weight: 500;
     padding: 0.15rem 0.5rem;
@@ -109,7 +109,7 @@
   }
   
   .action-detail {
-    color: #616161;
+    color: var(--brm-text-muted, #616161);
     font-size: 0.9rem;
     margin: 0;
     line-height: 1.4;

@@ -18,14 +18,14 @@ $beige: #E2E2B6;               // Beige
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
-  color: $beige;
+  background: var(--brm-btn-active-bg, linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%));
+  color: var(--brm-btn-active-color, $beige);
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--brm-shadow, rgba(0, 0, 0, 0.15));
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden; /* Asegura que nada se salga del borde redondeado */
@@ -41,20 +41,20 @@ $beige: #E2E2B6;               // Beige
     right: 0;
     bottom: 0;
     border-radius: 50%;
-    background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
+    background: var(--brm-btn-active-bg, linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%));
     transition: background 0.3s ease;
     z-index: 0;
   }
   
   /* Estilo para el estado hover */
   &:hover::after {
-    background: linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%);
+    background: var(--brm-btn-hover-bg, linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%));
   }
   
   /* Estilo para el estado focus */
   &:focus::after {
-    background: linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%);
-    box-shadow: 0 0 0 3px rgba($azul-claro, 0.3);
+    background: var(--brm-btn-hover-bg, linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%));
+    box-shadow: 0 0 0 3px var(--brm-shadow, rgba($azul-claro, 0.3));
   }
   
   /* Contenedor del ícono que se posiciona sobre el fondo */
@@ -79,9 +79,9 @@ $beige: #E2E2B6;               // Beige
   height: 70vh;
   min-height: 400px;
   max-height: 80vh;
-  background-color: $blanco;
+  background-color: var(--brm-bg-card, $blanco);
   border-radius: 16px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 25px var(--brm-shadow, rgba(0, 0, 0, 0.2));
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -100,8 +100,8 @@ $beige: #E2E2B6;               // Beige
 }
 
 .chatbot-header {
-  background: linear-gradient(90deg, $azul-principal 0%, $negro-suave 100%);
-  color: $beige;
+  background: var(--brm-header-gradient, linear-gradient(90deg, $azul-principal 0%, $negro-suave 100%));
+  color: var(--brm-text, $beige);
   padding: 15px;
   display: flex;
   justify-content: space-between;
@@ -116,7 +116,7 @@ $beige: #E2E2B6;               // Beige
   .minimize-button {
     background: none;
     border: none;
-    color: $blanco;
+    color: var(--brm-text, $blanco);
     font-size: 20px;
     cursor: pointer;
     padding: 0;
@@ -136,7 +136,7 @@ $beige: #E2E2B6;               // Beige
   flex: 1;
   padding: 24px 32px;
   overflow-y: auto;
-  background: linear-gradient(180deg, rgba(238, 241, 249, 1) 0%, rgba(238, 241, 249, 0.95) 100%);
+  background: var(--brm-bg, linear-gradient(180deg, rgba(238, 241, 249, 1) 0%, rgba(238, 241, 249, 0.95) 100%));
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -147,11 +147,11 @@ $beige: #E2E2B6;               // Beige
   }
   
   &::-webkit-scrollbar-track {
-    background: $gris-claro;
+    background: var(--brm-bg-card, $gris-claro);
   }
   
   &::-webkit-scrollbar-thumb {
-    background-color: darken($gris-claro, 20%);
+    background-color: var(--brm-border, $gris-claro);
     border-radius: 20px;
   }
 } 
@@ -189,7 +189,7 @@ $beige: #E2E2B6;               // Beige
     h1, h2, h3, h4 {
       font-weight: bold;
       margin: 10px 0 8px 0;
-      color: $azul-principal;
+      color: var(--brm-accent, $azul-principal);
       font-size: 1.1em;
     }
     p {
@@ -209,36 +209,36 @@ $beige: #E2E2B6;               // Beige
 
 .user-message {
   align-self: flex-end;
-  background: linear-gradient(135deg, rgba(110, 172, 218, 0.15) 0%, rgba(255, 255, 255, 1) 100%);
-  color: $negro-suave;
+  background: var(--brm-bg-card, linear-gradient(135deg, rgba(110, 172, 218, 0.15) 0%, rgba(255, 255, 255, 1) 100%));
+  color: var(--brm-text, $negro-suave);
   border-bottom-right-radius: 4px;
-  border: 2px solid $azul-claro;
-  box-shadow: 0 4px 12px rgba(110, 172, 218, 0.25);
+  border: 2px solid var(--brm-accent, $azul-claro);
+  box-shadow: 0 4px 12px var(--brm-shadow, rgba(110, 172, 218, 0.25));
   .message-content {
     background: transparent;
-    color: $negro-suave;
+    color: var(--brm-text, $negro-suave);
     font-weight: 500;
   }
 } 
 
 .bot-message {
   align-self: flex-start;
-  background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
-  color: $beige;
+  background: var(--brm-btn-active-bg, linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%));
+  color: var(--brm-btn-active-color, $beige);
   border-bottom-left-radius: 4px;
-  border: 1px solid rgba(110, 172, 218, 0.4);
-  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.35);
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.4));
+  box-shadow: 0 4px 16px var(--brm-shadow, rgba(2, 21, 38, 0.35));
   .message-content {
     background: transparent;
-    color: $beige;
+    color: var(--brm-btn-active-color, $beige);
     font-weight: 400;
     
     h1, h2, h3, h4 {
-      color: $beige;
+      color: var(--brm-btn-active-color, $beige);
       font-weight: 600;
     }
     a {
-      color: $azul-claro;
+      color: var(--brm-accent, $azul-claro);
       text-decoration: underline;
       font-weight: 500;
     }
@@ -256,7 +256,7 @@ $beige: #E2E2B6;               // Beige
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: darken($gris-claro, 30%);
+    background-color: var(--brm-text-muted, $gris-claro);
     margin: 0 2px;
     animation: typingAnimation 1.4s infinite ease-in-out;
     
@@ -286,58 +286,58 @@ $beige: #E2E2B6;               // Beige
 .chatbot-input {
   display: flex;
   padding: 16px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 1) 100%);
-  border-top: 2px solid rgba(110, 172, 218, 0.3);
+  background: var(--brm-bg-card, linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 1) 100%));
+  border-top: 2px solid var(--brm-border, rgba(110, 172, 218, 0.3));
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
   
   input {
     flex: 1;
     padding: 14px 18px;
-    border: 2px solid rgba(110, 172, 218, 0.4);
+    border: 2px solid var(--brm-border, rgba(110, 172, 218, 0.4));
     border-radius: 24px;
     font-size: 15px;
     outline: none;
     transition: all 0.3s ease;
-    background: rgba(238, 241, 249, 0.5);
-    color: $negro-suave;
+    background: var(--brm-bg-input, rgba(238, 241, 249, 0.5));
+    color: var(--brm-text, $negro-suave);
     font-weight: 500;
     
     &::placeholder {
-      color: rgba(2, 21, 38, 0.5);
+      color: var(--brm-text-muted, rgba(2, 21, 38, 0.5));
       font-weight: 400;
     }
     
     &:focus {
-      border-color: $azul-claro;
-      background: $blanco;
-      box-shadow: 0 0 0 3px rgba(110, 172, 218, 0.15);
+      border-color: var(--brm-accent, $azul-claro);
+      background: var(--brm-bg-card, $blanco);
+      box-shadow: 0 0 0 3px var(--brm-shadow, rgba(110, 172, 218, 0.15));
     }
   }
   
   button {
-    background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
-    color: $beige;
+    background: var(--brm-btn-active-bg, linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%));
+    color: var(--brm-btn-active-color, $beige);
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 2px solid $azul-claro;
+    border: 2px solid var(--brm-accent, $azul-claro);
     margin-left: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(110, 172, 218, 0.3);
+    box-shadow: 0 2px 8px var(--brm-shadow, rgba(110, 172, 218, 0.3));
     
     &:hover:not(:disabled) {
-      background: linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%);
+      background: var(--brm-btn-hover-bg, linear-gradient(135deg, $azul-claro 0%, $azul-principal 100%));
       transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+      box-shadow: 0 4px 12px var(--brm-shadow, rgba(110, 172, 218, 0.4));
     }
     
     &:disabled {
-      background: rgba(2, 21, 38, 0.3);
-      border-color: rgba(110, 172, 218, 0.2);
+      background: var(--brm-bg-card, rgba(2, 21, 38, 0.3));
+      border-color: var(--brm-border, rgba(110, 172, 218, 0.2));
       cursor: not-allowed;
       opacity: 0.5;
     }
@@ -353,11 +353,11 @@ $beige: #E2E2B6;               // Beige
 .chatbot-message.error {
   align-self: flex-start;
   max-width: 75%;
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(2, 21, 38, 0.95) 100%);
-  border: 2px solid rgba(239, 68, 68, 0.5);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, var(--brm-bg, rgba(2, 21, 38, 0.95)) 100%);
+  border: 2px solid var(--brm-error, rgba(239, 68, 68, 0.5));
   border-radius: 18px;
   border-bottom-left-radius: 4px;
-  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25);
+  box-shadow: 0 4px 16px var(--brm-shadow, rgba(239, 68, 68, 0.25));
   padding: 0;
   
   .message-content {
@@ -365,7 +365,7 @@ $beige: #E2E2B6;               // Beige
     background: transparent;
     
     p {
-      color: rgba(226, 226, 182, 0.95);
+      color: var(--brm-text-secondary, rgba(226, 226, 182, 0.95));
       font-weight: 500;
       font-size: 15px;
       margin: 0;
@@ -378,11 +378,11 @@ $beige: #E2E2B6;               // Beige
 .chatbot-message.bot {
   align-self: flex-start;
   max-width: 75%;
-  background: linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%);
-  border: 1px solid rgba(110, 172, 218, 0.4);
+  background: var(--brm-btn-active-bg, linear-gradient(135deg, $azul-principal 0%, $negro-suave 100%));
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.4));
   border-radius: 18px;
   border-bottom-left-radius: 4px;
-  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.35);
+  box-shadow: 0 4px 16px var(--brm-shadow, rgba(2, 21, 38, 0.35));
   padding: 0;
   
   .message-content {
@@ -390,7 +390,7 @@ $beige: #E2E2B6;               // Beige
     background: transparent;
     
     p {
-      color: $beige;
+      color: var(--brm-btn-active-color, $beige);
       font-weight: 500;
       font-size: 15px;
       margin: 0;

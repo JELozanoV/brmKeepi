@@ -3,18 +3,18 @@
 
 .script-section {
   .script-card {
-    background-color: vars.$brm-white;
+    background-color: var(--brm-bg-card, vars.$brm-white);
     border-radius: vars.$border-radius-md;
     padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid vars.$brm-light;
+    box-shadow: 0 4px 12px var(--brm-shadow, rgba(0, 0, 0, 0.05));
+    border: 1px solid var(--brm-border, vars.$brm-light);
 
     h3 {
       font-size: 1.2rem;
-      color: vars.$brm-primary;
+      color: var(--brm-text, vars.$brm-primary);
       margin-top: 0;
       margin-bottom: 1rem;
-      border-bottom: 2px solid vars.$brm-secondary;
+      border-bottom: 2px solid var(--brm-border, vars.$brm-secondary);
       padding-bottom: 0.5rem;
     }
 
@@ -22,7 +22,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
-      color: vars.$brm-text;
+      color: var(--brm-text, vars.$brm-text);
 
       .solution-line {
         margin: 0;
@@ -30,26 +30,26 @@
         border-radius: vars.$border-radius-sm;
         line-height: 1.5;
         font-size: 0.95rem;
-        color: vars.$brm-text !important;
+        color: var(--brm-text, vars.$brm-text) !important;
 
         &.empathy {
-          background-color: color.adjust(vars.$brm-primary, $lightness: 45%);
-          border-left: 4px solid vars.$brm-primary;
+          background-color: var(--brm-bg-card, color.adjust(vars.$brm-primary, $lightness: 45%));
+          border-left: 4px solid var(--brm-accent, vars.$brm-primary);
         }
 
         &.action {
-          background-color: #e6f7ff;
-          border-left: 4px solid #1890ff;
+          background-color: var(--brm-bg-card, #e6f7ff);
+          border-left: 4px solid var(--brm-accent, #1890ff);
         }
         
         &.offer {
-          background-color: #f6ffed;
-          border-left: 4px solid #52c41a;
+          background-color: var(--brm-bg-card, #f6ffed);
+          border-left: 4px solid var(--brm-success, #52c41a);
         }
 
         &.solution {
-          background-color: #fffbe6;
-          border-left: 4px solid #faad14;
+          background-color: var(--brm-bg-card, #fffbe6);
+          border-left: 4px solid var(--brm-warning, #faad14);
         }
       }
     }

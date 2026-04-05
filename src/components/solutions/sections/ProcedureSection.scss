@@ -17,17 +17,17 @@
       display: flex;
       align-items: center;
       padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--brm-bg-card, rgba(255, 255, 255, 0.1));
       border: none;
       border-radius: $border-radius-md;
-      color: white;
+      color: var(--brm-text, white);
       cursor: pointer;
       transition: $transition-normal;
       text-align: left;
       width: 100%;
       
       &:hover {
-        background: rgba(255, 255, 255, 0.2);
+        background: var(--brm-bg-card-hover, rgba(255, 255, 255, 0.2));
         transform: translateX(5px);
       }
       
@@ -43,7 +43,7 @@
         h4 {
           margin: 0;
           font-size: 1.1rem;
-          color: white;
+          color: var(--brm-text, white);
           font-weight: 500;
         }
         

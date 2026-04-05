@@ -32,12 +32,12 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
   if (loading) {
     return (
       <div style={{
-        background: 'rgba(2, 21, 38, 0.95)',
-        border: '1px solid rgba(110, 172, 218, 0.3)',
+        background: 'var(--brm-bg-card)',
+        border: '1px solid var(--brm-border)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(226, 226, 182, 0.8)',
+        color: 'var(--brm-text-secondary)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -49,12 +49,12 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
   if (!rankingData || !rankingData.participants || rankingData.participants.length === 0) {
     return (
       <div style={{
-        background: 'rgba(2, 21, 38, 0.95)',
-        border: '1px solid rgba(110, 172, 218, 0.3)',
+        background: 'var(--brm-bg-card)',
+        border: '1px solid var(--brm-border)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(226, 226, 182, 0.5)',
+        color: 'var(--brm-text-muted)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -73,12 +73,12 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
   } catch {
     return (
       <div style={{
-        background: 'rgba(2, 21, 38, 0.95)',
-        border: '1px solid rgba(110, 172, 218, 0.3)',
+        background: 'var(--brm-bg-card)',
+        border: '1px solid var(--brm-border)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(226, 226, 182, 0.5)',
+        color: 'var(--brm-text-muted)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -90,12 +90,12 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
   if (!teamRanking || !operationRanking) {
     return (
       <div style={{
-        background: 'rgba(2, 21, 38, 0.95)',
-        border: '1px solid rgba(110, 172, 218, 0.3)',
+        background: 'var(--brm-bg-card)',
+        border: '1px solid var(--brm-border)',
         borderRadius: 12,
         padding: 16,
         marginTop: 16,
-        color: 'rgba(226, 226, 182, 0.5)',
+        color: 'var(--brm-text-muted)',
         fontSize: 14,
         textAlign: 'center'
       }}>
@@ -121,15 +121,15 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
 
   return (
     <div style={{
-      background: 'rgba(2, 21, 38, 0.95)',
-      border: '1px solid rgba(110, 172, 218, 0.3)',
+      background: 'var(--brm-bg-card)',
+      border: '1px solid var(--brm-border)',
       borderRadius: 12,
       padding: 16,
       marginTop: 16,
-      boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)'
+      boxShadow: '0 4px 16px var(--brm-shadow)'
     }}>
       <h4 style={{
-        color: '#E2E2B6',
+        color: 'var(--brm-text)',
         fontSize: 16,
         fontWeight: 700,
         margin: '0 0 12px 0',
@@ -141,13 +141,13 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {/* Team Ranking */}
         <div style={{
-          background: 'rgba(3, 52, 110, 0.3)',
+          background: 'var(--brm-bg)',
           borderRadius: 8,
           padding: 12,
-          border: '1px solid rgba(110, 172, 218, 0.3)'
+          border: '1px solid var(--brm-border)'
         }}>
           <div style={{
-            color: 'rgba(226, 226, 182, 0.9)',
+            color: 'var(--brm-text-secondary)',
             fontSize: 13,
             fontWeight: 600,
             marginBottom: 4
@@ -155,7 +155,7 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
             En mi equipo
           </div>
           <div style={{
-            color: '#6EACDA',
+            color: 'var(--brm-accent)',
             fontSize: 18,
             fontWeight: 800
           }}>
@@ -165,13 +165,13 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
 
         {/* Operation Ranking */}
         <div style={{
-          background: 'rgba(3, 52, 110, 0.3)',
+          background: 'var(--brm-bg)',
           borderRadius: 8,
           padding: 12,
-          border: '1px solid rgba(110, 172, 218, 0.3)'
+          border: '1px solid var(--brm-border)'
         }}>
           <div style={{
-            color: 'rgba(226, 226, 182, 0.9)',
+            color: 'var(--brm-text-secondary)',
             fontSize: 13,
             fontWeight: 600,
             marginBottom: 4
@@ -179,7 +179,7 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
             En la operación
           </div>
           <div style={{
-            color: '#6EACDA',
+            color: 'var(--brm-accent)',
             fontSize: 18,
             fontWeight: 800
           }}>
@@ -190,15 +190,15 @@ const ProfileRankingCard: React.FC<ProfileRankingCardProps> = ({ range }) => {
       <div style={{ marginTop: 16, textAlign: 'center' }}>
         <button
           style={{
-            background: 'linear-gradient(135deg, #03346E 0%, #021526 100%)',
-            color: '#E2E2B6',
-            border: '1px solid #6EACDA',
+            background: 'var(--brm-btn-active-bg)',
+            color: 'var(--brm-btn-active-color)',
+            border: '1px solid var(--brm-accent)',
             borderRadius: 8,
             padding: '10px 20px',
             fontWeight: 700,
             fontSize: 14,
             cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(110, 172, 218, 0.3)',
+            boxShadow: '0 2px 8px var(--brm-shadow)',
             letterSpacing: 0.3,
             width: '100%'
           }}

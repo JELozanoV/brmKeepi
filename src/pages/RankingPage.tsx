@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchRankingMock } from '../services/rankingService';
 import { buildRankingVM } from '../utils/rankingUtils';
 import { MetricKey } from '../types/ranking';
@@ -14,15 +15,15 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #03346E 0%, #021526 100%)',
+      background: 'var(--brm-btn-active-bg)',
       borderRadius: 16,
       padding: 24,
       marginBottom: 24,
       textAlign: 'center',
       position: 'relative',
       overflow: 'hidden',
-      border: '1px solid rgba(110, 172, 218, 0.4)',
-      boxShadow: '0 8px 32px rgba(2, 21, 38, 0.4)'
+      border: '1px solid var(--brm-border-strong)',
+      boxShadow: '0 8px 32px var(--brm-shadow)'
     }}>
       {/* Efecto de fondo */}
       <div style={{
@@ -45,7 +46,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
       </div>
 
       <h3 style={{
-        color: '#E2E2B6',
+        color: 'var(--brm-btn-active-color)',
         margin: '0 0 8px 0',
         fontSize: 24,
         fontWeight: 700,
@@ -55,10 +56,11 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
       </h3>
 
       <p style={{
-        color: 'rgba(226, 226, 182, 0.9)',
+        color: 'var(--brm-btn-active-color)',
         margin: '0 0 16px 0',
         fontSize: 16,
-        lineHeight: 1.5
+        lineHeight: 1.5,
+        opacity: 0.9
       }}>
         {isTopPerformer ? (
           <>🎉 ¡Felicitaciones! ¡Estás en el primer lugar! La patineta eléctrica es tuya si mantienes esta posición hasta fin de mes.</>
@@ -102,15 +104,15 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
       </div>
 
       <div style={{
-        background: 'rgba(110, 172, 218, 0.15)',
+        background: 'rgba(var(--brm-accent-rgb), 0.2)',
         borderRadius: 12,
         padding: '12px 20px',
         display: 'inline-block',
         backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(110, 172, 218, 0.3)'
+        border: '1px solid var(--brm-border-strong)'
       }}>
         <div style={{
-          color: '#E2E2B6',
+          color: 'var(--brm-btn-active-color)',
           fontSize: 14,
           fontWeight: 600,
           marginBottom: 4
@@ -118,7 +120,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
           Tu posición actual
         </div>
         <div style={{
-          color: '#6EACDA',
+          color: 'var(--brm-btn-active-color)',
           fontSize: 28,
           fontWeight: 800,
           lineHeight: 1
@@ -126,9 +128,10 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
           #{currentPosition} de {totalParticipants}
         </div>
         <div style={{
-          color: 'rgba(226, 226, 182, 0.8)',
+          color: 'var(--brm-btn-active-color)',
           fontSize: 12,
-          marginTop: 4
+          marginTop: 4,
+          opacity: 0.8
         }}>
           Top {topPercentage}%
         </div>
@@ -193,6 +196,7 @@ const PrizeSection: React.FC<{ currentPosition: number; totalParticipants: numbe
 };
 
 const RankingPage: React.FC = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [rankingMetricTeam, setRankingMetricTeam] = useState<MetricKey>('tmo');
@@ -238,23 +242,52 @@ const RankingPage: React.FC = () => {
   return (
     <div className="app-content">
       <div className="filtered-rates-section" style={{
-        background: 'rgba(2, 21, 38, 0.95)',
-        color: '#E2E2B6',
+        background: 'var(--brm-bg-card)',
+        color: 'var(--brm-text)',
         padding: 20,
         borderRadius: 12,
         maxWidth: 1200,
         margin: '0 auto',
-        border: '1px solid rgba(110, 172, 218, 0.3)',
-        boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)'
+        border: '1px solid var(--brm-border)',
+        boxShadow: '0 4px 16px var(--brm-shadow)'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 20 }}>
-          <h2 style={{ color: '#E2E2B6', fontWeight: 700, margin: 0, fontSize: 22, letterSpacing: 0.3 }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 20, gap: 12 }}>
+          <button
+            onClick={() => navigate('/perfil')}
+            style={{
+              background: 'var(--brm-btn-inactive-bg)',
+              color: 'var(--brm-btn-inactive-color)',
+              border: '1px solid var(--brm-border)',
+              borderRadius: 8,
+              padding: '6px 14px',
+              fontWeight: 600,
+              fontSize: 14,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              flexShrink: 0,
+              transition: 'background 0.2s, color 0.2s'
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = 'var(--brm-btn-hover-bg)';
+              (e.currentTarget as HTMLButtonElement).style.color = 'var(--brm-btn-hover-color)';
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = 'var(--brm-btn-inactive-bg)';
+              (e.currentTarget as HTMLButtonElement).style.color = 'var(--brm-btn-inactive-color)';
+            }}
+            aria-label="Volver a perfil"
+          >
+            &#8592; Volver
+          </button>
+          <h2 style={{ color: 'var(--brm-text)', fontWeight: 700, margin: '0 auto', fontSize: 22, letterSpacing: 0.3 }}>
             Rankings
           </h2>
         </div>
 
-        {loading && <div style={{ textAlign: 'center', color: 'rgba(226, 226, 182, 0.8)' }}>Cargando rankings…</div>}
-        {error && <div style={{ textAlign: 'center', color: 'rgba(226, 226, 182, 0.95)', background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(2, 21, 38, 0.95) 100%)', border: '1px solid rgba(239, 68, 68, 0.5)', padding: 12, borderRadius: 8 }}>{error}</div>}
+        {loading && <div style={{ textAlign: 'center', color: 'var(--brm-text-secondary)' }}>Cargando rankings…</div>}
+        {error && <div style={{ textAlign: 'center', color: 'var(--brm-btn-active-color)', background: 'linear-gradient(135deg, rgba(239,68,68,0.15) 0%, var(--brm-bg-card) 100%)', border: '1px solid var(--brm-error)', padding: 12, borderRadius: 8 }}>{error}</div>}
 
         {rankingData && (
           <div style={{ display: 'grid', gap: 24 }}>

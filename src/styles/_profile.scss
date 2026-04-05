@@ -10,8 +10,32 @@
   overflow-x: hidden; // Evitar scroll horizontal en toda la página
   box-sizing: border-box; // Asegurar que el padding no afecte el ancho total
   border-radius: $border-radius-lg; // Esquinas redondeadas como profile-card
-  box-shadow: 0 4px 16px rgba(2, 21, 38, 0.3); // Sombra como profile-card
-  border: 1px solid rgba(110, 172, 218, 0.2); // Borde como profile-card
+  box-shadow: 0 4px 16px var(--brm-shadow, rgba(2, 21, 38, 0.3));
+  border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.2));
+
+  // ── Botón de rango general (cubre todos los usos dentro de .profile-page) ──
+  .range-btn {
+    background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+    color: var(--brm-btn-active-color, $brm-light);
+    border: 1px solid var(--brm-accent, $brm-accent);
+    border-radius: $border-radius-md;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    transition: $transition-normal;
+    box-shadow: 0 2px 8px var(--brm-shadow, rgba(2, 21, 38, 0.3));
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    &:hover {
+      background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
+      color: var(--brm-btn-hover-color, $brm-light);
+      box-shadow: 0 4px 12px var(--brm-shadow, rgba(110, 172, 218, 0.4));
+    }
+
+    &.active {
+      outline: 2px solid var(--brm-accent, $brm-accent);
+    }
+  }
 
   .profile-page__header {
     display: flex;
@@ -29,22 +53,23 @@
       gap: $spacing-sm;
 
       .range-btn {
-        background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
-        color: $brm-light;
-        border: 1px solid $brm-accent;
+        background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+        color: var(--brm-btn-active-color, $brm-light);
+        border: 1px solid var(--brm-accent, $brm-accent);
         border-radius: $border-radius-md;
         padding: $spacing-sm $spacing-md;
         cursor: pointer;
         transition: $transition-normal;
-        box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
+        box-shadow: 0 2px 8px var(--brm-shadow, rgba(2, 21, 38, 0.3));
 
         &:hover {
-          background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
-          box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+          background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
+          color: var(--brm-btn-hover-color, $brm-light);
+          box-shadow: 0 4px 12px var(--brm-shadow, rgba(110, 172, 218, 0.4));
         }
 
         &.active {
-          outline: 2px solid $brm-accent;
+          outline: 2px solid var(--brm-accent, $brm-accent);
         }
       }
     }
@@ -55,22 +80,23 @@
     gap: $spacing-sm;
 
     .range-btn {
-      background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
-      color: $brm-light;
-      border: 1px solid $brm-accent;
+      background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+      color: var(--brm-btn-active-color, $brm-light);
+      border: 1px solid var(--brm-accent, $brm-accent);
       border-radius: $border-radius-md;
       padding: $spacing-sm $spacing-md;
       cursor: pointer;
       transition: $transition-normal;
-      box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
+      box-shadow: 0 2px 8px var(--brm-shadow, rgba(2, 21, 38, 0.3));
 
       &:hover {
-        background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
-        box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+        background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
+        color: var(--brm-btn-hover-color, $brm-light);
+        box-shadow: 0 4px 12px var(--brm-shadow, rgba(110, 172, 218, 0.4));
       }
 
       &.active {
-        outline: 2px solid $brm-accent;
+        outline: 2px solid var(--brm-accent, $brm-accent);
       }
     }
   }

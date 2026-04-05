@@ -10,6 +10,8 @@ const formatSec = (sec?: number) => {
   return `${m}:${r}`;
 };
 
+const todayLabel = new Intl.DateTimeFormat('es-CO', { day: 'numeric', month: 'short' }).format(new Date());
+
 const KpiHeaderBar: React.FC = () => {
   const { vm, snapshot } = useKpiLiveData(30000, 'today');
   const navigate = useNavigate();
@@ -25,6 +27,9 @@ const KpiHeaderBar: React.FC = () => {
   return (
     <div className="kpi-header-bar">
       <div className="kpi-header-bar__content">
+        <span className="kpi-header-bar__today" aria-label={`KPIs del día de hoy, ${todayLabel}`}>
+          📅 Hoy · {todayLabel}
+        </span>
         <button className={`kpi-chip kpi-chip-${tmoState}`} aria-label={vm?.tmo.ariaLabel || 'TMO actual'} onClick={() => navigate('/perfil')}>
           <span className="kpi-chip__label">TMO</span>
           <span className="kpi-chip__value">{tmoVal}</span>

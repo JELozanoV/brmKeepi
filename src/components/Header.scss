@@ -5,8 +5,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: v.$brm-white;
-  border-bottom: 1px solid v.$brm-light-gray;
+  background-color: var(--brm-bg-card, v.$brm-white);
+  border-bottom: 1px solid var(--brm-border, v.$brm-light-gray);
   width: 100%;
   box-sizing: border-box;
 }

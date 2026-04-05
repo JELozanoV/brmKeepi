@@ -12,7 +12,7 @@
   .description {
     text-align: center;
     margin-bottom: 2rem;
-    color: $brm-light;
+    color: var(--brm-text, $brm-light);
     font-size: 1.1rem;
     opacity: 0.9;
   }
@@ -34,32 +34,32 @@
     width: 120px;
     height: 120px;
     border-radius: 12px;
-    background: rgba(3, 52, 110, 0.3);
-    border: 1px solid rgba(110, 172, 218, 0.3);
+    background: var(--brm-bg-card, rgba(3, 52, 110, 0.3));
+    border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.3));
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     padding: 1rem;
-    box-shadow: 0 4px 8px rgba(2, 21, 38, 0.3);
+    box-shadow: 0 4px 8px var(--brm-shadow, rgba(2, 21, 38, 0.3));
 
     &:hover,
     &:focus-visible {
-      background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
-      border-color: $brm-accent;
+      background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+      border-color: var(--brm-accent, $brm-accent);
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      .mood-label { color: $brm-light; }
-      color: $brm-light;
+      box-shadow: 0 6px 12px var(--brm-shadow, rgba(0, 0, 0, 0.15));
+      .mood-label { color: var(--brm-btn-active-color, $brm-light); }
+      color: var(--brm-btn-active-color, $brm-light);
       outline: 2px solid transparent;
       outline-offset: 2px;
     }
 
     &.selected {
-      border-color: $brm-accent;
-      background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
+      border-color: var(--brm-accent, $brm-accent);
+      background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
       transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-      .mood-label { color: $brm-light; }
-      color: $brm-light;
+      box-shadow: 0 6px 12px var(--brm-shadow, rgba(0, 0, 0, 0.15));
+      .mood-label { color: var(--brm-btn-active-color, $brm-light); }
+      color: var(--brm-btn-active-color, $brm-light);
     }
 
     .mood-emoji {
@@ -70,29 +70,29 @@
     .mood-label {
       font-size: 1rem;
       font-weight: 500;
-      color: $brm-light;
+      color: var(--brm-text, $brm-light);
     }
   }
 
   .mood-selected-message {
-    background: rgba(3, 52, 110, 0.2);
+    background: var(--brm-bg-card, rgba(3, 52, 110, 0.2));
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 2rem;
     width: 100%;
     max-width: 600px;
     text-align: center;
-    border: 1px solid rgba(110, 172, 218, 0.15);
+    border: 1px solid var(--brm-border, rgba(110, 172, 218, 0.15));
 
     p {
       margin: 0;
       margin-bottom: 0.5rem;
-      color: $brm-light;
+      color: var(--brm-text, $brm-light);
     }
 
     .mood-tip {
       font-style: italic;
-      color: $brm-accent;
+      color: var(--brm-accent, $brm-accent);
     }
   }
 
@@ -101,20 +101,20 @@
     align-items: center;
     justify-content: center;
     padding: 1rem 2rem;
-    background: linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%);
-    color: $brm-light;
-    border: 1px solid $brm-accent;
+    background: var(--brm-btn-active-bg, linear-gradient(135deg, $brm-secondary 0%, $brm-primary 100%));
+    color: var(--brm-btn-active-color, $brm-light);
+    border: 1px solid var(--brm-accent, $brm-accent);
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     margin-top: 1rem;
-    box-shadow: 0 2px 8px rgba(2, 21, 38, 0.3);
+    box-shadow: 0 2px 8px var(--brm-shadow, rgba(2, 21, 38, 0.3));
 
     &:hover {
-      background: linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%);
-      box-shadow: 0 4px 12px rgba(110, 172, 218, 0.4);
+      background: var(--brm-btn-hover-bg, linear-gradient(135deg, $brm-accent 0%, $brm-secondary 100%));
+      box-shadow: 0 4px 12px var(--brm-shadow, rgba(110, 172, 218, 0.4));
     }
 
     .arrow-icon {
