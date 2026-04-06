@@ -104,73 +104,41 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
     setShowResults(false);
   }, [technology, clientRate]);
 
-  if (loading) return <div style={{ color: 'rgba(226, 226, 182, 0.9)' }}>Cargando tarifas...</div>;
-  if (error) return <div style={{color: '#ef4444'}}>{error}</div>;
+  const canSearch = validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0;
+
+  if (loading) return <div className="filtered-rates-section__status">Cargando tarifas...</div>;
+  if (error) return <div className="filtered-rates-section__status filtered-rates-section__status--error">{error}</div>;
 
   return (
-    <div className="filtered-rates-section" style={{ background: 'rgba(2, 21, 38, 0.95)', color: '#E2E2B6', padding: 20, borderRadius: 12, maxWidth: 800, margin: '0 auto', border: '1px solid rgba(110, 172, 218, 0.3)', boxShadow: '0 4px 16px rgba(2, 21, 38, 0.3)' }}>
-      <h2 style={{color: '#E2E2B6', fontWeight: 700, marginBottom: 8, fontSize: 22, letterSpacing: 0.3}}>Tarifas Conectados</h2>
-      <p style={{color: 'rgba(226, 226, 182, 0.85)', fontSize: 15, marginBottom: 22}}>
-        Selecciona la <span style={{color: '#6EACDA', fontWeight: 600}}>tecnología</span> y coloca el <span style={{color: '#6EACDA', fontWeight: 600}}>precio actual del cliente</span> para ver solo las tarifas que puedes ofrecer.
+    <div className="filtered-rates-section">
+      <h2 className="filtered-rates-section__title">Tarifas Conectados</h2>
+      <p className="filtered-rates-section__description">
+        Selecciona la <span className="filtered-rates-section__accent">tecnología</span> y coloca el <span className="filtered-rates-section__accent">precio actual del cliente</span> para ver solo las tarifas que puedes ofrecer.
       </p>
-      <div style={{marginBottom: 22, display: 'flex', gap: 18, alignItems: 'center'}}>
-        <span style={{fontWeight: 600, color: '#E2E2B6'}}>Tecnología:</span>
+      <div className="filtered-rates-section__row filtered-rates-section__row--technology">
+        <span className="filtered-rates-section__label-text">Tecnología:</span>
         <button
           type="button"
-          style={{
-            background: technology === 'HFC' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
-            color: technology === 'HFC' ? '#E2E2B6' : '#6EACDA',
-            border: '2px solid #6EACDA',
-            borderRadius: 8,
-            padding: '8px 28px',
-            fontWeight: 700,
-            fontSize: 16,
-            cursor: 'pointer',
-            outline: 'none',
-            boxShadow: technology === 'HFC' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
-            transition: 'all .2s'
-          }}
+          className={`filtered-rates-section__chip ${technology === 'HFC' ? 'filtered-rates-section__chip--active' : ''}`}
           onClick={() => setTechnology('HFC')}
         >
           HFC
         </button>
         <button
           type="button"
-          style={{
-            background: technology === 'FTTH' ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
-            color: technology === 'FTTH' ? '#E2E2B6' : '#6EACDA',
-            border: '2px solid #6EACDA',
-            borderRadius: 8,
-            padding: '8px 28px',
-            fontWeight: 700,
-            fontSize: 16,
-            cursor: 'pointer',
-            outline: 'none',
-            boxShadow: technology === 'FTTH' ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
-            transition: 'all .2s'
-          }}
+          className={`filtered-rates-section__chip ${technology === 'FTTH' ? 'filtered-rates-section__chip--active' : ''}`}
           onClick={() => setTechnology('FTTH')}
         >
           FTTH
         </button>
       </div>
-      <div style={{marginBottom: 18, display: 'flex', alignItems: 'center', gap: 16}}>
-        <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15, minWidth: 120}}>
+      <div className="filtered-rates-section__row filtered-rates-section__row--field">
+        <label className="filtered-rates-section__field-label">
           Tipo de servicio:
           <select
             value={serviceType}
             onChange={e => setServiceType(e.target.value)}
-            style={{
-              marginLeft: 12,
-              padding: '8px 18px',
-              borderRadius: 8,
-              border: '1.5px solid #6EACDA',
-              fontSize: 16,
-              color: '#E2E2B6',
-              background: 'rgba(3, 52, 110, 0.3)',
-              minWidth: 170,
-              fontWeight: 600
-            }}
+            className="filtered-rates-section__select"
           >
             <option value="">Todos</option>
             {serviceTypeOptions.map((type, idx) => (
@@ -179,8 +147,8 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
           </select>
         </label>
       </div>
-      <div style={{marginBottom: 18}}>
-        <label style={{fontWeight: 600, color: '#E2E2B6', fontSize: 15}}>
+      <div className="filtered-rates-section__row filtered-rates-section__row--field">
+        <label className="filtered-rates-section__field-label">
           {minPriceLabel}:
           <input
             type="text"
@@ -194,46 +162,24 @@ const FilteredRatesSection: React.FC<FilteredRatesSectionProps> = ({ title = "Pl
               }
             }}
             placeholder="Ej: 90.000"
-            style={{
-              marginLeft: 12,
-              padding: 8,
-              borderRadius: 8,
-              border: '1.5px solid #6EACDA',
-              width: 160,
-              fontSize: 16,
-              color: '#E2E2B6',
-              background: 'rgba(3, 52, 110, 0.3)'
-            }}
+            className="filtered-rates-section__input"
           />
         </label>
       </div>
       <button
-        style={{
-          background: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? 'linear-gradient(135deg, #03346E 0%, #021526 100%)' : 'rgba(3, 52, 110, 0.3)',
-          color: '#E2E2B6',
-          border: '1px solid #6EACDA',
-          borderRadius: 8,
-          padding: '10px 28px',
-          fontWeight: 700,
-          fontSize: 16,
-          cursor: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? 'pointer' : 'not-allowed',
-          marginBottom: 20,
-          boxShadow: validatePrice(clientRate) && parseFloat(cleanPrice(clientRate)) > 0 ? '0 2px 8px rgba(110, 172, 218, 0.3)' : 'none',
-          letterSpacing: 0.3
-        }}
+        className={`filtered-rates-section__search-button ${canSearch ? 'filtered-rates-section__search-button--enabled' : ''}`}
         onClick={handleBuscar}
-        disabled={!validatePrice(clientRate) || parseFloat(cleanPrice(clientRate)) === 0}
+        disabled={!canSearch}
       >
         Buscar
       </button>
-      {/* Debug info oculto a petición del negocio */}
       {showResults && (
         !technology || clientRate === '' ? (
-          <div style={{marginTop: 16, color: '#ef4444', fontWeight: 600}}>
+          <div className="filtered-rates-section__feedback filtered-rates-section__feedback--error">
             Por favor, selecciona una tecnología y coloca el precio del cliente antes de buscar.
           </div>
         ) : filteredRates.length === 0 ? (
-          <div style={{marginTop: 16, color: '#ef4444', fontWeight: 600}}>
+          <div className="filtered-rates-section__feedback filtered-rates-section__feedback--error">
             No hay tarifas recomendadas para la tecnología y precio ingresados.
           </div>
         ) : (
